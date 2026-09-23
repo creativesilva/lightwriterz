@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Student Gallery | Light Writerz</title>
-  <meta name="description" content="The best student photographs from Light Writerz, the Pioneer Valley High School photography club.">
-  <meta property="og:title" content="Student Gallery | Light Writerz">
-  <meta property="og:description" content="The best student photographs from Light Writerz, the Pioneer Valley High School photography club.">
+  <title>Submit Photographs | Light Writerz</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Light Writerz member photo submissions.">
+  <meta property="og:title" content="Light Writerz">
+  <meta property="og:description" content="Light Writerz member photo submissions.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.lightwriterz.org/gallery.html">
+  <meta property="og:url" content="https://www.lightwriterz.org/">
   <meta property="og:site_name" content="Light Writerz">
   <meta property="og:image" content="https://www.lightwriterz.org/og-image.png">
   <meta property="og:image:width" content="1200">
@@ -50,7 +51,7 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="mission.html">Mission &amp; Statement</a></li>
         <li><a href="officers.html">Officers</a></li>
-        <li><a href="gallery.html" aria-current="page">Student Gallery</a></li>
+        <li><a href="gallery.html">Student Gallery</a></li>
         <li><a href="contact.html">Contact &amp; Donate</a></li>
         <li class="nav-donate"><a href="contact.html#donate">Donate a Camera</a></li>
       </ul>
@@ -61,57 +62,63 @@
 
     <section class="hero page hero-silva-45">
       <div class="wrap">
-        <p class="eyebrow">Photographs, made by our members</p>
-        <h1>Student<br>Gallery</h1>
+        <p class="eyebrow">Members only</p>
+        <h1>Submit<br>Photographs</h1>
       </div>
     </section>
-
-    <section class="gal-intro">
-      <div class="wrap">
-        <p class="gal-kicker">The Exhibition</p>
-        <p class="gal-statement">Every image here was made, not taken. Selected with intention from the work of our members.</p>
-        <p class="gal-meta" id="gal-meta" hidden></p>
-        <nav class="gal-index" id="gal-index" aria-label="Collections" hidden></nav>
-      </div>
-    </section>
-
-    <div id="gal-collections"></div>
 
     <section class="band">
-      <div class="wrap">
-        <div class="empty-gallery" id="empty" hidden>
-          <img src="logos/lwz-white-500.png" alt="">
-          <h3>The first gallery is being curated</h3>
-          <p>Our members are making photographs right now. Their best work will appear here soon.</p>
-        </div>
+      <div class="wrap sub-wrap">
+
+        <form class="sub-gate" id="gate" autocomplete="off">
+          <img src="logos/lw-minimal-192.png" alt="" width="64" height="64">
+          <h2 class="title">Enter the club code</h2>
+          <p class="note">Ask a Light Writerz officer or advisor for the code.</p>
+          <input id="gate-code" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="8" aria-label="Club code" placeholder="&bull; &bull; &bull; &bull;" required>
+          <p class="sub-err" id="gate-err" role="alert" hidden>That code is not right. Try again.</p>
+          <button class="btn" type="submit">Unlock</button>
+        </form>
+
+        <form class="sub-form form" id="sub-form" hidden>
+          <p class="lead">Share your best, most intentional work. Mr. Silva reviews every photograph before it goes in the gallery.</p>
+          <div class="row">
+            <div><label for="sub-name">Your name</label><input id="sub-name" name="student" required autocomplete="name" autocapitalize="words" enterkeyhint="next"></div>
+            <div><label for="sub-title">Photo title <span class="opt">(optional)</span></label><input id="sub-title" name="title" autocapitalize="words" enterkeyhint="next"></div>
+          </div>
+          <div>
+            <label for="sub-col">Collection</label>
+            <select id="sub-col" name="category">
+              <option>Writing with Light</option>
+              <option>Multiples</option>
+              <option>Portraits</option>
+              <option>Street &amp; City</option>
+              <option>Landscape &amp; Nature</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div>
+            <label>Photographs</label>
+            <button type="button" class="sub-drop" id="sub-drop">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+              <span><b>Choose photographs</b><br><small>or drag them here &middot; JPG or PNG, up to 30 MB each</small></span>
+            </button>
+            <input type="file" id="sub-files" accept="image/*" multiple hidden>
+            <ul class="sub-list" id="sub-list"></ul>
+          </div>
+          <div><label for="sub-msg">Note for Mr. Silva <span class="opt">(optional)</span></label><textarea id="sub-msg" name="message" rows="3"></textarea></div>
+          <button class="btn" type="submit" id="sub-send" disabled>Send Photographs</button>
+          <p class="note" id="sub-status" role="status" aria-live="polite"></p>
+        </form>
+
       </div>
     </section>
-
-    <!-- Full screen viewer: arrows / keys / swipe; X, Esc, or backdrop to close. -->
-    <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Photograph viewer" hidden>
-      <div class="viewer-top">
-        <p class="viewer-count" aria-live="polite"></p>
-        <button type="button" class="viewer-close" aria-label="Close">&times;</button>
-      </div>
-      <div class="viewer-stage">
-        <button type="button" class="viewer-nav prev" aria-label="Previous photograph">&#8249;</button>
-        <figure class="viewer-fig">
-          <img alt="">
-        </figure>
-        <button type="button" class="viewer-nav next" aria-label="Next photograph">&#8250;</button>
-      </div>
-      <div class="viewer-cap">
-        <p class="viewer-title"></p>
-        <p class="viewer-credit"></p>
-      </div>
-    </div>
   </main>
 
   <footer class="site">
     <div class="wrap">
       <div class="cols">
         <div>
-          <a class="foot-logo" href="submit.html" aria-label="Light Writerz"><img src="logos/lwz-white-500.png" alt="Light Writerz logo" width="96" height="96"></a>
+          <a class="foot-logo" href="index.html" aria-label="Light Writerz home"><img src="logos/lwz-white-500.png" alt="Light Writerz logo" width="96" height="96"></a>
           <p class="motto">Pics are taken.<br>Photographs are made.</p>
           <p>Founded in 2010 by four professional photographers, Light Writerz (LWZ) has been the photography club of Pioneer Valley High School since 2021.</p>
         </div>
@@ -148,6 +155,6 @@
   </footer>
 
   <script src="js/main.js?v=8"></script>
-  <script src="js/gallery.js?v=6"></script>
+  <script src="js/submit.js?v=1"></script>
 </body>
 </html>
