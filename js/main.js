@@ -1,12 +1,23 @@
-// Light Writerz shared behavior: mobile nav, footer year, contact form.
+// Light Writerz shared behavior: mobile menu, footer year, contact form.
 (function () {
   var nav = document.querySelector(".mainnav");
   var toggle = document.querySelector(".navtoggle");
+  var label = toggle && toggle.querySelector(".navtoggle-label");
+
+  function setMenu(open) {
+    nav.classList.toggle("open", open);
+    document.body.classList.toggle("menu-open", open);
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    if (label) label.textContent = open ? "Close" : "Menu";
+  }
   if (nav && toggle) {
-    toggle.addEventListener("click", function () {
-      var open = nav.classList.toggle("open");
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    toggle.addEventListener("click", function () { setMenu(!nav.classList.contains("open")); });
+    nav.querySelectorAll("a").forEach(function (a) {
+      a.addEventListener("click", function () { setMenu(false); });
     });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
+    window.addEventListener("resize", function () { if (window.innerWidth > 760) setMenu(false); });
   }
 
   var yr = document.getElementById("yr");

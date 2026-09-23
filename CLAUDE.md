@@ -9,3 +9,4 @@
 - Colors live as CSS variables at the top of `css/style.css`.
 - Theme: dark mode with soft teal radial and linear gradients for depth (students prefer dark aesthetics). No plain white sections.
 - Share image: og-image.png (white logo on black). og:image/og:url use https://creativesilva.github.io/lightwriterz/ for now; switch to https://www.lightwriterz.org/ when the domain is connected.
+- Mobile first: most visitors are on iPhones. Phone header is one sticky 64px bar with a full screen menu. Hero photos are CSS classes (.hero-<image>) in style.css with -m.jpg (1080px) versions for phones; content images use srcset with -m.jpg.
