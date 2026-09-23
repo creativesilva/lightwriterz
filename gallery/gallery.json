@@ -1,3 +1,179 @@
 {
-  "photos": []
+  "collections": [
+    {
+      "id": "writing-with-light",
+      "title": "Writing with Light",
+      "kicker": "Collection 01",
+      "note": "Long exposures in a darkened room. The shutter stays open while students draw with handheld lights, writing directly onto the frame. Every mark is intentional, made in the dark, and seen only when the exposure ends.",
+      "rows": [
+        1,
+        2,
+        3,
+        1,
+        2,
+        3
+      ],
+      "photos": [
+        {
+          "file": "light-01.jpg",
+          "w": 1600,
+          "h": 1067,
+          "bg": "#343f53",
+          "alt": "Ribbons of light spiral around a student standing in the dark",
+          "student": "",
+          "title": ""
+        },
+        {
+          "file": "light-02.jpg",
+          "w": 1600,
+          "h": 1067,
+          "bg": "#080c19",
+          "alt": "A student in a blue sweater surrounded by loops of light",
+          "student": "",
+          "title": ""
+        },
+        {
+          "file": "light-03.jpg",
+          "w": 1600,
+          "h": 1067,
+          "bg": "#0b101e",
+          "alt": "A student framed by a large circle of written light",
+          "student": "",
+          "title": ""
+        },
+        {
+          "file": "light-04.jpg",
+          "w": 1600,
+          "h": 1067,
+          "bg": "#12162b",
+          "alt": "Dense scribbles of light across a dark frame, a face glowing behind them",
+          "student": "",
+          "title": ""
+        },
+        {
+          "file": "light-05.jpg",
+          "w": 1600,
+          "h": 1067,
+          "bg": "#06070c",
+          "alt": "Pure light drawing: loops and strokes on a black background",
+          "student": "",
+          "title": ""
+        },
+        {
+          "file": "light-06.jpg",
+          "w": 1600,
+          "h": 1067,
+          "bg": "#05060a",
+          "alt": "Tall, sweeping strokes of light on black",
+          "student": "",
+          "title": ""
+        },
+        {
+          "file": "light-07.jpg",
+          "w": 1600,
+          "h": 1067,
+          "bg": "#202631",
+          "alt": "A student framed inside a wide ring of light",
+          "student": "",
+          "title": ""
+        },
+        {
+          "file": "light-08.jpg",
+          "w": 1600,
+          "h": 1067,
+          "bg": "#273040",
+          "alt": "A smiling teacher inside a halo of light loops",
+          "student": "",
+          "title": ""
+        },
+        {
+          "file": "light-09.jpg",
+          "w": 1600,
+          "h": 1067,
+          "bg": "#243b5e",
+          "alt": "Two exposures of a student with headphones and a burst of light",
+          "student": "",
+          "title": ""
+        },
+        {
+          "file": "light-10.jpg",
+          "w": 1600,
+          "h": 1067,
+          "bg": "#0e1733",
+          "alt": "Three exposures of the same student in one frame, peace signs up",
+          "student": "",
+          "title": ""
+        },
+        {
+          "file": "light-11.jpg",
+          "w": 1600,
+          "h": 1067,
+          "bg": "#0d142a",
+          "alt": "Three exposures of one student, thumbs up, in blue light",
+          "student": "",
+          "title": ""
+        },
+        {
+          "file": "light-12.jpg",
+          "w": 1600,
+          "h": 1067,
+          "bg": "#101118",
+          "alt": "A double exposure portrait of a student in low, moody light",
+          "student": "",
+          "title": ""
+        }
+      ]
+    },
+    {
+      "id": "multiples",
+      "title": "Multiples",
+      "kicker": "Collection 02",
+      "note": "Portraits built from more than one exposure. Students layer a single subject across time and light in one frame, turning a portrait into a study of presence, motion, and identity.",
+      "rows": [
+        4
+      ],
+      "photos": [
+        {
+          "file": "multiples-01.jpg",
+          "w": 1067,
+          "h": 1600,
+          "bg": "#632a77",
+          "alt": "Portrait of a student in a striped sweater under violet light",
+          "student": "",
+          "title": "",
+          "year": "2023"
+        },
+        {
+          "file": "multiples-02.jpg",
+          "w": 1067,
+          "h": 1600,
+          "bg": "#585858",
+          "alt": "Black and white multiple exposure portrait of a student",
+          "student": "",
+          "title": "",
+          "year": "2023"
+        },
+        {
+          "file": "multiples-03.jpg",
+          "w": 1067,
+          "h": 1600,
+          "bg": "#884185",
+          "alt": "Multiple exposure portrait of a student with glasses in violet and red light",
+          "student": "",
+          "title": "",
+          "year": "2023"
+        },
+        {
+          "file": "multiples-04.jpg",
+          "w": 1067,
+          "h": 1600,
+          "bg": "#717171",
+          "alt": "Black and white triple exposure portrait of a student",
+          "student": "",
+          "title": "",
+          "year": "2023"
+        }
+      ]
+    }
+  ]
 }

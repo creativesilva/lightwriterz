@@ -19,25 +19,18 @@ Plain HTML, CSS, and JavaScript. No build step.
 
 ## Adding photos to the gallery
 
-1. Put the image in `gallery/photos/` (JPG, long edge about 2000px).
-2. Add an entry to `gallery/gallery.json`:
+The gallery is organized into **collections** in `gallery/gallery.json`.
+
+1. Save the photo twice: a 1600px JPG in `gallery/photos/` and a 900px JPG (same name) in `gallery/thumbs/`.
+2. Add an entry to the right collection's `photos` list:
 
 ```json
-{
-  "photos": [
-    {
-      "file": "jane-doe-shadows.jpg",
-      "title": "Shadows",
-      "student": "Jane Doe",
-      "year": "2026",
-      "category": "Portraits",
-      "alt": "A black and white portrait lit by window light"
-    }
-  ]
-}
+{ "file": "light-13.jpg", "w": 1600, "h": 1067, "alt": "What the photo shows", "student": "", "title": "", "year": "2026" }
 ```
 
-Category filter buttons appear automatically once there are two or more categories.
+`student` and `title` are optional; without a name the credit reads "Light Writerz member".
+A collection's `rows` (for example `[1, 2, 3]`) sets how many photos sit in each row, repeating.
+A new collection is another object in `collections` with `id`, `title`, `kicker`, `note`, `rows`, and `photos`.
 
 ## Brand
 
