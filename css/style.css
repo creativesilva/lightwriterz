@@ -853,3 +853,6 @@ footer.site .foot-logo { margin-bottom: 16px; }
 .spirit-name { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.12em; font-size: 18px; color: #fff; }
 .spirit-model { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.16em; font-size: 12px; color: var(--gold); }
 .spirit-story { font-size: 13.5px; line-height: 1.55; color: var(--gray); margin-top: 4px; }
+
+/* Footer motto: lowercase light grey first line contrasts the bold white second line. */
+footer.site .motto-pics { text-transform: none; color: #9aa6a6; font-family: var(--font-body); font-weight: 400; letter-spacing: 0.02em; font-size: 0.8em; }
