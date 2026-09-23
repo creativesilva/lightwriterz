@@ -19,3 +19,4 @@
 - "In Our Words" quotes section on mission.html is SHELVED (hidden attribute, not deleted) until Chris sends student quotes. Remove `hidden` from #in-our-words to restore.
 - Desktop has no utility link bar (removed as redundant). Docked desktop nav fades from teal to a dark gray/black gradient (.mainnav::before) with a thin teal bottom line.
 - LWZ shirt shadow box (#shirt-modal on index.html) opens from the yellow .shirt-badge button. Slides live in .shirt-track (scroll snap = native swipe); add a slide by adding another <figure class="shirt-slide"> with an image in images/shirt/. Dots build automatically.
+- History: LWZ came to Pioneer Valley High School in 2021 (brought by Mr. Silva, just after students returned to classrooms post COVID). The masks in the shirt photo are from 2021; its caption explains that.

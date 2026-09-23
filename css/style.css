@@ -609,3 +609,7 @@ html.modal-open { overflow: hidden; }
   .shirt-slide img { max-height: 66vh; }
 }
 @media (prefers-reduced-motion: reduce) { .shirt-track { scroll-behavior: auto; } }
+
+/* Photo with caption inside a split layout */
+.photo-fig { margin: 0; }
+.photo-fig figcaption { margin-top: 12px; font-size: 13.5px; line-height: 1.5; color: var(--gray); padding-left: 12px; border-left: 2px solid var(--gold); }
