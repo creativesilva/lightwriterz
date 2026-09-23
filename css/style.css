@@ -856,3 +856,17 @@ footer.site .foot-logo { margin-bottom: 16px; }
 
 /* Footer motto: lowercase light grey first line contrasts the bold white second line. */
 footer.site .motto-pics { text-transform: none; color: #9aa6a6; font-family: var(--font-body); font-weight: 400; letter-spacing: 0.02em; font-size: 0.8em; }
+
+/* ---------- The motto, site-wide ----------
+   "pics are taken." is lowercase and fades away (left to right) so the bright
+   all-caps "PHOTOGRAPHS ARE MADE." carries the weight. */
+.motto-pics {
+  text-transform: none !important; font-weight: 400; letter-spacing: 0.01em;
+  color: rgba(230,236,236,0.45);
+  background: linear-gradient(90deg, rgba(230,236,236,0.62) 0%, rgba(230,236,236,0.16) 100%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero h1 .motto-pics { font-size: 0.62em; text-shadow: none; }
+blockquote.pull .motto-pics { font-size: 0.72em; }
+footer.site .motto-pics { font-family: var(--font-body); font-size: 0.8em; }
+.hero h1 .motto-pics, blockquote.pull .motto-pics { display: inline-block; line-height: 1.15; margin-bottom: 0.1em; }
