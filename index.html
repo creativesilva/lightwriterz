@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="images/Landscapes-1-m.jpg" media="(max-width: 760px)" fetchpriority="high">
-  <link rel="stylesheet" href="css/style.css?v=17">
+  <link rel="stylesheet" href="css/style.css?v=18">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -115,7 +115,7 @@
       <div class="wrap split">
         <img src="images/LWZ_Shirts_BW-m.jpg" srcset="images/LWZ_Shirts_BW-m.jpg 1080w, images/LWZ_Shirts_BW.jpg 1254w" sizes="(max-width: 760px) 100vw, 50vw" alt="Light Writerz members wearing their earned LWZ shirts, reviewing an image on a camera in the classroom" loading="lazy">
         <div>
-          <span class="shirt-badge">The LWZ Shirt</span>
+          <button type="button" class="shirt-badge" data-open="shirt-modal" aria-haspopup="dialog">The LWZ Shirt <span class="shirt-badge-icon" aria-hidden="true">&#9656;</span><span class="shirt-badge-hint">View</span></button>
           <h2 class="title">Earned. Never given.</h2>
           <p class="lead" style="margin-top:18px">A Light Writerz shirt cannot be bought. It is only handed to students who have earned it by showing dedication and respect for the true art of making photographs.</p>
           <p>If you see someone on campus wearing a Light Writerz shirt, you know they earned it. They are not a &ldquo;picographer.&rdquo; They are a photographer, dedicated to the art of making photographs.</p>
@@ -168,6 +168,23 @@
     </section>
   </main>
 
+
+  <!-- LWZ shirt shadow box: swipe (phones), arrows or keys (desktop), X / Esc / backdrop to close. -->
+  <div class="shirt-modal" id="shirt-modal" role="dialog" aria-modal="true" aria-label="The LWZ shirt" hidden>
+    <div class="shirt-modal-backdrop" data-close></div>
+    <div class="shirt-modal-panel">
+      <button type="button" class="shirt-modal-close" data-close aria-label="Close">&times;</button>
+      <p class="shirt-modal-title">The LWZ Shirt <span>Earned. Never given.</span></p>
+      <div class="shirt-track" tabindex="0" aria-label="Shirt photos, swipe to see more">
+        <figure class="shirt-slide"><img src="images/shirt/lwz-shirt-front.jpg" alt="Front of the black Light Writerz shirt" loading="lazy" width="1000" height="1250"><figcaption>Front</figcaption></figure>
+        <figure class="shirt-slide"><img src="images/shirt/lwz-shirt-back.jpg" alt="Back of the black Light Writerz shirt: LW logo, Est. 2010, Photo + Graphy" loading="lazy" width="1000" height="1250"><figcaption>Back</figcaption></figure>
+      </div>
+      <button type="button" class="shirt-nav prev" aria-label="Previous photo">&#8249;</button>
+      <button type="button" class="shirt-nav next" aria-label="Next photo">&#8250;</button>
+      <div class="shirt-dots" role="tablist" aria-label="Choose photo"></div>
+    </div>
+  </div>
+
   <footer class="site">
     <div class="wrap">
       <div class="cols">
@@ -208,6 +225,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=5"></script>
+  <script src="js/main.js?v=6"></script>
 </body>
 </html>

@@ -30,6 +30,64 @@
     window.addEventListener("resize", function () { if (window.innerWidth > 760) setMenu(false); });
   }
 
+
+  // LWZ shirt shadow box: native swipe (scroll snap), arrows, keys, dots; X / Esc / backdrop close.
+  var modal = document.getElementById("shirt-modal");
+  if (modal) {
+    var track = modal.querySelector(".shirt-track");
+    var slides = [].slice.call(track.children);
+    var prev = modal.querySelector(".shirt-nav.prev");
+    var next = modal.querySelector(".shirt-nav.next");
+    var dotsWrap = modal.querySelector(".shirt-dots");
+    var opener = null;
+    var dots = slides.map(function (s, i) {
+      var d = document.createElement("button");
+      d.type = "button";
+      d.setAttribute("role", "tab");
+      d.setAttribute("aria-label", s.querySelector("figcaption").textContent);
+      d.addEventListener("click", function () { go(i); });
+      dotsWrap.appendChild(d);
+      return d;
+    });
+    function current() { return Math.round(track.scrollLeft / track.clientWidth); }
+    function go(i) {
+      i = Math.max(0, Math.min(slides.length - 1, i));
+      track.scrollTo({ left: i * track.clientWidth });
+    }
+    function sync() {
+      var i = current();
+      dots.forEach(function (d, k) { d.setAttribute("aria-selected", k === i ? "true" : "false"); });
+      prev.disabled = i === 0;
+      next.disabled = i === slides.length - 1;
+    }
+    track.addEventListener("scroll", function () { window.requestAnimationFrame(sync); });
+    prev.addEventListener("click", function () { go(current() - 1); });
+    next.addEventListener("click", function () { go(current() + 1); });
+    function open(btn) {
+      opener = btn;
+      modal.hidden = false;
+      document.documentElement.classList.add("modal-open");
+      track.scrollLeft = 0;
+      sync();
+      modal.querySelector(".shirt-modal-close").focus();
+    }
+    function close() {
+      modal.hidden = true;
+      document.documentElement.classList.remove("modal-open");
+      if (opener) opener.focus();
+    }
+    document.querySelectorAll('[data-open="shirt-modal"]').forEach(function (b) {
+      b.addEventListener("click", function () { open(b); });
+    });
+    modal.querySelectorAll("[data-close]").forEach(function (b) { b.addEventListener("click", close); });
+    document.addEventListener("keydown", function (e) {
+      if (modal.hidden) return;
+      if (e.key === "Escape") close();
+      else if (e.key === "ArrowRight") go(current() + 1);
+      else if (e.key === "ArrowLeft") go(current() - 1);
+    });
+  }
+
   var yr = document.getElementById("yr");
   if (yr) yr.textContent = new Date().getFullYear();
 

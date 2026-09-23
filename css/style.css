@@ -563,3 +563,49 @@ section.band.orange::before {
 /* Photo + Graphy: size columns to the words so the pair sits closer together. */
 .etym-block .etym { grid-template-columns: auto auto auto; justify-content: center; column-gap: 44px; }
 @media (max-width: 760px) { .etym-block .etym { column-gap: 14px; } }
+
+/* ---------- LWZ shirt button + shadow box ---------- */
+button.shirt-badge { border: 0; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 4px;
+  box-shadow: 0 6px 18px rgba(245,179,1,0.25); transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease; }
+button.shirt-badge:hover { background: #ffc42b; transform: translateY(-1px); box-shadow: 0 10px 24px rgba(245,179,1,0.35); }
+button.shirt-badge:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.shirt-badge-icon { font-size: 11px; }
+.shirt-badge-hint { font-size: 11px; letter-spacing: 0.12em; padding-left: 8px; border-left: 1px solid rgba(0,0,0,0.25); }
+
+.shirt-modal { position: fixed; inset: 0; z-index: 300; display: flex; align-items: center; justify-content: center; padding: 24px; }
+.shirt-modal[hidden] { display: none; }
+.shirt-modal-backdrop { position: absolute; inset: 0; background: rgba(3,6,6,0.86); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); animation: shirtFade 0.2s ease; }
+.shirt-modal-panel { position: relative; width: min(560px, 100%); max-height: 100%; display: flex; flex-direction: column; align-items: center;
+  background: linear-gradient(170deg, #161d1d 0%, #0a0e0e 100%); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6); padding: 22px 22px 18px; animation: shirtPop 0.22s ease; }
+.shirt-modal-title { align-self: flex-start; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.1em; font-size: 18px; color: #fff; margin: 0 48px 14px 2px; }
+.shirt-modal-title span { display: block; font-family: var(--font-body); text-transform: none; letter-spacing: 0; font-size: 13px; color: var(--gold); margin-top: 2px; }
+.shirt-modal-close { position: absolute; top: 10px; right: 10px; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.06); color: #fff; font-size: 28px; line-height: 1; cursor: pointer; }
+.shirt-modal-close:hover { background: rgba(255,255,255,0.14); }
+.shirt-track { width: 100%; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch; scrollbar-width: none; border-radius: 10px; outline: none; }
+.shirt-track::-webkit-scrollbar { display: none; }
+.shirt-slide { flex: 0 0 100%; scroll-snap-align: center; margin: 0; background: #fff; border-radius: 10px; position: relative; }
+.shirt-slide img { width: 100%; height: auto; max-height: min(64vh, 620px); object-fit: contain; margin: 0 auto; user-select: none; -webkit-user-drag: none; }
+.shirt-slide figcaption { position: absolute; left: 12px; bottom: 12px; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.12em;
+  font-size: 12px; color: #fff; background: rgba(0,0,0,0.75); padding: 5px 10px; border-radius: 4px; }
+.shirt-nav { position: absolute; top: 50%; width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.18); cursor: pointer;
+  background: rgba(10,14,14,0.85); color: #fff; font-size: 30px; line-height: 1; display: flex; align-items: center; justify-content: center; transform: translateY(-50%); }
+.shirt-nav.prev { left: -23px; }
+.shirt-nav.next { right: -23px; }
+.shirt-nav:hover { background: var(--teal); }
+.shirt-nav[disabled] { opacity: 0.25; cursor: default; }
+.shirt-dots { display: flex; gap: 10px; margin-top: 14px; }
+.shirt-dots button { width: 10px; height: 10px; padding: 0; border-radius: 50%; border: 0; background: rgba(255,255,255,0.3); cursor: pointer; }
+.shirt-dots button[aria-selected="true"] { background: var(--gold); width: 26px; border-radius: 5px; }
+html.modal-open { overflow: hidden; }
+@keyframes shirtFade { from { opacity: 0; } }
+@keyframes shirtPop { from { opacity: 0; transform: translateY(12px) scale(0.98); } }
+@media (max-width: 760px) {
+  .shirt-modal { padding: max(14px, env(safe-area-inset-top)) 12px max(14px, env(safe-area-inset-bottom)); }
+  .shirt-modal-panel { padding: 16px 14px 14px; }
+  .shirt-nav { display: none; }
+  .shirt-slide img { max-height: 66vh; }
+}
+@media (prefers-reduced-motion: reduce) { .shirt-track { scroll-behavior: auto; } }

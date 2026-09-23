@@ -18,3 +18,4 @@
 - Contact: text and email only, never call (no tel: links). Contact form posts through EmailJS using creativesilva.com's account (public key 68UkiTjqHIKZMkeCC, service_4mhkbik, template_creativesilva); message is prefixed [Light Writerz] + topic. Falls back to mailto if EmailJS is unavailable.
 - "In Our Words" quotes section on mission.html is SHELVED (hidden attribute, not deleted) until Chris sends student quotes. Remove `hidden` from #in-our-words to restore.
 - Desktop has no utility link bar (removed as redundant). Docked desktop nav fades from teal to a dark gray/black gradient (.mainnav::before) with a thin teal bottom line.
+- LWZ shirt shadow box (#shirt-modal on index.html) opens from the yellow .shirt-badge button. Slides live in .shirt-track (scroll snap = native swipe); add a slide by adding another <figure class="shirt-slide"> with an image in images/shirt/. Dots build automatically.
