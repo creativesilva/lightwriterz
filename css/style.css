@@ -332,6 +332,7 @@ section.band.orange { background: radial-gradient(700px 300px at 85% 0%, rgba(25
 .mainnav a.dock-logo, .mainnav a.dock-logo:hover { padding: 0; border: 0; background: none; }
 .mainnav.docked .dock-logo { opacity: 1; pointer-events: auto; transform: translate(0, -50%) scale(1); }
 [id] { scroll-margin-top: 76px; }
+@media (max-width: 760px) { [id] { scroll-margin-top: 86px; } }
 
 /* ---------- Phones (iPhone first) ---------- */
 html { -webkit-text-size-adjust: 100%; }
@@ -348,28 +349,29 @@ a, button { -webkit-tap-highlight-color: rgba(128,224,224,0.15); }
   .wrap { padding-left: max(16px, env(safe-area-inset-left)); padding-right: max(16px, env(safe-area-inset-right)); }
   h1, h2, h3 { overflow-wrap: anywhere; }
 
-  /* Compact logo row that scrolls away. */
+  /* Phone header: one dark row (logo left, name centered, hamburger right) that stays
+     at the top, with the teal bar reduced to a thin decorative line under it. */
   .utility { display: none; }
-  .masthead { padding-top: env(safe-area-inset-top); }
-  .masthead .wrap { min-height: 68px; gap: 12px; }
-  .brand { gap: 11px; }
-  .brand img { width: 46px; height: 46px; }
-  .brand-name { font-size: 23px; }
-  .brand-sub { font-size: 11.5px; margin-top: 3px; }
+  .masthead { position: sticky; top: 0; z-index: 60; padding-top: env(safe-area-inset-top); border-bottom: 0;
+    background: linear-gradient(180deg, #0a0f0f 0%, #0f1818 100%); }
+  .masthead .wrap { position: relative; display: block; min-height: 64px; }
+  .brand { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; min-height: 64px; gap: 0; }
+  .brand img { width: 40px; height: 40px; }
+  .brand > div { text-align: center; }
+  .brand-name { font-size: 22px; letter-spacing: 0.04em; }
+  .brand-sub { font-size: 11px; margin-top: 3px; }
   .brand-sub .est { display: none; }
 
-  /* Sticky teal bar with centered MENU; the white logo docks on the left once it sticks. */
-  .mainnav { position: sticky; top: 0; padding-top: 0; }
-  .mainnav.docked { padding-top: env(safe-area-inset-top); }
-  .mainnav .wrap { display: flex; min-height: 56px; }
-  .dock-logo { left: max(16px, env(safe-area-inset-left)); width: 36px; height: 36px; }
-  .dock-logo img { width: 36px; height: 36px; }
-  /* Plain hamburger lines on the right (no pill, no label; the label stays for screen readers). */
-  .mainnav .wrap { justify-content: flex-end; }
+  .mainnav { position: sticky; top: calc(64px + env(safe-area-inset-top)); z-index: 59; box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+    background: linear-gradient(90deg, #005f5f 0%, #009090 50%, #005f5f 100%); }
+  .mainnav .wrap { min-height: 10px; padding-top: 0; padding-bottom: 0; }
+  .dock-logo { display: none; }
+
+  /* Plain hamburger lines, top right of the dark row. */
   .navtoggle {
     display: inline-flex; align-items: center; justify-content: center;
-    width: 48px; height: 56px; margin-right: -12px; padding: 0; cursor: pointer;
-    background: none; border: 0; color: #fff;
+    position: absolute; top: 50%; right: max(4px, calc(env(safe-area-inset-right) - 12px)); transform: translateY(-50%);
+    width: 48px; height: 48px; padding: 0; cursor: pointer; background: none; border: 0; color: #fff;
   }
   .navtoggle-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .navtoggle .bars, .navtoggle .bars::before, .navtoggle .bars::after { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; position: relative; transition: transform 0.2s ease, background 0.2s ease; }
@@ -383,7 +385,7 @@ a, button { -webkit-tap-highlight-color: rgba(128,224,224,0.15); }
   /* Full screen menu panel directly under the bar (main.js sets --menu-top). */
   .mainnav ul { display: none; }
   .mainnav.open ul {
-    display: flex; flex-direction: column; flex-wrap: nowrap;
+    display: flex; flex-direction: column; flex-wrap: nowrap; justify-content: flex-start;
     position: fixed; left: 0; right: 0; bottom: 0; top: var(--menu-top, 56px); z-index: 55; overflow-y: auto; overscroll-behavior: contain;
     padding: 8px max(16px, env(safe-area-inset-right)) calc(28px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
     background: radial-gradient(600px 400px at 100% 0%, rgba(0,116,116,0.3), transparent 70%), #060a0a;

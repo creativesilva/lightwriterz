@@ -13,5 +13,5 @@
 - Cache busting: css/js links carry ?v=N. Bump N on all 5 pages whenever style.css or a script changes, or phones keep the old cached copy (Pages caches ~10 min, Safari longer).
 - Sticky teal bar on every page; main.js adds .docked when the masthead scrolls away, which fades in the white .dock-logo. Scroll lock for the phone menu goes on <html> only (locking <body> breaks the sticky bar).
 - Always spell it "Cameras 4 Kids" (separate words), never Cameras4Kids.
-- Header logo (masthead + dock) is the minimal mark logos/lw-minimal-192.png; the full LIGHTWRITERZ badge stays everywhere else (footer, placeholders, share image). Phone menu button is plain hamburger lines on the right, no pill, no visible label.
+- Header logo (masthead + dock) is the minimal mark logos/lw-minimal-192.png; the full LIGHTWRITERZ badge stays everywhere else (footer, placeholders, share image). Phone header: one sticky dark row (minimal logo left, name centered, plain hamburger right, no pill, no label) with the teal bar reduced to a 10px decorative line under it. The .navtoggle lives in the masthead; desktop keeps the full teal nav bar with the docking logo.
 - Home page is about the students, not Chris: no portraits of Chris on the home page.
