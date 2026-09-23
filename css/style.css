@@ -827,3 +827,19 @@ footer.site .foot-logo { margin-bottom: 16px; }
 .shirt-stage .shirt-nav { top: 50%; }
 .shirt-stage .shirt-nav.prev { left: 10px; }
 .shirt-stage .shirt-nav.next { right: 10px; }
+
+/* One line about the print (replaces the garment specs). */
+.shirt-print { width: 100%; margin-top: 14px; padding: 12px 16px; border-radius: 10px; text-align: center; font-size: 14px; color: #cfdada;
+  background: #050707; border: 1px solid rgba(255,255,255,0.1); }
+.shirt-print strong { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.14em; font-size: 13px; color: #fff; margin-right: 4px; }
+/* Phones: the viewer always fits the visible screen and scrolls inside if needed. */
+.shirt-modal { height: 100vh; height: 100dvh; }
+.shirt-modal-panel { max-height: 100%; -webkit-overflow-scrolling: touch; }
+
+/* Nothing in the viewer squishes; the panel scrolls instead. */
+.shirt-modal-panel > * { flex-shrink: 0; }
+@media (min-width: 761px) { .shirt-slide img { max-height: min(40vh, 460px); } }
+.shirt-modal-panel { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.18) transparent; }
+.shirt-modal-panel::-webkit-scrollbar { width: 6px; }
+.shirt-modal-panel::-webkit-scrollbar-track { background: transparent; }
+.shirt-modal-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.18); border-radius: 3px; }
