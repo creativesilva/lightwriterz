@@ -894,3 +894,8 @@ footer.site .motto-pics { font-family: var(--font-body); font-size: 0.8em; }
 @media (max-width: 760px) {
   .motto-band .wrap::after { width: 78%; right: -18%; top: 38%; opacity: 0.045; }
 }
+
+/* Six officers: three across on desktop, two on phones. */
+.officers { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 760px) { .officers { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 761px) { .officer .ph { aspect-ratio: 4 / 3; } .officer .ph img { width: 26%; } }
