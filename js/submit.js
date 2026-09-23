@@ -2,7 +2,7 @@
 // The code is checked here AND by the Apps Script, so uploads without it are refused.
 // ENDPOINT: the Apps Script web app /exec URL (same deployment as the Curriculum Catalog uploader).
 (function () {
-  var ENDPOINT = "";
+  var ENDPOINT = "https://script.google.com/macros/s/AKfycbwKgAWHt-MerxhSJN81C-LfuGkqINYlb6VyMTBY11z6pLc7ewpw0ajSX2FE7CXq78tL/exec";
   var TARGET = "lwz-students";
   var MAX = 30 * 1024 * 1024;
 
