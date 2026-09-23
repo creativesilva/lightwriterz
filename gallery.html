@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Gallery | Light Writerz</title>
+  <meta name="description" content="The best student photographs from Light Writerz, the Pioneer Valley High School photography club.">
+  <meta property="og:title" content="Student Gallery | Light Writerz">
+  <meta property="og:description" content="The best student photographs from Light Writerz, the Pioneer Valley High School photography club.">
+  <meta property="og:image" content="https://www.lightwriterz.org/logos/lwz-teal-500.png">
+  <meta name="theme-color" content="#007474">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <div class="utility">
+    <div class="wrap">
+      <span class="tag">Pioneer Valley High School &middot; Santa Maria, California</span>
+      <ul>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html#donate">Cameras4Kids</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <header class="masthead">
+    <div class="wrap">
+      <a class="brand" href="index.html" aria-label="Light Writerz home">
+        <img src="logos/lwz-black-500.png" alt="Light Writerz logo" width="76" height="76">
+        <div>
+          <div class="brand-name">Light Writerz</div>
+          <div class="brand-sub">PVHS Photography Club &middot; Est. 2010</div>
+        </div>
+      </a>
+      <a class="btn orange cta" href="contact.html#donate">Donate a Camera</a>
+    </div>
+  </header>
+
+  <nav class="mainnav" aria-label="Main">
+    <div class="wrap">
+      <button class="navtoggle" aria-expanded="false" aria-controls="navlist">&#9776;&nbsp; Menu</button>
+      <ul id="navlist">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="mission.html">Mission &amp; Statement</a></li>
+        <li><a href="officers.html">Officers</a></li>
+        <li><a href="gallery.html" aria-current="page">Student Gallery</a></li>
+        <li><a href="contact.html">Contact &amp; Donate</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <section class="hero page" style="background-image:url('images/SILVA-45.jpg')">
+      <div class="wrap">
+        <p class="eyebrow">Photographs, made by our members</p>
+        <h1>Student<br>Gallery</h1>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Our Best Work</h2>
+          <span class="sub">Every image here was selected with intention</span>
+        </div>
+        <div class="filters" id="filters" hidden></div>
+        <div class="grid" id="grid"></div>
+        <div class="empty-gallery" id="empty" hidden>
+          <img src="logos/lwz-black-500.png" alt="">
+          <h3>The first gallery is being curated</h3>
+          <p>Our members are making photographs right now. Their best work will appear here soon.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photograph viewer">
+      <button type="button" aria-label="Close">&times;</button>
+      <img alt="">
+      <p></p>
+    </div>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="cols">
+        <div>
+          <img src="logos/lwz-white-500.png" alt="Light Writerz logo" width="96" height="96">
+          <p class="motto">Pics are taken.<br>Photographs are made.</p>
+          <p>Light Writerz (LWZ) is the photography club of Pioneer Valley High School, founded in 2010.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="mission.html">Mission &amp; Statement</a></li>
+            <li><a href="officers.html">Officers</a></li>
+            <li><a href="gallery.html">Student Gallery</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <ul>
+            <li><a href="contact.html#donate">Cameras4Kids</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Reach Us</h4>
+          <ul>
+            <li><a href="mailto:info@lightwriterz.org">info@lightwriterz.org</a></li>
+            <li><a href="tel:+18056310001">805-631-0001</a></li>
+            <li>Pioneer Valley High School<br>Santa Maria, CA</li>
+          </ul>
+        </div>
+      </div>
+      <div class="legal">
+        <span>&copy; <span id="yr">2026</span> Light Writerz &middot; A Pioneer Valley High School student club</span>
+        <span>Photo = light &middot; Graphy = to write</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/gallery.js"></script>
+</body>
+</html>
