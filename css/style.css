@@ -215,6 +215,10 @@ blockquote.pull cite { display: block; font-family: var(--font-body); text-trans
 
 .founders-mini { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 32px; }
 .founders-mini .card h3 { font-size: 22px; }
+.card.founder { display: flex; align-items: center; gap: 22px; }
+.card.founder .head { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; flex-shrink: 0; filter: grayscale(1); box-shadow: 0 0 0 2px rgba(128,224,224,0.55), 0 0 0 6px rgba(0,116,116,0.18), 0 10px 24px rgba(0,0,0,0.5); }
+.card.founder .head.empty { display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 35%, #1b3535, #070b0b); }
+.card.founder .head.empty img { width: 58%; opacity: 0.75; }
 
 /* Gallery */
 .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
