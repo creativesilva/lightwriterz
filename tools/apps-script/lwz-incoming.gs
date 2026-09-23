@@ -15,10 +15,11 @@
  *  3) Copy the Web app /exec URL and give it to Claude. It goes in two places:
  *     js/submit.js (ENDPOINT) in this repo, and the LWZ Incoming row in the catalog.
  */
-const LWZ_INCOMING = "1p3IYB6lNez4Byv8yzMs3AsgBV7HzNPOV"; // LWZ_incoming Drive folder
+const LWZ_INCOMING = "1p3IYB6lNez4Byv8yzMs3AsgBV7HzNPOV";     // LWZ_incoming Drive folder
+const STUDENT_INCOMING = "1Ol2-w3AKZDiW6SYTKfyfi6O4h66TQkbD"; // LWZ_incoming/Student_incoming
 const TARGETS = {
   lightwriterz:   { folderId: LWZ_INCOMING, key: "lwz-7a538caa4e2f" },
-  "lwz-students": { folderId: LWZ_INCOMING, key: "2010", jpgOnly: true, prefix: "STUDENT" },
+  "lwz-students": { folderId: STUDENT_INCOMING, key: "2010", jpgOnly: true, prefix: "STUDENT" },
 };
 const MAX_BYTES = 45 * 1024 * 1024; // ~45 MB per file (Apps Script POST payload ceiling is ~50 MB)
 
