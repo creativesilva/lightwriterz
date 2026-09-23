@@ -10,10 +10,19 @@
         2,
         3,
         1,
-        2,
+        3,
         3
       ],
       "photos": [
+        {
+          "file": "light-lw.jpg",
+          "w": 1535,
+          "h": 1025,
+          "bg": "#1c345b",
+          "alt": "A student framed by the letters LW and a circle, written in light",
+          "student": "",
+          "title": ""
+        },
         {
           "file": "light-01.jpg",
           "w": 1600,

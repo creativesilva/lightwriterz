@@ -88,6 +88,24 @@
     });
   }
 
+  // Home hero slider: crossfade every 7s; later slides load after the page does.
+  var slides = [].slice.call(document.querySelectorAll(".hero-slide"));
+  if (slides.length > 1) {
+    var sdots = [].slice.call(document.querySelectorAll(".hero-dots button"));
+    var at = 0, timer = null;
+    var still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var showSlide = function (i) {
+      at = (i + slides.length) % slides.length;
+      slides.forEach(function (s, k) { s.classList.toggle("is-active", k === at); });
+      sdots.forEach(function (d, k) { d.setAttribute("aria-selected", k === at ? "true" : "false"); });
+    };
+    var play = function () { clearInterval(timer); if (!still) timer = setInterval(function () { showSlide(at + 1); }, 7000); };
+    sdots.forEach(function (d, k) { d.addEventListener("click", function () { slides.forEach(function (s) { s.classList.remove("pending"); }); showSlide(k); play(); }); });
+    var wake = function () { slides.forEach(function (s) { s.classList.remove("pending"); }); play(); };
+    if (document.readyState === "complete") wake(); else window.addEventListener("load", wake);
+    document.addEventListener("visibilitychange", function () { if (document.hidden) clearInterval(timer); else play(); });
+  }
+
   var yr = document.getElementById("yr");
   if (yr) yr.textContent = new Date().getFullYear();
 

@@ -468,13 +468,13 @@ a, button { -webkit-tap-highlight-color: rgba(128,224,224,0.15); }
 .hero-city-3 { background-image: url("../images/City-3.jpg"); }
 .hero-landscapes-1 { background-image: url("../images/Landscapes-1.jpg"); }
 .hero-silva-45 { background-image: url("../images/SILVA-45.jpg"); }
-.hero-the-spirit-box { background-image: url("../images/The_Spirit_Box.jpg"); background-position: center 40%; }
+.hero-the-spirit-box { background-image: url("../images/Spirit_Box_V2.jpg"); background-position: center 45%; }
 @media (max-width: 760px) {
   .hero-city-1 { background-image: url("../images/City-1-m.jpg"); }
   .hero-city-3 { background-image: url("../images/City-3-m.jpg"); }
   .hero-landscapes-1 { background-image: url("../images/Landscapes-1-m.jpg"); }
   .hero-silva-45 { background-image: url("../images/SILVA-45-m.jpg"); }
-  .hero-the-spirit-box { background-image: url("../images/The_Spirit_Box-m.jpg"); }
+  .hero-the-spirit-box { background-image: url("../images/Spirit_Box_V2-m.jpg"); }
 }
 
 /* Cameras 4 Kids band: donated cameras photo as a soft texture over the orange. */
@@ -687,3 +687,31 @@ html.modal-open { overflow: hidden; }
 }
 .gal-row.is-solo { justify-content: center; }
 @media (max-width: 760px) { .gal-row.is-solo .gal-item { max-width: none !important; } }
+
+/* ---------- Home hero slider ----------
+   LW light painting first, then black and white cityscapes. Slow crossfade with a gentle drift. */
+.hero-home .hero-slides { position: absolute; inset: 0; z-index: 0; overflow: hidden; background: var(--black); }
+.hero-home::before { z-index: 1; background:
+  linear-gradient(90deg, rgba(4,8,8,0.72) 0%, rgba(4,8,8,0.35) 45%, rgba(4,8,8,0) 75%),
+  linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.25) 45%, rgba(12,17,17,1) 100%); }
+.hero-home .wrap { z-index: 2; }
+.hero-slide { position: absolute; inset: 0; background: center / cover no-repeat; opacity: 0; transform: scale(1.06);
+  transition: opacity 1.8s ease, transform 9s linear; will-change: opacity, transform; }
+.hero-slide.is-active { opacity: 1; transform: scale(1); }
+.hero-slide.pending { background-image: none !important; }
+.hs-lw-light { background-image: url("../images/hero/lw-light.jpg"); background-position: 62% 45%; }
+.hs-city-1 { background-image: url("../images/hero/city-1.jpg"); background-position: center 35%; }
+.hs-landscapes-1 { background-image: url("../images/hero/landscapes-1.jpg"); }
+.hs-city-2 { background-image: url("../images/hero/city-2.jpg"); background-position: center 40%; }
+.hero-dots { position: absolute; z-index: 3; right: max(24px, calc((100vw - var(--max)) / 2 + 24px)); bottom: 118px; display: flex; gap: 8px; }
+.hero-dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 4px; cursor: pointer; background: rgba(255,255,255,0.35); transition: width 0.3s ease, background 0.3s ease; }
+.hero-dots button[aria-selected="true"] { width: 28px; background: var(--teal-light-accent); }
+@media (max-width: 760px) {
+  .hs-lw-light { background-image: url("../images/hero/lw-light-m.jpg"); background-position: 58% center; }
+  .hs-city-1 { background-image: url("../images/hero/city-1-m.jpg"); }
+  .hs-landscapes-1 { background-image: url("../images/hero/landscapes-1-m.jpg"); }
+  .hs-city-2 { background-image: url("../images/hero/city-2-m.jpg"); }
+  .hero-home::before { background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.45) 45%, rgba(12,17,17,1) 100%); }
+  .hero-dots { right: 16px; bottom: 84px; }
+}
+@media (prefers-reduced-motion: reduce) { .hero-slide { transition: opacity 0.6s ease; transform: none !important; } }

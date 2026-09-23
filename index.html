@@ -24,8 +24,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="images/Landscapes-1-m.jpg" media="(max-width: 760px)" fetchpriority="high">
-  <link rel="stylesheet" href="css/style.css?v=21">
+  <link rel="preload" as="image" href="images/hero/lw-light-m.jpg" media="(max-width: 760px)" fetchpriority="high">
+  <link rel="preload" as="image" href="images/hero/lw-light.jpg" media="(min-width: 761px)" fetchpriority="high">
+  <link rel="stylesheet" href="css/style.css?v=22">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -60,7 +61,19 @@
 
   <main id="main">
 
-    <section class="hero hero-landscapes-1">
+    <section class="hero hero-home">
+      <div class="hero-slides" aria-roledescription="carousel" aria-label="Featured photographs">
+        <div class="hero-slide hs-lw-light is-active" role="img" aria-label="Light painting: the letters LW written in light around a student"></div>
+        <div class="hero-slide hs-city-1 pending" role="img" aria-label="New York City skyline in black and white"></div>
+        <div class="hero-slide hs-landscapes-1 pending" role="img" aria-label="A harbor at night under storm clouds, in black and white"></div>
+        <div class="hero-slide hs-city-2 pending" role="img" aria-label="A New York City street scene in black and white"></div>
+      </div>
+      <div class="hero-dots" role="tablist" aria-label="Choose photograph">
+        <button type="button" role="tab" aria-label="Photograph 1 of 4" aria-selected="true"></button>
+        <button type="button" role="tab" aria-label="Photograph 2 of 4"></button>
+        <button type="button" role="tab" aria-label="Photograph 3 of 4"></button>
+        <button type="button" role="tab" aria-label="Photograph 4 of 4"></button>
+      </div>
       <div class="wrap">
         <p class="eyebrow">Founded 2010 &middot; At PVHS since 2021</p>
         <h1>Pics are taken.<br><span class="accent">Photographs are made.</span></h1>
@@ -92,7 +105,7 @@
           <p>In 2021, just after students were allowed back into classrooms following the COVID-19 pandemic, Mr. Silva brought LWZ to Pioneer Valley High School, and it has called PVHS home ever since. It is run by student officers and advised by two of its founders, Chris Silva and Laura Garcia. The logo carries pride and responsibility: to continue a legacy of image making at the highest level of intention and passion.</p>
           <p style="margin-top:26px"><a class="btn dark" href="mission.html">Read our mission</a></p>
         </div>
-        <img src="images/The_Spirit_Box-m.jpg" srcset="images/The_Spirit_Box-m.jpg 1080w, images/The_Spirit_Box.jpg 2000w" sizes="(max-width: 760px) 100vw, 50vw" alt="A black and white photograph of a Nikon F3 film camera" loading="lazy">
+        <img src="images/Spirit_Box_V2-m.jpg" srcset="images/Spirit_Box_V2-m.jpg 1000w, images/Spirit_Box_V2.jpg 1254w" sizes="(max-width: 760px) 100vw, 50vw" alt="The Spirit Box: a vintage Nikon F3 film camera with motor drive, in black and white" loading="lazy">
       </div>
     </section>
 
@@ -227,6 +240,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=6"></script>
+  <script src="js/main.js?v=7"></script>
 </body>
 </html>
