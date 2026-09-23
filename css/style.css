@@ -541,3 +541,21 @@ section.band.orange::before {
   footer.site .legal-dot { display: none; }
   footer.site .legal-club { display: block; }
 }
+
+/* Desktop: when the teal bar docks at the top it fades to a dark gray/black gradient,
+   keeping a thin teal line along the bottom edge. */
+@media (min-width: 761px) {
+  .mainnav::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 0.35s ease;
+    background: linear-gradient(180deg, #1c2323 0%, #0b0f0f 100%); box-shadow: inset 0 -2px 0 #007474; }
+  .mainnav.docked::before { opacity: 1; }
+  .mainnav > .wrap { position: relative; z-index: 1; }
+  .mainnav.docked a:hover { background: rgba(0,116,116,0.35); }
+  .mainnav.docked a[aria-current="page"] { border-bottom-color: var(--teal-light-accent); }
+}
+
+/* Advisor website link */
+.person .person-link { margin-top: 16px; }
+.person .person-link a { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.1em; font-size: 14px; text-decoration: none;
+  color: var(--teal-light-accent); border-bottom: 1px solid rgba(128,224,224,0.4); padding-bottom: 2px; }
+.person .person-link a::after { content: "\00a0\2197"; }
+.person .person-link a:hover { color: #fff; border-bottom-color: #fff; }
