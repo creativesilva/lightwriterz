@@ -879,3 +879,18 @@ footer.site .motto-pics { font-family: var(--font-body); font-size: 0.8em; }
   color: rgba(230,236,236,0.4) !important; }
 .creed-close span { color: var(--teal-light-accent); }
 @media (max-width: 760px) { .creed { margin-left: 24px; } .creed p { font-size: 16.5px; } .creed-close { font-size: 18px !important; } }
+
+/* Motto section: LW mark ghosted into the right side; text can sit over it. */
+.motto-band { position: relative; overflow: hidden; }
+.motto-band .wrap { position: relative; }
+.motto-band .wrap::after {
+  content: ""; position: absolute; z-index: 0; pointer-events: none;
+  right: 0; top: 50%; transform: translateY(-50%);
+  width: min(440px, 42%); aspect-ratio: 1;
+  background: url("../logos/LW_White_Minimal.png") center / contain no-repeat;
+  opacity: 0.05;
+}
+.motto-band .wrap > * { position: relative; z-index: 1; }
+@media (max-width: 760px) {
+  .motto-band .wrap::after { width: 78%; right: -18%; top: 38%; opacity: 0.045; }
+}
