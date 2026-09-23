@@ -774,3 +774,28 @@ footer.site .foot-logo { margin-bottom: 16px; }
 .gal-row.is-fixed { justify-content: center; }
 .gal-row.is-fixed .gal-item { flex: 0 0 calc((100% - (var(--cols) - 1) * 14px) / var(--cols)) !important; }
 @media (max-width: 760px) { .gal-row.is-fixed .gal-item { flex-basis: calc(50% - 5px) !important; } }
+
+/* ---------- Shirt "drop" release card ---------- */
+.shirt-modal-panel { overflow-y: auto; overscroll-behavior: contain; }
+.shirt-slide img { max-height: min(54vh, 560px); }
+.drop-card { width: 100%; margin-top: 16px; padding: 16px 18px 18px; border-radius: 10px; position: relative; overflow: hidden;
+  background: linear-gradient(160deg, rgba(255,107,26,0.12) 0%, rgba(255,255,255,0.02) 55%); border: 1px solid rgba(255,107,26,0.35); }
+.drop-card::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--orange); }
+.drop-kicker { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.22em; font-size: 12px; color: var(--orange); margin-bottom: 10px; }
+.drop-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 0 12px; }
+.drop-specs div { padding: 10px 12px; border-radius: 6px; background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.06); }
+.drop-specs dt { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.16em; font-size: 10.5px; color: var(--gray); }
+.drop-specs dd { margin: 3px 0 0; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.05em; font-size: 15px; color: #fff; line-height: 1.25; }
+.drop-specs .drop-status { color: var(--orange); }
+.drop-copy { font-size: 14px; line-height: 1.6; color: #c3cfcf; }
+@media (max-width: 760px) {
+  .shirt-slide img { max-height: 46vh; }
+  .drop-specs { grid-template-columns: 1fr 1fr; }
+  .drop-specs dd { font-size: 13.5px; }
+  .drop-copy { font-size: 13.5px; }
+}
+.shirt-modal-panel { overflow-x: hidden; }
+.shirt-nav { top: 38%; }
+.shirt-nav.prev { left: 30px; }
+.shirt-nav.next { right: 30px; }
+@media (min-width: 761px) { .shirt-slide img { max-height: min(48vh, 520px); } }
