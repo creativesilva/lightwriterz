@@ -12,3 +12,4 @@
 - Mobile first: most visitors are on iPhones. Phone header is one sticky 64px bar with a full screen menu. Hero photos are CSS classes (.hero-<image>) in style.css with -m.jpg (1080px) versions for phones; content images use srcset with -m.jpg.
 - Cache busting: css/js links carry ?v=N. Bump N on all 5 pages whenever style.css or a script changes, or phones keep the old cached copy (Pages caches ~10 min, Safari longer).
 - Sticky teal bar on every page; main.js adds .docked when the masthead scrolls away, which fades in the white .dock-logo. Scroll lock for the phone menu goes on <html> only (locking <body> breaks the sticky bar).
+- Always spell it "Cameras 4 Kids" (separate words), never Cameras4Kids.

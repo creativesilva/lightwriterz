@@ -13,7 +13,7 @@ Live at **https://www.lightwriterz.org** (GitHub Pages, custom domain via GoDadd
 | `mission.html` | Mission and artist statement, pic vs. photograph, member quotes |
 | `officers.html` | Student officers, advisors, founding four |
 | `gallery.html` | Student gallery (reads `gallery/gallery.json`) |
-| `contact.html` | Contact form, Cameras4Kids camera donations |
+| `contact.html` | Contact form, Cameras 4 Kids camera donations |
 
 Plain HTML, CSS, and JavaScript. No build step.
 
@@ -42,7 +42,7 @@ Category filter buttons appear automatically once there are two or more categori
 ## Brand
 
 - Dark theme: near black `#0c1111` base with soft teal gradients, white text, PVHS teal `#007474`
-- Curriculum accents: light teal `#80e0e0`, orange `#FF6B1A` (Cameras4Kids / donate), gold `#f5b301` (earned, honors), purple `#8b5cf6` (reserved)
+- Curriculum accents: light teal `#80e0e0`, orange `#FF6B1A` (Cameras 4 Kids / donate), gold `#f5b301` (earned, honors), purple `#8b5cf6` (reserved)
 - Fonts: Oswald (headings), Inter (body)
 - Logos in `logos/` (transparent PNG, black / white / teal)
 

@@ -8,7 +8,7 @@
   --teal-dark: #005656;
   --teal-light: #e6f2f2;
   --teal-light-accent: #80e0e0;   /* curriculum Light Teal */
-  --orange: #FF6B1A;              /* curriculum Orange: Cameras4Kids / donate */
+  --orange: #FF6B1A;              /* curriculum Orange: Cameras 4 Kids / donate */
   --gold: #f5b301;                /* curriculum Gold: earned, honors */
   --purple: #8b5cf6;              /* curriculum Purple: reserved for resources */
   --black: #070a0a;
@@ -471,4 +471,15 @@ a, button { -webkit-tap-highlight-color: rgba(128,224,224,0.15); }
   .hero-landscapes-1 { background-image: url("../images/Landscapes-1-m.jpg"); }
   .hero-silva-45 { background-image: url("../images/SILVA-45-m.jpg"); }
   .hero-the-spirit-box { background-image: url("../images/The_Spirit_Box-m.jpg"); }
+}
+
+/* Cameras 4 Kids band: donated cameras photo as a soft texture over the orange. */
+section.band.orange { position: relative; overflow: hidden; isolation: isolate; }
+section.band.orange::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: url("../images/Donated_Cameras.jpg") center / cover no-repeat;
+  opacity: 0.16; mix-blend-mode: multiply;
+}
+@media (max-width: 760px) {
+  section.band.orange::before { background-image: url("../images/Donated_Cameras-m.jpg"); opacity: 0.15; }
 }
