@@ -559,3 +559,7 @@ section.band.orange::before {
   color: var(--teal-light-accent); border-bottom: 1px solid rgba(128,224,224,0.4); padding-bottom: 2px; }
 .person .person-link a::after { content: "\00a0\2197"; }
 .person .person-link a:hover { color: #fff; border-bottom-color: #fff; }
+
+/* Photo + Graphy: size columns to the words so the pair sits closer together. */
+.etym-block .etym { grid-template-columns: auto auto auto; justify-content: center; column-gap: 44px; }
+@media (max-width: 760px) { .etym-block .etym { column-gap: 14px; } }
