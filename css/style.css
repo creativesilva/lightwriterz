@@ -482,10 +482,10 @@ section.band.orange { position: relative; overflow: hidden; isolation: isolate; 
 section.band.orange::before {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background: url("../images/Donated_Cameras.jpg") center / cover no-repeat;
-  opacity: 0.16; mix-blend-mode: multiply;
+  opacity: 0.24; mix-blend-mode: multiply;
 }
 @media (max-width: 760px) {
-  section.band.orange::before { background-image: url("../images/Donated_Cameras-m.jpg"); opacity: 0.15; }
+  section.band.orange::before { background-image: url("../images/Donated_Cameras-m.jpg"); opacity: 0.22; }
 }
 
 /* "We write with light" band: text only, centered. */
