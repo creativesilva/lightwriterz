@@ -183,6 +183,199 @@
           "title": ""
         }
       ]
+    },
+    {
+      "id": "magazine-covers",
+      "title": "Magazine Covers",
+      "kicker": "Collection 03",
+      "note": "Editorial covers conceived, lit, captured, and designed by students in the first year of CTE Photography at Pioneer Valley High School. Every cover is built to stand next to what you would see on a newsstand.",
+      "rows": [
+        5
+      ],
+      "photos": [
+        {
+          "file": "cover-vogue.jpg",
+          "w": 1236,
+          "h": 1600,
+          "bg": "#644b45",
+          "alt": "Vogue magazine cover by Ella Naoe",
+          "student": "Ella Naoe",
+          "title": "Vogue cover",
+          "year": "2026"
+        },
+        {
+          "file": "cover-rolling-stone.jpg",
+          "w": 1236,
+          "h": 1600,
+          "bg": "#595454",
+          "alt": "Rolling Stone magazine cover by Gregorio Calleja",
+          "student": "Gregorio Calleja",
+          "title": "Rolling Stone cover",
+          "year": "2026"
+        },
+        {
+          "file": "cover-time.jpg",
+          "w": 1236,
+          "h": 1600,
+          "bg": "#372750",
+          "alt": "Time magazine cover by Julio Marquez",
+          "student": "Julio Marquez",
+          "title": "Time cover",
+          "year": "2026"
+        },
+        {
+          "file": "cover-sports-illustrated.jpg",
+          "w": 1236,
+          "h": 1600,
+          "bg": "#8f8784",
+          "alt": "Sports Illustrated magazine cover by Davina Royall Showalter",
+          "student": "Davina Royall Showalter",
+          "title": "Sports Illustrated cover",
+          "year": "2026"
+        },
+        {
+          "file": "cover-people.jpg",
+          "w": 1236,
+          "h": 1600,
+          "bg": "#a87b8e",
+          "alt": "People magazine cover by Jessica Valdez",
+          "student": "Jessica Valdez",
+          "title": "People cover",
+          "year": "2026"
+        }
+      ]
+    },
+    {
+      "id": "sauce-baby",
+      "title": "Product: Sauce Baby",
+      "kicker": "Collection 04",
+      "note": "A real client assignment: product photography for Sauce Baby's Hot Lil Mama hot sauce. Students styled, lit, and photographed the bottle to a professional commercial standard. These three photographers earned invitations to the 2026 Spring Awards.",
+      "rows": [
+        4
+      ],
+      "labelRows": true,
+      "photos": [
+        {
+          "file": "sauce-veniece-1.jpg",
+          "w": 900,
+          "h": 1600,
+          "bg": "#2e1916",
+          "alt": "Sauce Baby Hot Lil Mama hot sauce, product photograph 1 by Veniece Archuleta",
+          "student": "Veniece Archuleta",
+          "title": "Sauce Baby, Hot Lil Mama",
+          "year": "2026"
+        },
+        {
+          "file": "sauce-veniece-2.jpg",
+          "w": 900,
+          "h": 1600,
+          "bg": "#371815",
+          "alt": "Sauce Baby Hot Lil Mama hot sauce, product photograph 2 by Veniece Archuleta",
+          "student": "Veniece Archuleta",
+          "title": "Sauce Baby, Hot Lil Mama",
+          "year": "2026"
+        },
+        {
+          "file": "sauce-veniece-3.jpg",
+          "w": 900,
+          "h": 1600,
+          "bg": "#6a3e31",
+          "alt": "Sauce Baby Hot Lil Mama hot sauce, product photograph 3 by Veniece Archuleta",
+          "student": "Veniece Archuleta",
+          "title": "Sauce Baby, Hot Lil Mama",
+          "year": "2026"
+        },
+        {
+          "file": "sauce-veniece-4.jpg",
+          "w": 900,
+          "h": 1600,
+          "bg": "#623729",
+          "alt": "Sauce Baby Hot Lil Mama hot sauce, product photograph 4 by Veniece Archuleta",
+          "student": "Veniece Archuleta",
+          "title": "Sauce Baby, Hot Lil Mama",
+          "year": "2026"
+        },
+        {
+          "file": "sauce-dennis-1.jpg",
+          "w": 900,
+          "h": 1600,
+          "bg": "#26110c",
+          "alt": "Sauce Baby Hot Lil Mama hot sauce, product photograph 1 by Dennis Petersen",
+          "student": "Dennis Petersen",
+          "title": "Sauce Baby, Hot Lil Mama",
+          "year": "2026"
+        },
+        {
+          "file": "sauce-dennis-2.jpg",
+          "w": 900,
+          "h": 1600,
+          "bg": "#602212",
+          "alt": "Sauce Baby Hot Lil Mama hot sauce, product photograph 2 by Dennis Petersen",
+          "student": "Dennis Petersen",
+          "title": "Sauce Baby, Hot Lil Mama",
+          "year": "2026"
+        },
+        {
+          "file": "sauce-dennis-3.jpg",
+          "w": 900,
+          "h": 1600,
+          "bg": "#633427",
+          "alt": "Sauce Baby Hot Lil Mama hot sauce, product photograph 3 by Dennis Petersen",
+          "student": "Dennis Petersen",
+          "title": "Sauce Baby, Hot Lil Mama",
+          "year": "2026"
+        },
+        {
+          "file": "sauce-dennis-4.jpg",
+          "w": 900,
+          "h": 1600,
+          "bg": "#623d2f",
+          "alt": "Sauce Baby Hot Lil Mama hot sauce, product photograph 4 by Dennis Petersen",
+          "student": "Dennis Petersen",
+          "title": "Sauce Baby, Hot Lil Mama",
+          "year": "2026"
+        },
+        {
+          "file": "sauce-emiliano-1.jpg",
+          "w": 900,
+          "h": 1600,
+          "bg": "#4f332a",
+          "alt": "Sauce Baby Hot Lil Mama hot sauce, product photograph 1 by Emiliano Jimenez",
+          "student": "Emiliano Jimenez",
+          "title": "Sauce Baby, Hot Lil Mama",
+          "year": "2026"
+        },
+        {
+          "file": "sauce-emiliano-2.jpg",
+          "w": 900,
+          "h": 1600,
+          "bg": "#684a40",
+          "alt": "Sauce Baby Hot Lil Mama hot sauce, product photograph 2 by Emiliano Jimenez",
+          "student": "Emiliano Jimenez",
+          "title": "Sauce Baby, Hot Lil Mama",
+          "year": "2026"
+        },
+        {
+          "file": "sauce-emiliano-3.jpg",
+          "w": 900,
+          "h": 1600,
+          "bg": "#945b2a",
+          "alt": "Sauce Baby Hot Lil Mama hot sauce, product photograph 3 by Emiliano Jimenez",
+          "student": "Emiliano Jimenez",
+          "title": "Sauce Baby, Hot Lil Mama",
+          "year": "2026"
+        },
+        {
+          "file": "sauce-emiliano-4.jpg",
+          "w": 900,
+          "h": 1600,
+          "bg": "#492317",
+          "alt": "Sauce Baby Hot Lil Mama hot sauce, product photograph 4 by Emiliano Jimenez",
+          "student": "Emiliano Jimenez",
+          "title": "Sauce Baby, Hot Lil Mama",
+          "year": "2026"
+        }
+      ]
     }
   ]
 }

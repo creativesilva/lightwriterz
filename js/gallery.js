@@ -38,6 +38,8 @@
       while (i < c.photos.length) {
         var n = rows[r % rows.length];
         var chunk = c.photos.slice(i, i + n);
+        // Collections with labelRows show the photographer's name above their row.
+        if (c.labelRows && chunk[0].student) wrap.appendChild(el("p", "gal-row-label", chunk[0].student));
         var row = el("div", "gal-row" + (chunk.length === 1 ? " is-solo" : ""));
         chunk.forEach(function (p) {
           var k = all.length;

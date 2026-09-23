@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=25">
+  <link rel="stylesheet" href="css/style.css?v=27">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -80,7 +80,7 @@
         </form>
 
         <form class="sub-form form" id="sub-form" hidden>
-          <p class="lead">Share your best, most intentional work. Mr. Silva reviews every photograph before it goes in the gallery.</p>
+          <p class="lead">Share your best, most intentional work. Mr. Silva and Mrs. Garcia review every photograph before it goes in the gallery.</p>
           <div class="row">
             <div><label for="sub-name">Your name</label><input id="sub-name" name="student" required autocomplete="name" autocapitalize="words" enterkeyhint="next"></div>
             <div><label for="sub-title">Photo title <span class="opt">(optional)</span></label><input id="sub-title" name="title" autocapitalize="words" enterkeyhint="next"></div>
@@ -90,6 +90,8 @@
             <select id="sub-col" name="category">
               <option>Writing with Light</option>
               <option>Multiples</option>
+              <option>Magazine Covers</option>
+              <option>Product Photography</option>
               <option>Portraits</option>
               <option>Street &amp; City</option>
               <option>Landscape &amp; Nature</option>
@@ -105,7 +107,7 @@
             <input type="file" id="sub-files" accept="image/*" multiple hidden>
             <ul class="sub-list" id="sub-list"></ul>
           </div>
-          <div><label for="sub-msg">Note for Mr. Silva <span class="opt">(optional)</span></label><textarea id="sub-msg" name="message" rows="3"></textarea></div>
+          <div><label for="sub-msg">Note for Mr. Silva &amp; Mrs. Garcia <span class="opt">(optional)</span></label><textarea id="sub-msg" name="message" rows="3"></textarea></div>
           <button class="btn" type="submit" id="sub-send" disabled>Send Photographs</button>
           <p class="note" id="sub-status" role="status" aria-live="polite"></p>
         </form>

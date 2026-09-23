@@ -753,3 +753,13 @@ footer.site .foot-logo { margin-bottom: 16px; }
 
 /* Anything marked hidden stays hidden, even when a class gives it a display value. */
 [hidden] { display: none !important; }
+
+/* Photographer name above a row (collections with labelRows). */
+.gal-row-label { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.18em; font-size: 13px; color: #e6ecec; margin: 18px 0 -2px; display: flex; align-items: center; gap: 14px; }
+.gal-row-label::after { content: ""; flex: 1; height: 1px; background: rgba(255,255,255,0.1); }
+.gal-row-label:first-child { margin-top: 0; }
+@media (max-width: 760px) {
+  /* Tall photos stay two across; an odd one out is centered at the same size. */
+  .gal-row { justify-content: center; }
+  .gal-item.is-tall { flex-grow: 0 !important; }
+}
