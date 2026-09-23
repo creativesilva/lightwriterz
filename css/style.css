@@ -520,3 +520,11 @@ section.band.orange::before {
 
   footer.site img { width: 64px; }
 }
+
+/* Founding Four: profession line under the name. */
+.card.founder .founder-title { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.08em; font-size: 13px; color: #e6ecec; margin: -4px 0 4px; }
+.card.founder p + p { margin-top: 0; }
+@media (max-width: 760px) {
+  .card.founder p:last-child { font-size: 14.5px; line-height: 1.5; }
+  .founders-mini { gap: 16px; }
+}
