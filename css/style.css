@@ -843,3 +843,7 @@ footer.site .foot-logo { margin-bottom: 16px; }
 .shirt-modal-panel::-webkit-scrollbar { width: 6px; }
 .shirt-modal-panel::-webkit-scrollbar-track { background: transparent; }
 .shirt-modal-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.18); border-radius: 3px; }
+
+/* "The Black Shirt" section title */
+.black-shirt-title { font-size: clamp(40px, 5.6vw, 64px); letter-spacing: 0.02em; }
+.black-shirt-sub { margin-top: 8px; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.2em; font-size: 15px; color: var(--gold); }
