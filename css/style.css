@@ -763,3 +763,9 @@ footer.site .foot-logo { margin-bottom: 16px; }
   .gal-row { justify-content: center; }
   .gal-item.is-tall { flex-grow: 0 !important; }
 }
+
+.sub-intro { display: grid; gap: 16px; }
+.sub-steps { margin: 0; padding: 18px 20px 18px 40px; display: grid; gap: 10px; font-size: 15px; color: #c9d4d4; line-height: 1.55;
+  background: var(--surface); border: 1px solid var(--surface-border); border-left: 3px solid var(--gold); border-radius: 8px; }
+.sub-steps strong { color: #fff; }
+.sub-steps em { color: var(--teal-light-accent); font-style: normal; }

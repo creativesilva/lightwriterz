@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=27">
+  <link rel="stylesheet" href="css/style.css?v=28">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -80,32 +80,31 @@
         </form>
 
         <form class="sub-form form" id="sub-form" hidden>
-          <p class="lead">Share your best, most intentional work. Mr. Silva and Mrs. Garcia review every photograph before it goes in the gallery.</p>
+          <div class="sub-intro">
+            <p class="lead">Share your strongest, most intentional work. Mr. Silva and Mrs. Garcia review every photograph before it appears in the gallery.</p>
+            <ol class="sub-steps">
+              <li><strong>Rename each photo to its title.</strong> The file name becomes the title shown on the site, so <em>Golden Hour Pier.jpg</em> appears as &ldquo;Golden Hour Pier.&rdquo;</li>
+              <li><strong>JPG files only.</strong> Export from Lightroom or Photoshop as JPG. iPhone photos convert to JPG automatically when you choose them here.</li>
+              <li><strong>Uploading a series?</strong> Add the series name below so the photos stay together.</li>
+            </ol>
+          </div>
           <div class="row">
-            <div><label for="sub-name">Your name</label><input id="sub-name" name="student" required autocomplete="name" autocapitalize="words" enterkeyhint="next"></div>
-            <div><label for="sub-title">Photo title <span class="opt">(optional)</span></label><input id="sub-title" name="title" autocapitalize="words" enterkeyhint="next"></div>
+            <div><label for="sub-name">Full name</label><input id="sub-name" name="student" required autocomplete="name" autocapitalize="words" enterkeyhint="next"></div>
+            <div><label for="sub-id">Student ID number</label><input id="sub-id" name="studentId" required inputmode="numeric" pattern="[0-9]{4,10}" maxlength="10" autocomplete="off" enterkeyhint="next" title="Numbers only"></div>
           </div>
           <div>
-            <label for="sub-col">Collection</label>
-            <select id="sub-col" name="category">
-              <option>Writing with Light</option>
-              <option>Multiples</option>
-              <option>Magazine Covers</option>
-              <option>Product Photography</option>
-              <option>Portraits</option>
-              <option>Street &amp; City</option>
-              <option>Landscape &amp; Nature</option>
-              <option>Other</option>
-            </select>
+            <label for="sub-series">Series name <span class="opt">(optional)</span></label>
+            <input id="sub-series" name="series" autocapitalize="words" enterkeyhint="next" placeholder="Only if these photos belong together, e.g. Night Streets">
           </div>
           <div>
             <label>Photographs</label>
             <button type="button" class="sub-drop" id="sub-drop">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
-              <span><b>Choose photographs</b><br><small>or drag them here &middot; JPG or PNG, up to 30 MB each</small></span>
+              <span><b>Choose JPG photographs</b><br><small>or drag them here &middot; JPG only, up to 30 MB each</small></span>
             </button>
-            <input type="file" id="sub-files" accept="image/*" multiple hidden>
+            <input type="file" id="sub-files" accept=".jpg,.jpeg,image/jpeg" multiple hidden>
             <ul class="sub-list" id="sub-list"></ul>
+            <p class="note err" id="sub-warn" role="alert" hidden></p>
           </div>
           <div><label for="sub-msg">Note for Mr. Silva &amp; Mrs. Garcia <span class="opt">(optional)</span></label><textarea id="sub-msg" name="message" rows="3"></textarea></div>
           <button class="btn" type="submit" id="sub-send" disabled>Send Photographs</button>
@@ -157,6 +156,6 @@
   </footer>
 
   <script src="js/main.js?v=8"></script>
-  <script src="js/submit.js?v=1"></script>
+  <script src="js/submit.js?v=3"></script>
 </body>
 </html>

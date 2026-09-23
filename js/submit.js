@@ -41,6 +41,14 @@
     s.textContent = msg;
     s.className = "note" + (kind ? " " + kind : "");
   }
+  // JPG only: both the extension and the file type must say JPEG.
+  function isJpg(file) {
+    return /\.(jpe?g)$/i.test(file.name) && (!file.type || file.type === "image/jpeg");
+  }
+  // The file name (without .jpg) is the photo's title on the site.
+  function titleOf(name) {
+    return name.replace(/\.(jpe?g)$/i, "").replace(/[_-]+/g, " ").replace(/\s+/g, " ").trim();
+  }
   function fmt(n) { return n > 1048576 ? (n / 1048576).toFixed(1) + " MB" : Math.round(n / 1024) + " KB"; }
   function render() {
     list.innerHTML = "";
@@ -51,7 +59,7 @@
       img.alt = "";
       var meta = document.createElement("span");
       meta.className = "sub-meta";
-      meta.textContent = f.file.name + " · " + fmt(f.file.size);
+      meta.textContent = "“" + titleOf(f.file.name) + "” · " + fmt(f.file.size);
       var st = document.createElement("span");
       st.className = "sub-state " + (f.state || "");
       st.textContent = f.state === "done" ? "✓ Sent" : f.state === "fail" ? "Failed" : f.state === "busy" ? "Sending…" : "";
@@ -68,13 +76,15 @@
     send.disabled = !files.some(function (f) { return !f.state || f.state === "fail"; });
   }
   function add(fl) {
-    var skipped = 0;
+    var skipped = [];
     Array.prototype.forEach.call(fl || [], function (file) {
-      if (!/^image\//.test(file.type) || file.size > MAX) { skipped++; return; }
+      if (!isJpg(file) || file.size > MAX) { skipped.push(file.name); return; }
       files.push({ file: file });
     });
     render();
-    status(skipped ? skipped + " file" + (skipped === 1 ? "" : "s") + " skipped (images up to 30 MB only)." : "", skipped ? "err" : "");
+    var warn = document.getElementById("sub-warn");
+    warn.textContent = skipped.length ? "Not added (JPG only, up to 30 MB each): " + skipped.join(", ") : "";
+    warn.hidden = !skipped.length;
   }
   drop.addEventListener("click", function () { input.click(); });
   input.addEventListener("change", function () { add(input.files); input.value = ""; });
@@ -96,11 +106,12 @@
     if (!ENDPOINT) { status("Uploads are not switched on yet. Check back soon.", "err"); return; }
     var fields = {
       student: document.getElementById("sub-name").value.trim(),
-      title: document.getElementById("sub-title").value.trim(),
-      category: document.getElementById("sub-col").value,
+      studentId: document.getElementById("sub-id").value.trim(),
+      series: document.getElementById("sub-series").value.trim(),
       message: document.getElementById("sub-msg").value.trim()
     };
     if (!fields.student) { document.getElementById("sub-name").focus(); return; }
+    if (!/^[0-9]{4,10}$/.test(fields.studentId)) { status("Enter your student ID number (numbers only).", "err"); document.getElementById("sub-id").focus(); return; }
     send.disabled = true;
     var todo = files.filter(function (f) { return !f.state || f.state === "fail"; });
     var ok = 0, bad = 0;
@@ -114,7 +125,7 @@
           method: "POST",
           headers: { "Content-Type": "text/plain;charset=utf-8" },
           body: JSON.stringify({ target: TARGET, key: code, name: f.file.name, type: f.file.type, data: data,
-            student: fields.student, title: fields.title, category: fields.category, message: fields.message })
+            student: fields.student, studentId: fields.studentId, series: fields.series, title: titleOf(f.file.name), message: fields.message })
         });
         var out = await res.json();
         if (out.ok) { f.state = "done"; ok++; } else { f.state = "fail"; bad++; console.warn("Upload:", out.error); }

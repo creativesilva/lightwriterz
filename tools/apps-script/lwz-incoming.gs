@@ -5,7 +5,8 @@
  * Two ways in, both saving to LWZ_incoming:
  *   - "lightwriterz": Chris's Curriculum Catalog paperclip row (any file type).
  *   - "lwz-students": the hidden member page www.lightwriterz.org/submit.html
- *     (club code checked here too; images only; files prefixed STUDENT with name + title).
+ *     (club code checked here too; JPG only; files prefixed STUDENT with name, series, title;
+ *      student ID number goes in the file's Drive description, not its name).
  * Requests are JSON sent as text/plain (avoids a CORS preflight).
  *
  * SETUP (Chris, one time):
@@ -17,7 +18,7 @@
 const LWZ_INCOMING = "1p3IYB6lNez4Byv8yzMs3AsgBV7HzNPOV"; // LWZ_incoming Drive folder
 const TARGETS = {
   lightwriterz:   { folderId: LWZ_INCOMING, key: "lwz-7a538caa4e2f" },
-  "lwz-students": { folderId: LWZ_INCOMING, key: "2010", imagesOnly: true, prefix: "STUDENT" },
+  "lwz-students": { folderId: LWZ_INCOMING, key: "2010", jpgOnly: true, prefix: "STUDENT" },
 };
 const MAX_BYTES = 45 * 1024 * 1024; // ~45 MB per file (Apps Script POST payload ceiling is ~50 MB)
 
@@ -32,17 +33,17 @@ function doPost(e) {
     const d = JSON.parse(e.postData.contents);
     const t = TARGETS[d.target];
     if (!t || String(d.key) !== t.key) return out({ ok: false, error: "Not authorized" });
-    if (t.imagesOnly && !/^image\//.test(d.type || "")) return out({ ok: false, error: "Images only" });
+    if (t.jpgOnly && (d.type !== "image/jpeg" || !/\.jpe?g$/i.test(d.name || ""))) return out({ ok: false, error: "JPG only" });
     const bytes = Utilities.base64Decode(d.data);
     if (bytes.length > MAX_BYTES) return out({ ok: false, error: "File over 45 MB" });
     const stamp = Utilities.formatDate(new Date(), "America/Los_Angeles", "yyyy-MM-dd");
     const safe = function (v, n) { return String(v || "").replace(/[^\w.\- ]+/g, "_").trim().slice(0, n); };
     const clean = safe(d.name || "file", 120);
-    // Optional credit fields (student page): 2026-09-23_STUDENT_Jane-Doe_Orbit_IMG_1234.jpg
-    const parts = [stamp, t.prefix, safe(d.student, 40).replace(/ +/g, "-"), safe(d.title, 40).replace(/ +/g, "-"), clean].filter(String);
+    // Student page: 2026-09-23_STUDENT_Jane-Doe_[Series-Name_]Golden Hour Pier.jpg (file name = title on the site)
+    const parts = [stamp, t.prefix, safe(d.student, 40).replace(/ +/g, "-"), safe(d.series, 40).replace(/ +/g, "-"), clean].filter(String);
     const blob = Utilities.newBlob(bytes, d.type || "application/octet-stream", parts.join("_"));
     const file = folderFor(t).createFile(blob);
-    const note = [d.student && "Student: " + d.student, d.title && "Title: " + d.title, d.category && "Collection: " + d.category, d.message && "Note: " + d.message].filter(Boolean).join("\n");
+    const note = [d.student && "Student: " + d.student, d.studentId && "Student ID: " + d.studentId, d.title && "Title: " + d.title, d.series && "Series: " + d.series, d.message && "Note: " + d.message].filter(Boolean).join("\n");
     if (note) file.setDescription(note);
     return out({ ok: true, id: file.getId(), name: file.getName() });
   } catch (err) {
