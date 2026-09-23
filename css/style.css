@@ -40,7 +40,7 @@ body {
   font-size: 17px;
   -webkit-font-smoothing: antialiased;
 }
-img { max-width: 100%; display: block; }
+img { max-width: 100%; height: auto; display: block; }
 a { color: var(--teal-light-accent); }
 a:hover { color: #fff; }
 
@@ -83,7 +83,7 @@ a:hover { color: #fff; }
 
 /* ---------- Buttons ---------- */
 .btn {
-  display: inline-block; font-family: var(--font-head); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+  display: inline-block; border-radius: 6px; font-family: var(--font-head); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
   font-size: 16px; padding: 13px 26px; border: 2px solid var(--teal); background: var(--teal); color: #fff; text-decoration: none; cursor: pointer;
   transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
@@ -492,3 +492,31 @@ section.band.orange::before {
 .etym-block { max-width: 820px; margin: 0 auto; text-align: center; }
 .etym-block .etym { margin: 34px 0 18px; }
 .etym-block p { max-width: 640px; margin-left: auto; margin-right: auto; font-size: 18px; }
+
+/* ---------- Mobile polish pass ---------- */
+.hero h1, .hero .eyebrow, .hero p { text-shadow: 0 2px 18px rgba(0,0,0,0.55); }
+@media (max-width: 760px) {
+  /* Page banners: darker base so eyebrow and title read cleanly over busy photos. */
+  .hero.page::before { background: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.55) 55%, rgba(12,17,17,1) 100%); }
+  .hero .eyebrow { font-size: 12px; letter-spacing: 0.16em; }
+
+  /* Every call to action is a full width, thumb friendly button. */
+  .band .btn { display: block; width: 100%; text-align: center; padding: 15px 20px; }
+
+  /* Officers: compact placeholders until names are announced. */
+  .officer .ph { aspect-ratio: 1 / 1; }
+  .officer .ph img { width: 38%; }
+  .officer .role { font-size: 11px; }
+  .officer .tba { font-size: 13px; }
+
+  /* Pending quotes shrink to a single tidy line. */
+  .quote.pending { padding: 16px 20px; }
+  .quote.pending p { font-size: 15px; }
+  .quote.pending .who { margin-top: 6px; font-size: 13px; }
+  .quotes { gap: 14px; }
+
+  /* Contact: Call/Text/Email buttons already cover these two rows. */
+  .contact-list li:nth-child(-n+2) { display: none; }
+
+  footer.site img { width: 64px; }
+}
