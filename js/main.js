@@ -99,11 +99,16 @@
       slides.forEach(function (s, k) { s.classList.toggle("is-active", k === at); });
       sdots.forEach(function (d, k) { d.setAttribute("aria-selected", k === at ? "true" : "false"); });
     };
-    var play = function () { clearInterval(timer); if (!still) timer = setInterval(function () { showSlide(at + 1); }, 7000); };
+    // Each slide holds 7s unless it sets data-hold (the LW light painting holds longer).
+    var play = function () {
+      clearTimeout(timer);
+      if (still) return;
+      timer = setTimeout(function () { showSlide(at + 1); play(); }, +(slides[at].getAttribute("data-hold") || 7000));
+    };
     sdots.forEach(function (d, k) { d.addEventListener("click", function () { slides.forEach(function (s) { s.classList.remove("pending"); }); showSlide(k); play(); }); });
     var wake = function () { slides.forEach(function (s) { s.classList.remove("pending"); }); play(); };
     if (document.readyState === "complete") wake(); else window.addEventListener("load", wake);
-    document.addEventListener("visibilitychange", function () { if (document.hidden) clearInterval(timer); else play(); });
+    document.addEventListener("visibilitychange", function () { if (document.hidden) clearTimeout(timer); else play(); });
   }
 
   var yr = document.getElementById("yr");

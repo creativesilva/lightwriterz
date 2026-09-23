@@ -699,7 +699,7 @@ html.modal-open { overflow: hidden; }
   transition: opacity 1.8s ease, transform 9s linear; will-change: opacity, transform; }
 .hero-slide.is-active { opacity: 1; transform: scale(1); }
 .hero-slide.pending { background-image: none !important; }
-.hs-lw-light { background-image: url("../images/hero/lw-light.jpg"); background-position: 62% 45%; }
+.hs-lw-light { background-image: url("../images/hero/lw-light-bw.jpg"); background-position: 62% 45%; }
 .hs-city-1 { background-image: url("../images/hero/city-1.jpg"); background-position: center 35%; }
 .hs-landscapes-1 { background-image: url("../images/hero/landscapes-1.jpg"); }
 .hs-city-2 { background-image: url("../images/hero/city-2.jpg"); background-position: center 40%; }
@@ -707,7 +707,7 @@ html.modal-open { overflow: hidden; }
 .hero-dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 4px; cursor: pointer; background: rgba(255,255,255,0.35); transition: width 0.3s ease, background 0.3s ease; }
 .hero-dots button[aria-selected="true"] { width: 28px; background: var(--teal-light-accent); }
 @media (max-width: 760px) {
-  .hs-lw-light { background-image: url("../images/hero/lw-light-m.jpg"); background-position: 58% center; }
+  .hs-lw-light { background-image: url("../images/hero/lw-light-bw-m.jpg"); background-position: 58% center; }
   .hs-city-1 { background-image: url("../images/hero/city-1-m.jpg"); }
   .hs-landscapes-1 { background-image: url("../images/hero/landscapes-1-m.jpg"); }
   .hs-city-2 { background-image: url("../images/hero/city-2-m.jpg"); }
