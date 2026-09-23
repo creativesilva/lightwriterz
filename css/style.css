@@ -528,3 +528,7 @@ section.band.orange::before {
   .card.founder p:last-child { font-size: 14.5px; line-height: 1.5; }
   .founders-mini { gap: 16px; }
 }
+
+/* Officer placeholders use the minimal LW mark, a little smaller and softer. */
+.officer .ph img { width: 30%; opacity: 0.8; }
+@media (max-width: 760px) { .officer .ph img { width: 32%; } }
