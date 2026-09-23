@@ -9,8 +9,6 @@
         1,
         2,
         3,
-        1,
-        3,
         3
       ],
       "photos": [
@@ -94,42 +92,6 @@
           "alt": "A smiling teacher inside a halo of light loops",
           "student": "",
           "title": ""
-        },
-        {
-          "file": "light-09.jpg",
-          "w": 1600,
-          "h": 1067,
-          "bg": "#243b5e",
-          "alt": "Two exposures of a student with headphones and a burst of light",
-          "student": "",
-          "title": ""
-        },
-        {
-          "file": "light-10.jpg",
-          "w": 1600,
-          "h": 1067,
-          "bg": "#0e1733",
-          "alt": "Three exposures of the same student in one frame, peace signs up",
-          "student": "",
-          "title": ""
-        },
-        {
-          "file": "light-11.jpg",
-          "w": 1600,
-          "h": 1067,
-          "bg": "#0d142a",
-          "alt": "Three exposures of one student, thumbs up, in blue light",
-          "student": "",
-          "title": ""
-        },
-        {
-          "file": "light-12.jpg",
-          "w": 1600,
-          "h": 1067,
-          "bg": "#101118",
-          "alt": "A double exposure portrait of a student in low, moody light",
-          "student": "",
-          "title": ""
         }
       ]
     },
@@ -139,7 +101,9 @@
       "kicker": "Collection 02",
       "note": "Portraits built from more than one exposure. Students layer a single subject across time and light in one frame, turning a portrait into a study of presence, motion, and identity.",
       "rows": [
-        4
+        4,
+        2,
+        2
       ],
       "photos": [
         {
@@ -181,6 +145,42 @@
           "student": "",
           "title": "",
           "year": "2023"
+        },
+        {
+          "file": "light-09.jpg",
+          "w": 1600,
+          "h": 1067,
+          "bg": "#243b5e",
+          "alt": "Two exposures of a student with headphones and a burst of light",
+          "student": "",
+          "title": ""
+        },
+        {
+          "file": "light-10.jpg",
+          "w": 1600,
+          "h": 1067,
+          "bg": "#0e1733",
+          "alt": "Three exposures of the same student in one frame, peace signs up",
+          "student": "",
+          "title": ""
+        },
+        {
+          "file": "light-11.jpg",
+          "w": 1600,
+          "h": 1067,
+          "bg": "#0d142a",
+          "alt": "Three exposures of one student, thumbs up, in blue light",
+          "student": "",
+          "title": ""
+        },
+        {
+          "file": "light-12.jpg",
+          "w": 1600,
+          "h": 1067,
+          "bg": "#101118",
+          "alt": "A double exposure portrait of a student in low, moody light",
+          "student": "",
+          "title": ""
         }
       ]
     }
