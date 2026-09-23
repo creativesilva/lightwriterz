@@ -449,7 +449,7 @@ a, button { -webkit-tap-highlight-color: rgba(128,224,224,0.15); }
   .principles li { padding-left: 54px; }
 
   /* Contact: one tap Call, Text, Email; full width send. */
-  .quick { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: -8px 0 28px; }
+  .quick { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: -8px 0 28px; }
   .quick .btn { text-align: center; padding: 13px 6px; border-radius: 8px; }
   .form button.btn { width: 100%; }
   .form label { font-size: 13px; }
@@ -517,6 +517,7 @@ section.band.orange::before {
 
   /* Contact: Call/Text/Email buttons already cover these two rows. */
   .contact-list li:nth-child(-n+2) { display: none; }
+  .note.ok { color: var(--teal-light-accent); }
 
   footer.site img { width: 64px; }
 }
@@ -532,3 +533,6 @@ section.band.orange::before {
 /* Officer placeholders use the minimal LW mark, a little smaller and softer. */
 .officer .ph img { width: 30%; opacity: 0.8; }
 @media (max-width: 760px) { .officer .ph img { width: 32%; } }
+
+.note.ok { color: var(--teal-light-accent); }
+.note.err { color: #ffb38a; }

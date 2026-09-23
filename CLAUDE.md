@@ -15,3 +15,4 @@
 - Always spell it "Cameras 4 Kids" (separate words), never Cameras4Kids.
 - Header logo (masthead + dock) is the minimal mark logos/lw-minimal-192.png; officer placeholders also use the minimal mark; the full LIGHTWRITERZ badge stays in the footer, gallery empty state, and share image. Phone header: one sticky dark row (minimal logo left, name centered, plain hamburger right, no pill, no label) with the teal bar reduced to a 10px decorative line under it. The .navtoggle lives in the masthead; desktop keeps the full teal nav bar with the docking logo.
 - Home page is about the students, not Chris: no portraits of Chris on the home page.
+- Contact: text and email only, never call (no tel: links). Contact form posts through EmailJS using creativesilva.com's account (public key 68UkiTjqHIKZMkeCC, service_4mhkbik, template_creativesilva); message is prefixed [Light Writerz] + topic. Falls back to mailto if EmailJS is unavailable.

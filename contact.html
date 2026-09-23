@@ -24,7 +24,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=11">
+  <link rel="stylesheet" href="css/style.css?v=12">
+  <!-- Contact form sends through the same EmailJS account as creativesilva.com. -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -83,7 +85,6 @@
           <h2 class="title">Contact Us</h2>
           <p style="margin:14px 0 26px">Questions about the club, joining, events, or donations? Send us a message.</p>
           <div class="quick" aria-label="Quick contact">
-            <a class="btn" href="tel:+18056310001">Call</a>
             <a class="btn" href="sms:+18056310001">Text</a>
             <a class="btn" href="mailto:info@lightwriterz.org">Email</a>
           </div>
@@ -103,14 +104,14 @@
               </select>
             </div>
             <div><label for="message">Message</label><textarea id="message" name="message" required></textarea></div>
-            <div><button class="btn" type="submit">Send Message</button></div>
-            <p class="note">Sending opens your email app with your message addressed to info@lightwriterz.org.</p>
+            <div><button class="btn" type="submit" id="contactSubmit">Send Message</button></div>
+            <p class="note" id="formNote" role="status" aria-live="polite">Messages go straight to the Light Writerz advisors.</p>
           </form>
         </div>
         <div>
           <ul class="contact-list">
             <li><div class="k">Email</div><div class="v"><a href="mailto:info@lightwriterz.org">info@lightwriterz.org</a></div></li>
-            <li><div class="k">Phone / Text</div><div class="v"><a href="tel:+18056310001">805-631-0001</a></div></li>
+            <li><div class="k">Text</div><div class="v"><a href="sms:+18056310001">805-631-0001</a></div></li>
             <li><div class="k">Home</div><div class="v">Pioneer Valley High School<br>Santa Maria, California</div></li>
             <li><div class="k">Advisors</div><div class="v">Chris Silva &amp; Laura Garcia</div></li>
           </ul>
@@ -179,7 +180,7 @@
           <h4>Reach Us</h4>
           <ul>
             <li><a href="mailto:info@lightwriterz.org">info@lightwriterz.org</a></li>
-            <li><a href="tel:+18056310001">805-631-0001</a></li>
+            <li><a href="sms:+18056310001">Text 805-631-0001</a></li>
             <li>Pioneer Valley High School<br>Santa Maria, CA</li>
           </ul>
         </div>
@@ -191,6 +192,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=4"></script>
+  <script src="js/main.js?v=5"></script>
 </body>
 </html>

@@ -41,17 +41,43 @@
     });
   });
 
-  // Contact form: no server needed. Opens the visitor's email app
-  // addressed to the club inbox with their message filled in.
+  // Contact form: sends through EmailJS (same account and template as creativesilva.com),
+  // tagged [Light Writerz] with the topic. Falls back to the visitor's email app if EmailJS fails.
   var form = document.getElementById("contactForm");
   if (form) {
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var f = form.elements;
-      var subject = "[LWZ] " + f.topic.value + " from " + f.name.value;
+    var btn = document.getElementById("contactSubmit");
+    var note = document.getElementById("formNote");
+    var EMAILJS = { publicKey: "68UkiTjqHIKZMkeCC", service: "service_4mhkbik", template: "template_creativesilva" };
+    function mailtoFallback(f) {
+      var subject = "[Light Writerz] " + f.topic.value + " from " + f.name.value;
       var body = f.message.value + "\n\n" + f.name.value + "\n" + f.email.value;
       window.location.href = "mailto:info@lightwriterz.org?subject=" +
         encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    }
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var f = form.elements;
+      if (!window.emailjs) { mailtoFallback(f); return; }
+      btn.disabled = true;
+      btn.textContent = "Sending\u2026";
+      note.className = "note";
+      window.emailjs.send(EMAILJS.service, EMAILJS.template, {
+        name: f.name.value.trim(),
+        email: f.email.value.trim(),
+        message: "[Light Writerz] " + f.topic.value + "\n\n" + f.message.value.trim(),
+      }, { publicKey: EMAILJS.publicKey }).then(function () {
+        form.reset();
+        btn.disabled = false;
+        btn.textContent = "Send Message";
+        note.className = "note ok";
+        note.textContent = "\u2713 Message sent. Thank you! We will get back to you soon.";
+      }, function (err) {
+        console.error("EmailJS error:", err);
+        btn.disabled = false;
+        btn.textContent = "Send Message";
+        note.className = "note err";
+        note.textContent = "Something went wrong. Please text 805-631-0001 or try again.";
+      });
     });
   }
 })();
