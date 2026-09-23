@@ -536,3 +536,8 @@ section.band.orange::before {
 
 .note.ok { color: var(--teal-light-accent); }
 .note.err { color: #ffb38a; }
+@media (max-width: 760px) {
+  footer.site .legal { align-items: center; text-align: center; gap: 6px; }
+  footer.site .legal-dot { display: none; }
+  footer.site .legal-club { display: block; }
+}
