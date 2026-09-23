@@ -8,3 +8,4 @@
 - Pending content: 2026/2027 officer names and roles, founder quotes (Laura, Joshua, Jeremy), student quotes, club history, social links, Laura's bio (draft, needs her review), financial donations (not accepting money yet).
 - Colors live as CSS variables at the top of `css/style.css`.
 - Theme: dark mode with soft teal radial and linear gradients for depth (students prefer dark aesthetics). No plain white sections.
+- Share image: og-image.png (white logo on black). og:image/og:url use https://creativesilva.github.io/lightwriterz/ for now; switch to https://www.lightwriterz.org/ when the domain is connected.
