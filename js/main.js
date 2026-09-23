@@ -60,7 +60,19 @@
       prev.disabled = i === 0;
       next.disabled = i === slides.length - 1;
     }
-    track.addEventListener("scroll", function () { window.requestAnimationFrame(sync); });
+    // Shirt Info tabs: follow the photo (slides 1-2 men's, 3-4 women's) or a tap.
+    var info = document.getElementById("shirt-info");
+    var setFit = function (fit) {
+      if (!info) return;
+      info.querySelectorAll(".si-tabs button").forEach(function (b) { b.setAttribute("aria-selected", b.getAttribute("data-fit") === fit ? "true" : "false"); });
+      info.querySelectorAll(".si-panel").forEach(function (p) { p.hidden = p.getAttribute("data-fit") !== fit; });
+    };
+    if (info) info.querySelectorAll(".si-tabs button").forEach(function (b) {
+      b.addEventListener("click", function () { setFit(b.getAttribute("data-fit")); });
+    });
+    track.addEventListener("scroll", function () {
+      window.requestAnimationFrame(function () { sync(); setFit(current() >= 2 ? "womens" : "mens"); });
+    });
     prev.addEventListener("click", function () { go(current() - 1); });
     next.addEventListener("click", function () { go(current() + 1); });
     function open(btn) {

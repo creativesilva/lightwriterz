@@ -799,3 +799,31 @@ footer.site .foot-logo { margin-bottom: 16px; }
 .shirt-nav.prev { left: 30px; }
 .shirt-nav.next { right: 30px; }
 @media (min-width: 761px) { .shirt-slide img { max-height: min(48vh, 520px); } }
+
+/* ---------- Shirt Info (specs) ---------- */
+.shirt-info { width: 100%; margin-top: 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); }
+.shirt-info summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; padding: 13px 16px;
+  font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.16em; font-size: 13px; color: #fff; }
+.shirt-info summary::-webkit-details-marker { display: none; }
+.shirt-info summary:hover { color: var(--teal-light-accent); }
+.si-caret { transition: transform 0.2s ease; font-size: 12px; }
+.shirt-info[open] .si-caret { transform: rotate(180deg); }
+.si-tabs { display: flex; gap: 8px; padding: 0 16px 12px; }
+.si-tabs button { flex: 1; padding: 9px 10px; border-radius: 999px; cursor: pointer; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.12em; font-size: 12px;
+  color: #cfdada; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.14); }
+.si-tabs button[aria-selected="true"] { background: var(--teal); border-color: var(--teal); color: #fff; }
+.si-panel { padding: 0 16px; }
+.si-name { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.06em; font-size: 15px; color: #fff; margin-bottom: 8px; }
+.si-specs { margin: 0; display: grid; }
+.si-specs div { display: grid; grid-template-columns: 92px 1fr; gap: 12px; padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.06); }
+.si-specs dt { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.14em; font-size: 11px; color: var(--gray); padding-top: 2px; }
+.si-specs dd { margin: 0; font-size: 14px; color: #d7e0e0; line-height: 1.45; }
+.si-print { margin: 6px 16px 16px; padding: 12px 14px; border-radius: 8px; font-size: 13.5px; line-height: 1.5; color: #d7e0e0;
+  background: #050707; border: 1px solid rgba(255,255,255,0.08); }
+.si-print strong { color: #fff; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.1em; font-size: 12px; margin-right: 4px; }
+
+/* Arrows ride with the photo, not the scrolling panel. */
+.shirt-stage { position: relative; width: 100%; }
+.shirt-stage .shirt-nav { top: 50%; }
+.shirt-stage .shirt-nav.prev { left: 10px; }
+.shirt-stage .shirt-nav.next { right: 10px; }

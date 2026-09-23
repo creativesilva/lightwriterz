@@ -26,7 +26,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="images/hero/lw-light-bw-m.jpg" media="(max-width: 760px)" fetchpriority="high">
   <link rel="preload" as="image" href="images/hero/lw-light-bw.jpg" media="(min-width: 761px)" fetchpriority="high">
-  <link rel="stylesheet" href="css/style.css?v=31">
+  <link rel="stylesheet" href="css/style.css?v=33">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -183,11 +183,12 @@
 
 
   <!-- LWZ shirt shadow box: swipe (phones), arrows or keys (desktop), X / Esc / backdrop to close. -->
-  <div class="shirt-modal" id="shirt-modal" role="dialog" aria-modal="true" aria-label="The LWZ shirt" hidden>
+  <div class="shirt-modal" id="shirt-modal" role="dialog" aria-modal="true" aria-label="The LWZ Black Shirt" hidden>
     <div class="shirt-modal-backdrop" data-close></div>
     <div class="shirt-modal-panel">
       <button type="button" class="shirt-modal-close" data-close aria-label="Close">&times;</button>
-      <p class="shirt-modal-title">The LWZ Shirt <span>Earned. Never given.</span></p>
+      <p class="shirt-modal-title">The LWZ Black Shirt <span>Earned. Never given.</span></p>
+      <div class="shirt-stage">
       <div class="shirt-track" tabindex="0" aria-label="Shirt photos, swipe to see more">
         <figure class="shirt-slide"><img src="images/shirt/lwz-shirt-mens-front.jpg" alt="Front of the men's black Light Writerz shirt with the large circular LIGHTWRITERZ badge" loading="lazy" width="1000" height="1250"><figcaption>Men's &middot; Front</figcaption></figure>
         <figure class="shirt-slide"><img src="images/shirt/lwz-shirt-mens-back.jpg" alt="Back of the men's black Light Writerz shirt: LW logo, Est. 2010, Photo + Graphy" loading="lazy" width="1000" height="1250"><figcaption>Men's &middot; Back</figcaption></figure>
@@ -196,7 +197,37 @@
       </div>
       <button type="button" class="shirt-nav prev" aria-label="Previous photo">&#8249;</button>
       <button type="button" class="shirt-nav next" aria-label="Next photo">&#8250;</button>
+      </div>
       <div class="shirt-dots" role="tablist" aria-label="Choose photo"></div>
+      <!-- Shirt specs (no pricing). Tab follows the photo showing: slides 1-2 men's, 3-4 women's. -->
+      <details class="shirt-info" id="shirt-info">
+        <summary>Shirt Info <span class="si-caret" aria-hidden="true">&#9662;</span></summary>
+        <div class="si-tabs" role="tablist" aria-label="Shirt fit">
+          <button type="button" role="tab" data-fit="mens" aria-selected="true">Men's</button>
+          <button type="button" role="tab" data-fit="womens" aria-selected="false">Women's</button>
+        </div>
+        <div class="si-panel" data-fit="mens" role="tabpanel">
+          <p class="si-name">Next Level 1810 &middot; Men's Ideal Jersey T-Shirt</p>
+          <dl class="si-specs">
+            <div><dt>Fabric</dt><dd>100% carded ring-spun cotton</dd></div>
+            <div><dt>Weight</dt><dd>5.6 oz./yd&sup2;, midweight jersey</dd></div>
+            <div><dt>Fit</dt><dd>Regular fit, tubular body</dd></div>
+            <div><dt>Neckline</dt><dd>3/4" 1x1 rib neckband</dd></div>
+            <div><dt>Build</dt><dd>Self 3/8" shoulder-to-shoulder binding holds its shape wash after wash</dd></div>
+          </dl>
+        </div>
+        <div class="si-panel" data-fit="womens" role="tabpanel" hidden>
+          <p class="si-name">Next Level N1510 &middot; Women's Ideal T-Shirt</p>
+          <dl class="si-specs">
+            <div><dt>Fabric</dt><dd>60% combed ring-spun cotton, 40% polyester</dd></div>
+            <div><dt>Weight</dt><dd>4 oz./yd&sup2;, lightweight jersey</dd></div>
+            <div><dt>Fit</dt><dd>Fitted women's cut with side seams</dd></div>
+            <div><dt>Neckline</dt><dd>Set-in 1x1 baby rib collar</dd></div>
+            <div><dt>Build</dt><dd>Pre-laundered to minimize shrinkage; tear away label</dd></div>
+          </dl>
+        </div>
+        <p class="si-print"><strong>The print:</strong> white LIGHTWRITERZ artwork on a black shirt. Only available in this classic configuration.</p>
+      </details>
       <!-- Release info card: styled like a limited sneaker drop. -->
       <div class="drop-card" aria-label="2026-2027 release status">
         <p class="drop-kicker">2026-2027 Release</p>
@@ -249,6 +280,6 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=8"></script>
+  <script src="js/main.js?v=9"></script>
 </body>
 </html>
