@@ -769,3 +769,8 @@ footer.site .foot-logo { margin-bottom: 16px; }
   background: var(--surface); border: 1px solid var(--surface-border); border-left: 3px solid var(--gold); border-radius: 8px; }
 .sub-steps strong { color: #fff; }
 .sub-steps em { color: var(--teal-light-accent); font-style: normal; }
+
+/* Fixed grid rows (collections with "cols"): equal sized photos, short rows centered. */
+.gal-row.is-fixed { justify-content: center; }
+.gal-row.is-fixed .gal-item { flex: 0 0 calc((100% - (var(--cols) - 1) * 14px) / var(--cols)) !important; }
+@media (max-width: 760px) { .gal-row.is-fixed .gal-item { flex-basis: calc(50% - 5px) !important; } }

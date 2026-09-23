@@ -190,7 +190,7 @@
       "kicker": "Collection 03",
       "note": "Editorial covers conceived, lit, captured, and designed by students in the first year of CTE Photography at Pioneer Valley High School. Every cover is built to stand next to what you would see on a newsstand.",
       "rows": [
-        5
+        3
       ],
       "photos": [
         {
@@ -243,7 +243,8 @@
           "title": "People cover",
           "year": "2026"
         }
-      ]
+      ],
+      "cols": 3
     },
     {
       "id": "sauce-baby",

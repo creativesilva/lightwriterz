@@ -40,7 +40,9 @@
         var chunk = c.photos.slice(i, i + n);
         // Collections with labelRows show the photographer's name above their row.
         if (c.labelRows && chunk[0].student) wrap.appendChild(el("p", "gal-row-label", chunk[0].student));
-        var row = el("div", "gal-row" + (chunk.length === 1 ? " is-solo" : ""));
+        // "cols" = fixed grid: every photo the same size, a short last row centered.
+        var row = el("div", "gal-row" + (c.cols ? " is-fixed" : chunk.length === 1 ? " is-solo" : ""));
+        if (c.cols) row.style.setProperty("--cols", c.cols);
         chunk.forEach(function (p) {
           var k = all.length;
           p._col = c.title;
@@ -54,7 +56,7 @@
           item.style.aspectRatio = p.w + " / " + p.h;
           item.style.background = p.bg || "#0b0f0f";
           // A photo alone on its row fits within the screen height instead of running past it.
-          if (chunk.length === 1) item.style.maxWidth = "calc(78vh * " + ar.toFixed(4) + ")";
+          if (chunk.length === 1 && !c.cols) item.style.maxWidth = "calc(78vh * " + ar.toFixed(4) + ")";
           item.setAttribute("aria-label", "View photograph: " + p.alt);
           var img = el("img");
           img.src = "gallery/thumbs/" + p.file;
