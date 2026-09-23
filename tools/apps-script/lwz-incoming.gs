@@ -41,7 +41,7 @@ function doPost(e) {
     const safe = function (v, n) { return String(v || "").replace(/[^\w.\- ]+/g, "_").trim().slice(0, n); };
     const clean = safe(d.name || "file", 120);
     // Student page: 2026-09-23_STUDENT_Jane-Doe_[Series-Name_]Golden Hour Pier.jpg (file name = title on the site)
-    const parts = [stamp, t.prefix, safe(d.student, 40).replace(/ +/g, "-"), safe(d.series, 40).replace(/ +/g, "-"), clean].filter(String);
+    const parts = [stamp, t.prefix, safe(d.student, 40).replace(/ +/g, "-"), safe(d.series, 40).replace(/ +/g, "-"), clean].filter(Boolean);
     const blob = Utilities.newBlob(bytes, d.type || "application/octet-stream", parts.join("_"));
     const file = folderFor(t).createFile(blob);
     const note = [d.student && "Student: " + d.student, d.studentId && "Student ID: " + d.studentId, d.title && "Title: " + d.title, d.series && "Series: " + d.series, d.message && "Note: " + d.message].filter(Boolean).join("\n");
