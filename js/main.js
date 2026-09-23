@@ -4,9 +4,19 @@
   var toggle = document.querySelector(".navtoggle");
   var label = toggle && toggle.querySelector(".navtoggle-label");
 
+  // Dock: once the logo row scrolls away, the sticky teal bar shows the white logo.
+  var head = document.querySelector(".masthead");
+  if (nav && head && "IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries) {
+      var e = entries[0];
+      nav.classList.toggle("docked", !e.isIntersecting && e.boundingClientRect.top < 0);
+    }).observe(head);
+  }
+
   function setMenu(open) {
+    if (open) nav.style.setProperty("--menu-top", Math.max(0, nav.getBoundingClientRect().bottom) + "px");
     nav.classList.toggle("open", open);
-    document.body.classList.toggle("menu-open", open);
+    document.documentElement.classList.toggle("menu-open", open);
     toggle.setAttribute("aria-expanded", open ? "true" : "false");
     toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     if (label) label.textContent = open ? "Close" : "Menu";
