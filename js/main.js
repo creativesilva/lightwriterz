@@ -32,7 +32,8 @@
 
 
   // Shirt shadow boxes (black shirt, supporter shirt): native swipe (scroll snap), arrows, keys,
-  // dots; X / Esc / backdrop close. Openers use data-open="<modal id>" and optional data-slide.
+  // dots; X / Esc / backdrop close. Openers use data-open="<modal id>", optional data-slides="0,1"
+  // (only those photos are shown, e.g. men's front and back) and data-slide (which one to start on).
   document.querySelectorAll(".shirt-modal").forEach(function (modal) {
     var track = modal.querySelector(".shirt-track");
     var slides = [].slice.call(track.children);
@@ -40,34 +41,44 @@
     var next = modal.querySelector(".shirt-nav.next");
     var dotsWrap = modal.querySelector(".shirt-dots");
     var opener = null;
+    var shown = slides.slice();
     var dots = slides.map(function (s, i) {
       var d = document.createElement("button");
       d.type = "button";
       d.setAttribute("role", "tab");
       d.setAttribute("aria-label", s.querySelector("figcaption").textContent);
-      d.addEventListener("click", function () { go(i); });
+      d.addEventListener("click", function () { go(shown.indexOf(slides[i])); });
       dotsWrap.appendChild(d);
       return d;
     });
     function current() { return Math.round(track.scrollLeft / track.clientWidth); }
     function go(i, instant) {
-      i = Math.max(0, Math.min(slides.length - 1, i));
+      i = Math.max(0, Math.min(shown.length - 1, i));
       track.scrollTo({ left: i * track.clientWidth, behavior: instant ? "instant" : "smooth" });
     }
     function sync() {
-      var i = current();
-      dots.forEach(function (d, k) { d.setAttribute("aria-selected", k === i ? "true" : "false"); });
-      prev.disabled = i === 0;
-      next.disabled = i === slides.length - 1;
+      var cur = shown[current()];
+      dots.forEach(function (d, k) { d.setAttribute("aria-selected", slides[k] === cur ? "true" : "false"); });
+      prev.disabled = current() === 0;
+      next.disabled = current() >= shown.length - 1;
+      prev.hidden = next.hidden = shown.length < 2;
     }
     track.addEventListener("scroll", function () { window.requestAnimationFrame(sync); });
     prev.addEventListener("click", function () { go(current() - 1); });
     next.addEventListener("click", function () { go(current() + 1); });
     function open(btn) {
       opener = btn;
+      var only = (btn.getAttribute("data-slides") || "").split(",").filter(String).map(Number);
+      shown = only.length ? slides.filter(function (s, k) { return only.indexOf(k) > -1; }) : slides.slice();
+      slides.forEach(function (s, k) {
+        var on = shown.indexOf(s) > -1;
+        s.hidden = !on;
+        dots[k].hidden = !on || shown.length < 2;
+      });
       modal.hidden = false;
       document.documentElement.classList.add("modal-open");
-      go(+(btn.getAttribute("data-slide") || 0), true);
+      var start = shown.indexOf(slides[+(btn.getAttribute("data-slide") || 0)]);
+      go(start < 0 ? 0 : start, true);
       sync();
       modal.querySelector(".shirt-modal-close").focus();
     }
