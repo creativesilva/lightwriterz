@@ -925,3 +925,29 @@ footer.site .motto-pics { font-family: var(--font-body); font-size: 0.8em; }
 #supporter-modal .shirt-modal-panel { width: min(680px, 100%); }
 #supporter-modal .shirt-slide img { max-height: min(76vh, 860px); }
 @media (max-width: 760px) { #supporter-modal .shirt-slide img { max-height: 70vh; } }
+
+/* ---------- Merged shirts section ---------- */
+.shirts-intro { margin-bottom: 56px; }
+.motto-inline { color: rgba(230,236,236,0.45); }
+.shirt-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.shirt-card { display: flex; flex-direction: column; border-radius: 12px; overflow: hidden; background: var(--surface);
+  border: 1px solid var(--surface-border); box-shadow: var(--glow); border-top: 4px solid var(--teal-light-accent); }
+.shirt-card.earned { border-top-color: var(--gold); }
+.sc-shots { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 18px 18px 0; }
+.sc-shots .sup-open { background: #fff; border-radius: 8px; overflow: hidden; }
+.sc-shots img { width: 100%; height: auto; display: block; }
+.sc-body { padding: 20px 22px 24px; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; flex: 1; }
+.sc-kicker { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.2em; font-size: 12px; color: var(--teal-light-accent); }
+.earned .sc-kicker { color: var(--gold); }
+.sc-title { font-size: clamp(26px, 3vw, 34px) !important; margin: 0; }
+.sc-chip { display: inline-block; padding: 5px 12px; border-radius: 999px; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.16em; font-size: 12px; }
+.sc-chip.gold { color: #111; background: var(--gold); }
+.sc-body p { font-size: 15.5px; line-height: 1.65; color: #c9d4d4; margin: 0; }
+.sc-body .note { font-size: 13px; color: var(--gray); }
+.sc-btn { margin-top: auto; }
+.sc-body .soon-badge { margin-top: 0; }
+@media (max-width: 760px) {
+  .shirt-cards { grid-template-columns: 1fr; gap: 20px; }
+  .shirts-intro { margin-bottom: 36px; }
+  .sc-btn { width: 100%; text-align: center; }
+}
