@@ -911,3 +911,17 @@ footer.site .motto-pics { font-family: var(--font-body); font-size: 0.8em; }
 .supporter-shots figcaption { position: absolute; left: 10px; bottom: 10px; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.12em;
   font-size: 11px; color: #fff; background: rgba(0,0,0,0.75); padding: 4px 9px; border-radius: 4px; }
 @media (prefers-reduced-motion: reduce) { .soon-badge::before { animation: none; } }
+
+/* Supporter thumbnails open the viewer */
+.sup-open { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; position: relative; }
+.sup-open img { transition: transform 0.4s ease; }
+.sup-open:hover img { transform: scale(1.03); }
+.sup-zoom { position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.7); color: #fff; font-size: 15px; opacity: 0.85; transition: opacity 0.2s; }
+.sup-open:hover .sup-zoom { opacity: 1; }
+.sup-open:focus-visible { outline: 2px solid var(--teal-light-accent); outline-offset: 3px; }
+.shirt-modal-title .sup-sub { color: var(--teal-light-accent); }
+/* Supporter viewer: no release card below, so the shirt can use the full height. */
+#supporter-modal .shirt-modal-panel { width: min(680px, 100%); }
+#supporter-modal .shirt-slide img { max-height: min(76vh, 860px); }
+@media (max-width: 760px) { #supporter-modal .shirt-slide img { max-height: 70vh; } }

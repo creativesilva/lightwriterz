@@ -31,9 +31,9 @@
   }
 
 
-  // LWZ shirt shadow box: native swipe (scroll snap), arrows, keys, dots; X / Esc / backdrop close.
-  var modal = document.getElementById("shirt-modal");
-  if (modal) {
+  // Shirt shadow boxes (black shirt, supporter shirt): native swipe (scroll snap), arrows, keys,
+  // dots; X / Esc / backdrop close. Openers use data-open="<modal id>" and optional data-slide.
+  document.querySelectorAll(".shirt-modal").forEach(function (modal) {
     var track = modal.querySelector(".shirt-track");
     var slides = [].slice.call(track.children);
     var prev = modal.querySelector(".shirt-nav.prev");
@@ -50,9 +50,9 @@
       return d;
     });
     function current() { return Math.round(track.scrollLeft / track.clientWidth); }
-    function go(i) {
+    function go(i, instant) {
       i = Math.max(0, Math.min(slides.length - 1, i));
-      track.scrollTo({ left: i * track.clientWidth });
+      track.scrollTo({ left: i * track.clientWidth, behavior: instant ? "instant" : "smooth" });
     }
     function sync() {
       var i = current();
@@ -67,7 +67,7 @@
       opener = btn;
       modal.hidden = false;
       document.documentElement.classList.add("modal-open");
-      track.scrollLeft = 0;
+      go(+(btn.getAttribute("data-slide") || 0), true);
       sync();
       modal.querySelector(".shirt-modal-close").focus();
     }
@@ -76,7 +76,7 @@
       document.documentElement.classList.remove("modal-open");
       if (opener) opener.focus();
     }
-    document.querySelectorAll('[data-open="shirt-modal"]').forEach(function (b) {
+    document.querySelectorAll('[data-open="' + modal.id + '"]').forEach(function (b) {
       b.addEventListener("click", function () { open(b); });
     });
     modal.querySelectorAll("[data-close]").forEach(function (b) { b.addEventListener("click", close); });
@@ -86,7 +86,7 @@
       else if (e.key === "ArrowRight") go(current() + 1);
       else if (e.key === "ArrowLeft") go(current() - 1);
     });
-  }
+  });
 
   // Home hero slider: crossfade every 7s; later slides load after the page does.
   var slides = [].slice.call(document.querySelectorAll(".hero-slide"));
