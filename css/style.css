@@ -898,3 +898,16 @@ footer.site .motto-pics { font-family: var(--font-body); font-size: 0.8em; }
 .officers { grid-template-columns: repeat(3, 1fr); }
 @media (max-width: 760px) { .officers { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 761px) { .officer .ph { aspect-ratio: 4 / 3; } .officer .ph img { width: 26%; } }
+
+/* ---------- Supporter shirt ---------- */
+.soon-badge { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 5px 12px; border-radius: 999px;
+  font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.16em; font-size: 12px; color: var(--teal-light-accent);
+  border: 1px solid rgba(128,224,224,0.4); background: rgba(0,116,116,0.12); }
+.soon-badge::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--teal-light-accent); animation: soonPulse 2s ease-in-out infinite; }
+@keyframes soonPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
+.supporter-shots { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.supporter-shots figure { margin: 0; position: relative; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,0.5); }
+.split .supporter-shots img { width: 100%; height: auto; max-height: none; border-radius: 0; box-shadow: none; object-fit: contain; }
+.supporter-shots figcaption { position: absolute; left: 10px; bottom: 10px; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.12em;
+  font-size: 11px; color: #fff; background: rgba(0,0,0,0.75); padding: 4px 9px; border-radius: 4px; }
+@media (prefers-reduced-motion: reduce) { .soon-badge::before { animation: none; } }

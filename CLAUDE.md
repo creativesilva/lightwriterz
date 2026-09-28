@@ -25,3 +25,4 @@
 - NEVER use "shoot", "shooting", "shot", "shots", or "screenshot" in any copy, alt text, comments, or commits (school setting). Use capture, photograph, session, photo, frame, screen capture.
 - Favicon: white minimal LW on dark teal (#0e2c2c to #061c1c) rounded tile. favicon.ico (16/32/48), favicon-16/32.png, apple-touch-icon.png (180, square), icon-192/512.png + site.webmanifest. Bump ?v= on icon links when changed.
 - The motto is always styled: "pics are taken." lowercase, fading (.motto-pics gradient), then bright all caps "PHOTOGRAPHS ARE MADE." Used in the home hero, mission pull quote, and every footer.
+- Supporter shirt (home page section .supporter, after The Black Shirt): for parents/alumni/friends, on sale soon, women's mockup only so far (images/shirt/lwz-supporter-womens-front/back.jpg). Black shirt stays earned only; keep the two clearly distinct. Contact form has a 'Supporter shirt' topic.
