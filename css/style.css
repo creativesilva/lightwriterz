@@ -984,3 +984,11 @@ footer.site .motto-pics { font-family: var(--font-body); font-size: 0.8em; }
 /* Reveal pop-up uses the upload page's code card (.sub-gate); only positioning differs. */
 .reveal-panel.sub-gate { position: relative; margin: 0; width: min(380px, 100%); background: linear-gradient(170deg, #161d1d, #0a0e0e); }
 .reveal-panel.sub-gate .shirt-modal-close { position: absolute; top: 10px; right: 10px; }
+
+/* Officer photos */
+.officer.has-photo .ph { aspect-ratio: 4 / 5 !important; }
+.officer.has-photo { border-color: rgba(245,179,1,0.3); }
+/* Group photo */
+.group-fig img { width: 100%; height: auto; border-radius: 10px; box-shadow: 0 30px 80px rgba(0,0,0,0.6); }
+.group-fig figcaption { margin-top: 14px; font-size: 15px; color: #c9d4d4; }
+.group-fig figcaption strong { color: #fff; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; margin-right: 6px; }
