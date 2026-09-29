@@ -6,10 +6,10 @@ const CODE = "2010";
 const names = [
   { role: "President", name: "Leo Rodriguez" },
   { role: "Vice President", name: "Ashley Ortega" },
-  { role: "Secretary", name: "Revote pending", pending: true },
+  { role: "Secretary", name: "Mary Rojas" },
   { role: "Treasurer", name: "Gloria R." },
   { role: "Public Relations / Media Officer", name: "Wendy Linarez Ortuño" },
-  { role: "Creative Director", name: "Robert C." }
+  { role: "Creative Director", name: "Robert Carter" }
 ];
 const enc = new TextEncoder();
 const salt = crypto.getRandomValues(new Uint8Array(16));
