@@ -955,3 +955,28 @@ footer.site .motto-pics { font-family: var(--font-body); font-size: 0.8em; }
 .sc-fit { position: absolute; left: 8px; bottom: 8px; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.12em;
   font-size: 11px; color: #fff; background: rgba(0,0,0,0.75); padding: 4px 9px; border-radius: 4px; }
 .sc-body p.sc-hint { font-size: 12.5px; color: var(--gray); }
+
+/* ---------- Officer reveal ---------- */
+.officers-title { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.reveal-btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; cursor: pointer;
+  font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.16em; font-size: 13px; color: #111;
+  background: var(--gold); border: 0; box-shadow: 0 6px 18px rgba(245,179,1,0.3); transition: transform 0.15s, box-shadow 0.15s; }
+.reveal-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(245,179,1,0.4); }
+.reveal-dot { width: 7px; height: 7px; border-radius: 50%; background: #111; animation: soonPulse 1.6s ease-in-out infinite; }
+.reveal-modal { position: fixed; inset: 0; z-index: 330; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.reveal-modal[hidden] { display: none; }
+.reveal-backdrop { position: absolute; inset: 0; background: rgba(3,6,6,0.88); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); animation: shirtFade 0.2s ease; }
+.reveal-panel { position: relative; width: min(380px, 100%); display: grid; gap: 14px; justify-items: center; text-align: center;
+  padding: 36px 28px 30px; border-radius: 14px; background: linear-gradient(170deg, #161d1d, #0a0e0e); border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6); animation: shirtPop 0.22s ease; }
+.reveal-panel h2 { font-family: var(--font-head); text-transform: uppercase; font-size: 28px; letter-spacing: 0.04em; }
+.reveal-panel input { width: 100%; max-width: 220px; text-align: center; font-size: 28px; letter-spacing: 0.5em; padding: 12px; border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.05); color: #fff; font-family: var(--font-head); }
+.reveal-panel input:focus { outline: none; border-color: var(--gold); }
+.reveal-panel .btn { width: 100%; max-width: 220px; }
+.officer .off-name { transition: opacity 0.4s ease; }
+.officer.is-revealed .off-name { animation: nameIn 0.6s ease both; }
+.officer.is-revealed { border-color: rgba(245,179,1,0.35); }
+.officer.is-pending .off-name { color: var(--gray); font-style: italic; }
+@keyframes nameIn { from { opacity: 0; transform: translateY(6px); filter: blur(4px); } to { opacity: 1; transform: none; filter: none; } }
+@media (prefers-reduced-motion: reduce) { .officer.is-revealed .off-name, .reveal-dot { animation: none; } }

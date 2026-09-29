@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=53">
+  <link rel="stylesheet" href="css/style.css?v=54">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -72,33 +72,36 @@
     <section class="band">
       <div class="wrap">
         <div class="section-head">
-          <h2>2026 / 2027 Student Officers</h2>
-          <span class="sub">Election results coming soon</span>
+          <div class="officers-title">
+            <h2>2026 / 2027 Student Officers</h2>
+            <button type="button" class="reveal-btn" id="reveal-btn" aria-haspopup="dialog"><span class="reveal-dot" aria-hidden="true"></span>Reveal</button>
+          </div>
+          <span class="sub" id="officers-sub">Enter the club code to reveal</span>
         </div>
-        <div class="officers">
-          <div class="officer">
+        <div class="officers" id="officers">
+          <div class="officer" data-i="0">
             <div class="ph"><img src="logos/lw-minimal-192.png" alt=""></div>
-            <div class="body"><p class="role">President</p><h3>To Be Announced</h3><p class="tba">2026 / 2027</p></div>
+            <div class="body"><p class="role">President</p><h3 class="off-name">To Be Announced</h3><p class="tba">2026 / 2027</p></div>
           </div>
-          <div class="officer">
+          <div class="officer" data-i="1">
             <div class="ph"><img src="logos/lw-minimal-192.png" alt=""></div>
-            <div class="body"><p class="role">Vice President</p><h3>To Be Announced</h3><p class="tba">2026 / 2027</p></div>
+            <div class="body"><p class="role">Vice President</p><h3 class="off-name">To Be Announced</h3><p class="tba">2026 / 2027</p></div>
           </div>
-          <div class="officer">
+          <div class="officer" data-i="2">
             <div class="ph"><img src="logos/lw-minimal-192.png" alt=""></div>
-            <div class="body"><p class="role">Secretary</p><h3>To Be Announced</h3><p class="tba">2026 / 2027</p></div>
+            <div class="body"><p class="role">Secretary</p><h3 class="off-name">To Be Announced</h3><p class="tba">2026 / 2027</p></div>
           </div>
-          <div class="officer">
+          <div class="officer" data-i="3">
             <div class="ph"><img src="logos/lw-minimal-192.png" alt=""></div>
-            <div class="body"><p class="role">Treasurer</p><h3>To Be Announced</h3><p class="tba">2026 / 2027</p></div>
+            <div class="body"><p class="role">Treasurer</p><h3 class="off-name">To Be Announced</h3><p class="tba">2026 / 2027</p></div>
           </div>
-          <div class="officer">
+          <div class="officer" data-i="4">
             <div class="ph"><img src="logos/lw-minimal-192.png" alt=""></div>
-            <div class="body"><p class="role">Media Director</p><h3>To Be Announced</h3><p class="tba">2026 / 2027</p></div>
+            <div class="body"><p class="role">Public Relations / Media Officer</p><h3 class="off-name">To Be Announced</h3><p class="tba">2026 / 2027</p></div>
           </div>
-          <div class="officer">
+          <div class="officer" data-i="5">
             <div class="ph"><img src="logos/lw-minimal-192.png" alt=""></div>
-            <div class="body"><p class="role">Creative Director</p><h3>To Be Announced</h3><p class="tba">2026 / 2027</p></div>
+            <div class="body"><p class="role">Creative Director</p><h3 class="off-name">To Be Announced</h3><p class="tba">2026 / 2027</p></div>
           </div>
         </div>
         <p class="note" style="margin-top:22px">Light Writerz is led by elected student officers who plan meetings and activities and uphold the club standard.</p>
@@ -151,6 +154,23 @@
       </div>
     </section>
   </main>
+
+
+  <!-- Officer reveal: names are stored encrypted in js/officers.js; the club code unlocks them. -->
+  <div class="reveal-modal" id="reveal-modal" role="dialog" aria-modal="true" aria-label="Reveal the student officers" hidden>
+    <div class="reveal-backdrop" data-close></div>
+    <form class="reveal-panel" id="reveal-form" autocomplete="off">
+      <button type="button" class="shirt-modal-close" data-close aria-label="Close">&times;</button>
+      <img src="logos/lw-minimal-192.png" alt="" width="72" height="72">
+      <h2>Meet the Officers</h2>
+      <p class="note">Enter the club code to reveal the 2026 / 2027 student officers.</p>
+      <input id="reveal-code" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="8" aria-label="Club code" placeholder="&bull; &bull; &bull; &bull;" required>
+      <p class="sub-err" id="reveal-err" role="alert" hidden>That code is not right. Try again.</p>
+      <button class="btn" type="submit">Reveal</button>
+    </form>
+  </div>
+  <script>window.LWZ_OFFICERS = {"salt":"lakwMmV43acKVPk1Fzw60A==","iv":"9RqwHmPtPUz6Jd/T","data":"uFuqOYoZAaP8rnyTxOIDz7Lgfw7n8hwSOza56hGfqE/N0xmnq37YEoMm1jGYEJPBAG6C2pUJ44HqJUvu9EPLmih3rT3xZz4vcoTwf8mzxwqpTBrvmeCShG7pJnbQc6H1xzCDr79toARdhyhU0ZqLuujHFP/wqe+Wz6i7qciZsK+JebhFj1AgANqMvluDDQJ00SqrPNVWaf8NM5JQK7EkYNZ+EgOG2Y8Ipr6ioA771pMJi8f2baoBe3ma7bXMER5DJgpopTKB7BgVMegHca+QXRhTgSNVzZXSXfKZzA5xtlVoiwEMwTZCrDNSmCAWJ3plR2QrBWkjQfOHO1laYCent/EkurET64gkfkKVMXpz28O0tZGJhndXVsWjYROEb2n9uj/qQ68Ho4ok/j8EpCAkpODnNVV8L7rrFayzIG2UZhU7RG67HukjGbyzCxF0","iter":250000};</script>
+  <script src="js/officers.js?v=1"></script>
 
   <footer class="site">
     <div class="wrap">
