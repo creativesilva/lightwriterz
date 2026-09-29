@@ -701,7 +701,6 @@ html.modal-open { overflow: hidden; }
 .hs-lw-light { background-image: url("../images/hero/lw-light-bw.jpg"); background-position: 62% 45%; }
 .hs-city-1 { background-image: url("../images/hero/city-1.jpg"); background-position: center 35%; }
 .hs-landscapes-1 { background-image: url("../images/hero/landscapes-1.jpg"); }
-.hs-city-2 { background-image: url("../images/hero/city-2.jpg"); background-position: center 40%; }
 .hero-dots { position: absolute; z-index: 3; right: max(24px, calc((100vw - var(--max)) / 2 + 24px)); bottom: 118px; display: flex; gap: 8px; }
 .hero-dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 4px; cursor: pointer; background: rgba(255,255,255,0.35); transition: width 0.3s ease, background 0.3s ease; }
 .hero-dots button[aria-selected="true"] { width: 28px; background: var(--teal-light-accent); }
@@ -709,7 +708,6 @@ html.modal-open { overflow: hidden; }
   .hs-lw-light { background-image: url("../images/hero/lw-light-bw-m.jpg"); background-position: 58% center; }
   .hs-city-1 { background-image: url("../images/hero/city-1-m.jpg"); }
   .hs-landscapes-1 { background-image: url("../images/hero/landscapes-1-m.jpg"); }
-  .hs-city-2 { background-image: url("../images/hero/city-2-m.jpg"); }
   .hero-home::before { background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.45) 45%, rgba(12,17,17,1) 100%); }
   .hero-dots { right: 16px; bottom: 84px; }
 }
@@ -992,3 +990,7 @@ footer.site .motto-pics { font-family: var(--font-body); font-size: 0.8em; }
 .group-fig img { width: 100%; height: auto; border-radius: 10px; box-shadow: 0 30px 80px rgba(0,0,0,0.6); }
 .group-fig figcaption { margin-top: 14px; font-size: 15px; color: #c9d4d4; }
 .group-fig figcaption strong { color: #fff; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; margin-right: 6px; }
+
+/* Hero slide 1: officers and founders group photo (black and white) */
+.hs-group { background-image: url("../images/hero/lwz-group.jpg"); background-position: 62% 40%; }
+@media (max-width: 760px) { .hs-group { background-image: url("../images/hero/lwz-group-m.jpg"); background-position: 58% 40%; } }
