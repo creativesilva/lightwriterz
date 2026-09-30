@@ -133,12 +133,13 @@
     });
   });
 
-  // Contact form: sends through EmailJS (same account and template as creativesilva.com),
-  // tagged [Light Writerz] with the topic. Falls back to the visitor's email app if EmailJS fails.
+  // Contact form: sends to info@lightwriterz.org through the Light Writerz Apps Script (MailApp).
+  // Falls back to EmailJS (creativesilva.com account), then to the visitor's email app.
   var form = document.getElementById("contactForm");
   if (form) {
     var btn = document.getElementById("contactSubmit");
     var note = document.getElementById("formNote");
+    var LWZ_ENDPOINT = "https://script.google.com/macros/s/AKfycbwKgAWHt-MerxhSJN81C-LfuGkqINYlb6VyMTBY11z6pLc7ewpw0ajSX2FE7CXq78tL/exec";
     var EMAILJS = { publicKey: "68UkiTjqHIKZMkeCC", service: "service_4mhkbik", template: "template_creativesilva" };
     function mailtoFallback(f) {
       var subject = "[Light Writerz] " + f.topic.value + " from " + f.name.value;
@@ -146,30 +147,40 @@
       window.location.href = "mailto:info@lightwriterz.org?subject=" +
         encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
     }
+    function done() {
+      form.reset();
+      btn.disabled = false;
+      btn.textContent = "Send Message";
+      note.className = "note ok";
+      note.textContent = "\u2713 Message sent. Thank you! We will get back to you soon.";
+    }
+    function fail(err) {
+      console.error("Contact form:", err);
+      btn.disabled = false;
+      btn.textContent = "Send Message";
+      note.className = "note err";
+      note.textContent = "Something went wrong. Please text 805-631-0001 or email info@lightwriterz.org.";
+    }
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var f = form.elements;
-      if (!window.emailjs) { mailtoFallback(f); return; }
+      var payload = { target: "contact", name: f.name.value.trim(), email: f.email.value.trim(), topic: f.topic.value,
+        message: f.message.value.trim(), website: f.website ? f.website.value : "" };
       btn.disabled = true;
       btn.textContent = "Sending\u2026";
       note.className = "note";
-      window.emailjs.send(EMAILJS.service, EMAILJS.template, {
-        name: f.name.value.trim(),
-        email: f.email.value.trim(),
-        message: "[Light Writerz] " + f.topic.value + "\n\n" + f.message.value.trim(),
-      }, { publicKey: EMAILJS.publicKey }).then(function () {
-        form.reset();
-        btn.disabled = false;
-        btn.textContent = "Send Message";
-        note.className = "note ok";
-        note.textContent = "\u2713 Message sent. Thank you! We will get back to you soon.";
-      }, function (err) {
-        console.error("EmailJS error:", err);
-        btn.disabled = false;
-        btn.textContent = "Send Message";
-        note.className = "note err";
-        note.textContent = "Something went wrong. Please text 805-631-0001 or try again.";
-      });
+      fetch(LWZ_ENDPOINT, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) })
+        .then(function (r) { return r.json(); })
+        .then(function (out) { if (out.ok) done(); else throw new Error(out.error || "failed"); })
+        .catch(function (err) {
+          console.warn("Apps Script contact failed, trying EmailJS:", err);
+          if (!window.emailjs) { mailtoFallback(f); btn.disabled = false; btn.textContent = "Send Message"; return; }
+          window.emailjs.send(EMAILJS.service, EMAILJS.template, {
+            name: payload.name, email: payload.email,
+            message: "[Light Writerz] " + payload.topic + "\n\n" + payload.message
+          }, { publicKey: EMAILJS.publicKey }).then(done, fail);
+        });
     });
   }
+
 })();

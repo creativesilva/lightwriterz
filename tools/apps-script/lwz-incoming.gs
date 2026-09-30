@@ -7,6 +7,7 @@
  *   - "lwz-students": the hidden member page www.lightwriterz.org/submit.html
  *     (club code checked here too; JPG only; files prefixed STUDENT with name, series, title;
  *      student ID number goes in the file's Drive description, not its name).
+ *   - "contact": the website contact form; emails info@lightwriterz.org (MailApp).
  * Requests are JSON sent as text/plain (avoids a CORS preflight).
  *
  * SETUP (Chris, one time):
@@ -29,9 +30,31 @@ function folderFor(t) {
   return it.hasNext() ? it.next() : DriveApp.createFolder(t.folderName);
 }
 
+// Website contact form: emails info@lightwriterz.org (reply goes straight to the visitor).
+const CONTACT_TO = "info@lightwriterz.org";
+function contact(d) {
+  if (d.website) return out({ ok: true }); // honeypot: bots fill hidden fields
+  const clip = function (v, n) { return String(v || "").trim().slice(0, n); };
+  const name = clip(d.name, 100), email = clip(d.email, 200), topic = clip(d.topic, 100), message = clip(d.message, 5000);
+  if (!name || !message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return out({ ok: false, error: "Missing fields" });
+  const cache = CacheService.getScriptCache();
+  const n = Number(cache.get("contact-count") || 0);
+  if (n >= 30) return out({ ok: false, error: "Busy, try again later" }); // simple hourly limit
+  cache.put("contact-count", String(n + 1), 3600);
+  MailApp.sendEmail({
+    to: CONTACT_TO,
+    replyTo: email,
+    name: "Light Writerz Website",
+    subject: "[Light Writerz] " + (topic || "Message") + " from " + name,
+    body: message + "\n\n" + name + "\n" + email + "\n\nSent from the contact form on www.lightwriterz.org"
+  });
+  return out({ ok: true });
+}
+
 function doPost(e) {
   try {
     const d = JSON.parse(e.postData.contents);
+    if (d.target === "contact") return contact(d);
     const t = TARGETS[d.target];
     if (!t || String(d.key) !== t.key) return out({ ok: false, error: "Not authorized" });
     if (t.jpgOnly && (d.type !== "image/jpeg" || !/\.jpe?g$/i.test(d.name || ""))) return out({ ok: false, error: "JPG only" });

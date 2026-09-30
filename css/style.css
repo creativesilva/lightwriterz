@@ -994,3 +994,24 @@ footer.site .motto-pics { font-family: var(--font-body); font-size: 0.8em; }
 /* Hero slide 1: officers and founders group photo (black and white) */
 .hs-group { background-image: url("../images/hero/lwz-group.jpg"); background-position: 62% 40%; }
 @media (max-width: 760px) { .hs-group { background-image: url("../images/hero/lwz-group-m.jpg"); background-position: 58% 40%; } }
+
+/* ---------- Mobile polish pass 2 ---------- */
+@media (max-width: 760px) {
+  /* Photo + Graphy: short glosses can be read at arm's length now */
+  .etym .gloss { font-size: 14px; letter-spacing: 0.04em; text-transform: none; color: #c9d4d4; }
+  /* Slider dots: bigger tap targets without making the dots look bigger */
+  .hero-dots { gap: 0; bottom: 70px; right: 6px; }
+  .hero-dots button, .hero-dots button[aria-selected="true"] { width: 28px; height: 44px; background: transparent; position: relative; }
+  .hero-dots button::before { content: ""; position: absolute; left: 50%; top: 50%; width: 8px; height: 8px; border-radius: 4px;
+    transform: translate(-50%, -50%); background: rgba(255,255,255,0.35); transition: width 0.3s ease, background 0.3s ease; }
+  .hero-dots button[aria-selected="true"] { width: 40px; }
+  .hero-dots button[aria-selected="true"]::before { width: 26px; background: var(--teal-light-accent); }
+  /* Officer cards: keep long role names tidy */
+  .officer .role { font-size: 10.5px; line-height: 1.4; }
+  /* Readable caption and card text sizes */
+  .photo-fig figcaption, .spirit-story { font-size: 14px; }
+  .card p { font-size: 16px; }
+}
+.etym .gloss { text-transform: none; }
+
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
