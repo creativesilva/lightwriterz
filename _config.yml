@@ -1,0 +1,6 @@
+# GitHub Pages build settings: keep project notes and tools off the public website.
+exclude:
+  - CLAUDE.md
+  - README.md
+  - TASKS.md
+  - tools/
