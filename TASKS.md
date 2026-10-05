@@ -25,5 +25,5 @@ Audit done 2026-09-30. Approved to run as one pass. Read CLAUDE.md first (no em 
 - Y1 Google Search Console: verify domain (GoDaddy TXT), submit sitemap. Walk Chris through step by step.
 - Y2 Bing Webmaster Tools: same (feeds ChatGPT search, Copilot, DuckDuckGo).
 - Y3 Ask PVHS clubs page, ASB list, Canvas, chrisandlaura.com to link lightwriterz.org.
-- Y4 Club Instagram, then add to footer + JSON-LD sameAs.
+- Y4 DONE 2026-10-05: Instagram @light_writerz linked in footer + contact page. Still add to JSON-LD sameAs (S3).
 - Y5 Local news / school newsletter story.
