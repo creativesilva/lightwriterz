@@ -1015,3 +1015,10 @@ footer.site .motto-pics { font-family: var(--font-body); font-size: 0.8em; }
 .etym .gloss { text-transform: none; }
 
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* Click-to-enlarge photos (js/lightbox.js) */
+img.lb-zoom { cursor: zoom-in; transition: filter 0.25s ease, transform 0.4s ease; }
+img.lb-zoom:hover { filter: brightness(1.08); }
+img.lb-zoom:focus-visible { outline: 2px solid var(--teal-light-accent); outline-offset: 3px; }
+.officer .ph { overflow: hidden; }
+.officer .ph img.lb-zoom:hover { transform: scale(1.03); }
