@@ -1022,3 +1022,5 @@ img.lb-zoom:hover { filter: brightness(1.08); }
 img.lb-zoom:focus-visible { outline: 2px solid var(--teal-light-accent); outline-offset: 3px; }
 .officer .ph { overflow: hidden; }
 .officer .ph img.lb-zoom:hover { transform: scale(1.03); }
+
+.card.founder img.head.lb-zoom:hover { transform: scale(1.05); filter: brightness(1.1); }
