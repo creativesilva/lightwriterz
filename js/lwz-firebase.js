@@ -32,6 +32,17 @@ export function nextMeetingLabel(d = new Date()) {
   const n = new Date(d.getTime() + add * 86400000);
   return n.toLocaleDateString("en-US", { timeZone: "America/Los_Angeles", weekday: "long", month: "long", day: "numeric" });
 }
+// Start of the next meeting (Tuesday 12:25 PM Pacific) as a Date. During a meeting, that meeting's start.
+export function nextMeetingStart(d = new Date()) {
+  for (let k = 0; k <= 7; k++) {
+    const day = new Date(d.getTime() + k * 86400000), p = pacificParts(day);
+    if (p.weekday !== "Tue") continue;
+    const [y, m, dd] = p.date.split("-").map(Number);
+    let t = new Date(Date.UTC(y, m - 1, dd, 19, 25));            // 12:25 PM if Pacific is UTC-7
+    t = new Date(t.getTime() + ((12 * 60 + 25) - pacificParts(t).mins) * 60000); // fix for UTC-8
+    if (t.getTime() + 40 * 60000 > d.getTime()) return t;       // still before 1:05 PM that day
+  }
+}
 export function maskPhone(p) {
   const d = String(p || "").replace(/\D/g, "");
   return d.length >= 4 ? `(***) ***-**${d.slice(-2)}` : "";

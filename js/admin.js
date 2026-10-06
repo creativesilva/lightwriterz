@@ -1,5 +1,5 @@
 // LWZ admin panel: Google sign-in (approved list), attendance, members, notes, check-in QR, admins.
-import { firebaseConfig, SDK, OWNERS, CHECKIN_URL, pacificParts, nextMeetingLabel } from "./lwz-firebase.js";
+import { firebaseConfig, SDK, OWNERS, CHECKIN_URL, pacificParts, nextMeetingLabel, nextMeetingStart, inMeetingWindow } from "./lwz-firebase.js?v=2";
 const { initializeApp } = await import(SDK + "firebase-app.js");
 const { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } = await import(SDK + "firebase-auth.js");
 const { getFirestore, collection, getDocs, doc, setDoc, deleteDoc, addDoc, serverTimestamp, query, orderBy, getDoc } = await import(SDK + "firebase-firestore.js");
@@ -239,7 +239,26 @@ $("mail-form").addEventListener("submit", async e => {
 let qrClock = null;
 function renderQR() {
   if (!$("qr").firstChild) { const q = qrcode(0, "M"); q.addData(CHECKIN_URL); q.make(); $("qr").innerHTML = q.createSvgTag({ cellSize: 8, margin: 2 }); }
-  const tick = () => { $("qr-clock").textContent = new Date().toLocaleTimeString("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", minute: "2-digit", second: "2-digit" }); };
+  // During the meeting: live clock. Otherwise: countdown to the next meeting
+  // (days and hours until meeting day, then hours:minutes:seconds).
+  const tick = () => {
+    const now = new Date();
+    if (inMeetingWindow(now)) {
+      $("qr-label").textContent = "Check-in open";
+      $("qr-clock").textContent = now.toLocaleTimeString("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", minute: "2-digit", second: "2-digit" });
+      return;
+    }
+    const start = nextMeetingStart(now), left = Math.max(0, Math.floor((start - now) / 1000));
+    const plural = (n, w) => n + " " + w + (n === 1 ? "" : "s");
+    $("qr-label").textContent = "Next meeting in";
+    if (pacificParts(start).date !== pacificParts(now).date) {
+      const days = Math.floor(left / 86400), hours = Math.floor(left % 86400 / 3600);
+      $("qr-clock").textContent = (days ? plural(days, "day") + " " : "") + plural(hours, "hour");
+    } else {
+      const h = Math.floor(left / 3600), m = Math.floor(left % 3600 / 60), s = left % 60;
+      $("qr-clock").textContent = `${h}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+    }
+  };
   tick(); clearInterval(qrClock); qrClock = setInterval(tick, 1000);
 }
 $("qr-full").addEventListener("click", () => {

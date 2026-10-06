@@ -57,3 +57,4 @@
 #mp-form input#mp-sid, #mp-form input#mp-name { max-width: none; width: 100%; letter-spacing: normal; text-align: left; }
 #mp-form label.mp-unknown { justify-content: flex-start; width: auto; }
 #mp-form label.mp-unknown input { width: 20px; height: 20px; margin: 0; accent-color: var(--teal); flex-shrink: 0; }
+.qr-label { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.18em; font-size: 14px; color: #007474; margin-bottom: -6px; }

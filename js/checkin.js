@@ -1,5 +1,5 @@
 // LWZ meeting check-in (public page opened from the QR on the officer iPad).
-import { firebaseConfig, SDK, CLASSES, GRAD_YEARS, inMeetingWindow, nextMeetingLabel, pacificParts, maskPhone, maskEmail } from "./lwz-firebase.js";
+import { firebaseConfig, SDK, CLASSES, GRAD_YEARS, inMeetingWindow, nextMeetingLabel, pacificParts, maskPhone, maskEmail } from "./lwz-firebase.js?v=2";
 const { initializeApp } = await import(SDK + "firebase-app.js");
 const { getFirestore, doc, getDoc, setDoc, serverTimestamp } = await import(SDK + "firebase-firestore.js");
 const db = getFirestore(initializeApp(firebaseConfig));
