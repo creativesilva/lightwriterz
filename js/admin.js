@@ -79,7 +79,7 @@ function renderAttendance() {
   $("att-count").textContent = rows.length + " present";
   $("att-empty").hidden = rows.length > 0;
   $("att-table").querySelector("tbody").innerHTML = rows.map(r =>
-    `<tr><td>${esc(r.time)}${r.manual ? ` <span class="ad-hand" title="Added by hand">added</span> <button class="ad-link" data-unmark="${esc(r.id)}">Remove</button>` : ""}</td><td>${esc(r.last)}</td><td>${esc(r.first)}${tag(r.title)}</td><td>${esc(r.sid)}</td><td>${esc(r.gradYear)}</td><td>${esc(r.cls)}</td></tr>`).join("");
+    `<tr><td>${esc(r.time)}${r.manual ? ` <span class="ad-hand" title="Added by hand">added</span> <button class="ad-link" data-unmark="${esc(r.id)}">Remove</button>` : ""}</td><td>${esc(r.first)}${tag(r.title)}</td><td>${esc(r.last)}</td><td>${esc(r.sid)}</td><td>${esc(r.gradYear)}</td><td>${esc(r.cls)}</td></tr>`).join("");
 }
 $("att-table").addEventListener("click", async e => {
   const id = e.target.dataset && e.target.dataset.unmark;
@@ -124,7 +124,10 @@ $("mp-form").addEventListener("submit", async e => {
 });
 const tag = title => title ? ` <span class="ad-tag">${esc(title)}</span>` : "";
 
-let sortKey = "last", sortDir = 1;
+let sortKey = "first", sortDir = 1;
+// Officers list first, in rank order (same order as the Officers page).
+const RANK = ["President", "Vice President", "Secretary", "Treasurer", "PR / Media Officer", "Creative Director", "Management Assistant"];
+const rank = title => { const i = RANK.indexOf(title); return i < 0 ? RANK.length : i; };
 document.querySelectorAll("#mem-table th[data-k]").forEach(th => th.addEventListener("click", () => {
   sortDir = sortKey === th.dataset.k ? -sortDir : 1; sortKey = th.dataset.k; renderMembers();
 }));
@@ -139,9 +142,12 @@ function memRows() {
 }
 function renderMembers() {
   const rows = memRows();
+  const officers = rows.filter(m => m.title).sort((a, b) => rank(a.title) - rank(b.title));
+  const others = rows.filter(m => !m.title);
+  const row = m => `<tr><td>${esc(m.first)}${tag(m.title)}</td><td>${esc(m.last)}</td><td>${esc(m.sid)}</td><td>${esc(m.gradYear)}</td><td>${esc(m.cls)}</td><td>${esc(m.phone)}</td><td>${esc(m.email)}</td><td>${m.visits}</td><td>${m.lastSeen ? dateLabel(m.lastSeen) : ""}</td></tr>`;
+  const group = (name, list) => list.length ? `<tr class="ad-group"><th colspan="9">${name} <span>${list.length}</span></th></tr>` + list.map(row).join("") : "";
   $("mem-count").textContent = rows.length + " members";
-  $("mem-table").querySelector("tbody").innerHTML = rows.map(m =>
-    `<tr><td>${esc(m.last)}</td><td>${esc(m.first)}${tag(m.title)}</td><td>${esc(m.sid)}</td><td>${esc(m.gradYear)}</td><td>${esc(m.cls)}</td><td>${esc(m.phone)}</td><td>${esc(m.email)}</td><td>${m.visits}</td><td>${m.lastSeen ? dateLabel(m.lastSeen) : ""}</td></tr>`).join("");
+  $("mem-table").querySelector("tbody").innerHTML = group("Officers", officers) + group("Members", others);
 }
 
 // ---------- CSV ----------
@@ -153,11 +159,11 @@ function csv(name, header, rows) {
   a.download = name; a.click(); URL.revokeObjectURL(a.href);
 }
 $("att-csv").addEventListener("click", () => csv(`LWZ-attendance-${$("att-date").value}.csv`,
-  ["Date", "Time", "Last", "First", "Officer title", "Student #", "Grad year", "Class"],
-  attRows().map(r => [$("att-date").value, r.time, r.last, r.first, r.title, r.sid, r.gradYear, r.cls])));
+  ["Date", "Time", "First", "Last", "Officer title", "Student #", "Grad year", "Class"],
+  attRows().map(r => [$("att-date").value, r.time, r.first, r.last, r.title, r.sid, r.gradYear, r.cls])));
 $("mem-csv").addEventListener("click", () => csv(`LWZ-members-${pacificParts().date}.csv`,
-  ["Last", "First", "Officer title", "Student #", "Grad year", "Class", "Cell", "Personal email", "Meetings attended", "Last seen"],
-  memRows().map(m => [m.last, m.first, m.title, m.sid, m.gradYear, m.cls, m.phone, m.email, m.visits, m.lastSeen])));
+  ["First", "Last", "Officer title", "Student #", "Grad year", "Class", "Cell", "Personal email", "Meetings attended", "Last seen"],
+  [...memRows().filter(m => m.title).sort((a, b) => rank(a.title) - rank(b.title)), ...memRows().filter(m => !m.title)].map(m => [m.first, m.last, m.title, m.sid, m.gradYear, m.cls, m.phone, m.email, m.visits, m.lastSeen])));
 
 // ---------- Notes ----------
 let notes = [], current = null, saveTimer = null;

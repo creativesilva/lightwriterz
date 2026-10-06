@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=61">
   <link rel="stylesheet" href="css/lwz-app.css?v=2">
-  <link rel="stylesheet" href="css/lwz-admin.css?v=5">
+  <link rel="stylesheet" href="css/lwz-admin.css?v=6">
 </head>
 <body class="app-body">
   <!-- Signed out -->
@@ -49,7 +49,7 @@
         <button class="btn ad-sm" id="att-add">+ Mark present</button>
         <button class="btn dark ad-sm" id="att-csv">Download CSV</button>
       </div>
-      <div class="ad-table-wrap"><table class="ad-table" id="att-table"><thead><tr><th>Time</th><th>Last</th><th>First</th><th>Student #</th><th>Grad</th><th>Class</th></tr></thead><tbody></tbody></table></div>
+      <div class="ad-table-wrap"><table class="ad-table" id="att-table"><thead><tr><th>Time</th><th>First</th><th>Last</th><th>Student #</th><th>Grad</th><th>Class</th></tr></thead><tbody></tbody></table></div>
       <p class="note" id="att-empty" hidden>No check-ins yet for this meeting.</p>
     </section>
 
@@ -60,7 +60,7 @@
         <span class="ad-count" id="mem-count"></span>
         <button class="btn dark ad-sm" id="mem-csv">Download CSV</button>
       </div>
-      <div class="ad-table-wrap"><table class="ad-table" id="mem-table"><thead><tr><th data-k="last">Last</th><th data-k="first">First</th><th data-k="sid">Student #</th><th data-k="gradYear">Grad</th><th data-k="cls">Class</th><th>Cell</th><th>Email</th><th data-k="visits">Meetings</th><th data-k="lastSeen">Last seen</th></tr></thead><tbody></tbody></table></div>
+      <div class="ad-table-wrap"><table class="ad-table" id="mem-table"><thead><tr><th data-k="first">First</th><th data-k="last">Last</th><th data-k="sid">Student #</th><th data-k="gradYear">Grad</th><th data-k="cls">Class</th><th>Cell</th><th>Email</th><th data-k="visits">Meetings</th><th data-k="lastSeen">Last seen</th></tr></thead><tbody></tbody></table></div>
     </section>
 
     <section class="ad-pane ad-notes" id="p-notes" hidden>
@@ -138,6 +138,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script type="module" src="js/admin.js?v=6"></script>
+  <script type="module" src="js/admin.js?v=7"></script>
 </body>
 </html>

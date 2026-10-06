@@ -59,3 +59,6 @@
 #mp-form label.mp-unknown input { width: 20px; height: 20px; margin: 0; accent-color: var(--teal); flex-shrink: 0; }
 .qr-label { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.18em; font-size: 14px; color: #007474; margin-bottom: -6px; }
 .ad-table td.nom-why { white-space: normal; min-width: 260px; color: #c3cfcf; }
+.ad-table tr.ad-group th { background: rgba(0,116,116,0.18); color: #fff; font-size: 13px; letter-spacing: 0.14em; padding: 10px 12px; border-top: 1px solid rgba(128,224,224,0.25); cursor: default; }
+.ad-table tr.ad-group th span { color: var(--teal-light-accent); margin-left: 6px; }
+.ad-table tr.ad-group:hover th { background: rgba(0,116,116,0.18); }
