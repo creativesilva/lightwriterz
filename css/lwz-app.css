@@ -1,7 +1,7 @@
 /* LWZ check-in and admin panel */
 .app-body { min-height: 100vh; }
 .ci-wrap { max-width: 520px; margin: 0 auto; padding: max(20px, env(safe-area-inset-top)) 18px 40px; }
-.ci-head { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+.ci-head { text-align: center; margin-bottom: 22px; }
 .ci-kicker { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.18em; font-size: 12px; color: var(--teal-light-accent); }
 .ci-clock { font-family: var(--font-head); font-size: 28px; line-height: 1.1; color: #fff; }
 .ci-date { font-size: 13px; color: var(--gray); }
@@ -25,7 +25,9 @@
 .ci-consent input { width: 22px; height: 22px; flex-shrink: 0; margin-top: 1px; accent-color: var(--teal); }
 .ci-present { text-align: center; }
 .ci-bigclock { font-family: var(--font-head); font-size: 54px; color: var(--teal-light-accent); line-height: 1; }
-.ci-mark { font-size: 20px; padding: 20px; background: linear-gradient(160deg, #008585, #006060); }
+.ci-mark { font-size: 20px; padding: 20px; background: var(--orange); border-color: var(--orange); color: #111; }
 .ci-done { text-align: center; }
 .ci-check { font-size: 64px; color: var(--teal-light-accent); line-height: 1; }
 @media (max-width: 420px) { .ci-grid { grid-template-columns: 1fr; } }
+.ci-card h1 { text-align: center; }
+.ci-card h1 + .note { text-align: center; }
