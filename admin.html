@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>LWZ Admin | Light Writerz</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0a0f0f">
+  <link rel="icon" href="favicon.ico?v=2" sizes="48x48">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=2">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=61">
+  <link rel="stylesheet" href="css/lwz-app.css?v=1">
+  <link rel="stylesheet" href="css/lwz-admin.css?v=1">
+</head>
+<body class="app-body">
+  <!-- Signed out -->
+  <main class="ad-login" id="v-login">
+    <div class="ci-card" style="max-width:380px;margin:0 auto;text-align:center;justify-items:center">
+      <img src="logos/lw-minimal-192.png" alt="" width="64" height="64">
+      <h1>LWZ Admin</h1>
+      <p class="note">Officers and advisors only.</p>
+      <button class="btn ci-btn" id="signin">Sign in with Google</button>
+      <p class="ci-err" id="login-err" hidden></p>
+      <a class="note" href="index.html">&larr; Back to lightwriterz.org</a>
+    </div>
+  </main>
+
+  <!-- Signed in -->
+  <div class="ad-app" id="v-app" hidden>
+    <header class="ad-top">
+      <a href="index.html" class="ad-brand"><img src="logos/lw-minimal-192.png" alt="" width="34" height="34"><span>LWZ Admin</span></a>
+      <nav class="ad-tabs" role="tablist">
+        <button data-tab="attendance" aria-selected="true">Attendance</button>
+        <button data-tab="members">Members</button>
+        <button data-tab="notes">Notes</button>
+        <button data-tab="qr">Check-in QR</button>
+        <button data-tab="admins" id="tab-admins" hidden>Admins</button>
+      </nav>
+      <div class="ad-user"><span id="who"></span><button class="ad-link" id="signout">Sign out</button></div>
+    </header>
+
+    <section class="ad-pane" id="p-attendance">
+      <div class="ad-bar">
+        <h2>Attendance</h2>
+        <select id="att-date" aria-label="Meeting date"></select>
+        <span class="ad-count" id="att-count"></span>
+        <button class="btn dark ad-sm" id="att-csv">Download CSV</button>
+      </div>
+      <div class="ad-table-wrap"><table class="ad-table" id="att-table"><thead><tr><th>Time</th><th>Last</th><th>First</th><th>Student #</th><th>Grad</th><th>Class</th></tr></thead><tbody></tbody></table></div>
+      <p class="note" id="att-empty" hidden>No check-ins yet for this meeting.</p>
+    </section>
+
+    <section class="ad-pane" id="p-members" hidden>
+      <div class="ad-bar">
+        <h2>Members</h2>
+        <input id="mem-q" type="search" placeholder="Search name or number">
+        <span class="ad-count" id="mem-count"></span>
+        <button class="btn dark ad-sm" id="mem-csv">Download CSV</button>
+      </div>
+      <div class="ad-table-wrap"><table class="ad-table" id="mem-table"><thead><tr><th data-k="last">Last</th><th data-k="first">First</th><th data-k="sid">Student #</th><th data-k="gradYear">Grad</th><th data-k="cls">Class</th><th>Cell</th><th>Email</th><th data-k="visits">Meetings</th><th data-k="lastSeen">Last seen</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section class="ad-pane ad-notes" id="p-notes" hidden>
+      <aside class="nt-list">
+        <button class="btn ad-sm" id="nt-new">+ New meeting note</button>
+        <ul id="nt-items"></ul>
+      </aside>
+      <div class="nt-editor">
+        <input id="nt-title" placeholder="Title" aria-label="Note title">
+        <textarea id="nt-body" aria-label="Note" placeholder="Select or create a note"></textarea>
+        <div class="nt-foot"><span class="note" id="nt-status"></span><button class="btn dark ad-sm" id="nt-email">Save &amp; Email</button></div>
+      </div>
+    </section>
+
+    <section class="ad-pane ad-qr" id="p-qr" hidden>
+      <div class="qr-box" id="qr-box">
+        <p class="ci-kicker">Scan to check in</p>
+        <div id="qr"></div>
+        <p class="qr-clock" id="qr-clock"></p>
+        <p class="note">Tuesdays 12:25 to 1:05 PM &middot; lightwriterz.org/checkin.html</p>
+      </div>
+      <button class="btn ad-sm" id="qr-full">Full screen</button>
+    </section>
+
+    <section class="ad-pane" id="p-admins" hidden>
+      <div class="ad-bar"><h2>Admins</h2></div>
+      <p class="note">Advisors (always admins): creativesilva1@gmail.com, lg.artistic1@gmail.com. Add officers by their Google (Gmail) address.</p>
+      <form class="ad-add" id="adm-form"><input id="adm-email" type="email" placeholder="officer@gmail.com" required><input id="adm-name" placeholder="Name and role (optional)"><button class="btn ad-sm">Add</button></form>
+      <ul class="ad-admins" id="adm-list"></ul>
+    </section>
+  </div>
+
+  <!-- Email note dialog -->
+  <div class="reveal-modal" id="mail-modal" hidden>
+    <div class="reveal-backdrop" data-close></div>
+    <form class="sub-gate reveal-panel ad-mail" id="mail-form">
+      <button type="button" class="shirt-modal-close" data-close aria-label="Close">&times;</button>
+      <h2 class="title">Email this note</h2>
+      <p class="note">Edit the list: one email per line.</p>
+      <textarea id="mail-to" rows="5"></textarea>
+      <p class="ci-err" id="mail-err" hidden></p>
+      <button class="btn" type="submit" id="mail-send">Send</button>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="module" src="js/admin.js?v=1"></script>
+</body>
+</html>

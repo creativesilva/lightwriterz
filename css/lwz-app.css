@@ -1,0 +1,31 @@
+/* LWZ check-in and admin panel */
+.app-body { min-height: 100vh; }
+.ci-wrap { max-width: 520px; margin: 0 auto; padding: max(20px, env(safe-area-inset-top)) 18px 40px; }
+.ci-head { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+.ci-kicker { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.18em; font-size: 12px; color: var(--teal-light-accent); }
+.ci-clock { font-family: var(--font-head); font-size: 28px; line-height: 1.1; color: #fff; }
+.ci-date { font-size: 13px; color: var(--gray); }
+.ci-card { background: var(--surface); border: 1px solid var(--surface-border); border-radius: 14px; padding: 26px 22px; box-shadow: var(--glow); display: grid; gap: 14px; }
+.ci-card h1 { font-family: var(--font-head); text-transform: uppercase; font-size: 26px; letter-spacing: 0.03em; line-height: 1.1; }
+.ci-card label { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.1em; font-size: 12px; color: #cfdada; display: block; margin-bottom: 6px; }
+.ci-card input, .ci-card select { width: 100%; font: inherit; font-size: 17px; padding: 13px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.05); color: #fff; }
+.ci-card select option { background: #101717; }
+#sid { font-family: var(--font-head); font-size: 34px; letter-spacing: 0.35em; text-align: center; }
+.ci-card input:focus, .ci-card select:focus { outline: none; border-color: var(--teal-light-accent); }
+.ci-btn { width: 100%; text-align: center; padding: 15px; border-radius: 10px; font-size: 17px; }
+.ci-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ci-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.ci-err { color: #ffb38a; font-size: 14px; }
+.ci-next { color: #c9d4d4; }
+.ci-info { display: grid; gap: 0; margin: 0; }
+.ci-info div { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.ci-info dt { color: var(--gray); font-size: 14px; }
+.ci-info dd { margin: 0; color: #fff; font-size: 15px; }
+.ci-consent { display: flex !important; gap: 10px; align-items: flex-start; text-transform: none !important; letter-spacing: 0 !important; font-family: var(--font-body) !important; font-size: 14px !important; color: #c9d4d4 !important; }
+.ci-consent input { width: 22px; height: 22px; flex-shrink: 0; margin-top: 1px; accent-color: var(--teal); }
+.ci-present { text-align: center; }
+.ci-bigclock { font-family: var(--font-head); font-size: 54px; color: var(--teal-light-accent); line-height: 1; }
+.ci-mark { font-size: 20px; padding: 20px; background: linear-gradient(160deg, #008585, #006060); }
+.ci-done { text-align: center; }
+.ci-check { font-size: 64px; color: var(--teal-light-accent); line-height: 1; }
+@media (max-width: 420px) { .ci-grid { grid-template-columns: 1fr; } }

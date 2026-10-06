@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>LWZ Check-in | Light Writerz</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0a0f0f">
+  <link rel="icon" href="favicon.ico?v=2" sizes="48x48">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=2">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=61">
+  <link rel="stylesheet" href="css/lwz-app.css?v=1">
+</head>
+<body class="app-body">
+  <main class="ci-wrap">
+    <header class="ci-head">
+      <img src="logos/lw-minimal-192.png" alt="Light Writerz" width="56" height="56">
+      <div>
+        <p class="ci-kicker">LWZ Meeting Check-in</p>
+        <p class="ci-clock" id="clock">--:--</p>
+        <p class="ci-date" id="today"></p>
+      </div>
+    </header>
+
+    <!-- Closed -->
+    <section class="ci-card" id="v-closed" hidden>
+      <h1>Check-in is closed</h1>
+      <p>Check-in opens during LWZ meetings, Tuesdays 12:25 to 1:05 PM.</p>
+      <p class="ci-next">Next meeting: <strong id="next"></strong></p>
+    </section>
+
+    <!-- Step 1: student number -->
+    <form class="ci-card" id="v-sid" hidden autocomplete="off">
+      <h1>Welcome, Light Writer</h1>
+      <label for="sid">Student number</label>
+      <input id="sid" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" placeholder="6 digits" required autofocus>
+      <p class="ci-err" id="sid-err" hidden>Enter your 6 digit student number.</p>
+      <button class="btn ci-btn" type="submit">Continue</button>
+    </form>
+
+    <!-- Returning: confirm masked info -->
+    <section class="ci-card" id="v-confirm" hidden>
+      <h1>Welcome back, <span id="c-first"></span></h1>
+      <p class="note">Is your information still correct?</p>
+      <dl class="ci-info">
+        <div><dt>Class of</dt><dd id="c-grad"></dd></div>
+        <div><dt>Class</dt><dd id="c-cls"></dd></div>
+        <div><dt>Cell</dt><dd id="c-phone"></dd></div>
+        <div><dt>Email</dt><dd id="c-email"></dd></div>
+      </dl>
+      <div class="ci-row2">
+        <button class="btn ghost ci-btn" type="button" id="c-edit">Edit</button>
+        <button class="btn ci-btn" type="button" id="c-ok">OK</button>
+      </div>
+    </section>
+
+    <!-- New or edit profile -->
+    <form class="ci-card" id="v-form" hidden autocomplete="off">
+      <h1 id="f-title">Create your profile</h1>
+      <p class="note" id="f-note">First time checking in. This builds your LWZ member profile.</p>
+      <div class="ci-grid">
+        <div><label for="f-last">Last name</label><input id="f-last" autocapitalize="words" autocomplete="family-name"></div>
+        <div><label for="f-first">First name</label><input id="f-first" autocapitalize="words" autocomplete="given-name"></div>
+        <div><label for="f-grad">Graduation year</label><select id="f-grad"></select></div>
+        <div><label for="f-cls">Photography class</label><select id="f-cls"></select></div>
+        <div><label for="f-phone">Cell phone <span class="opt">(optional)</span></label><input id="f-phone" type="tel" inputmode="tel" autocomplete="tel"></div>
+        <div><label for="f-email">Personal email <span class="opt">(optional)</span></label><input id="f-email" type="email" inputmode="email" autocapitalize="off" spellcheck="false" autocomplete="email"></div>
+      </div>
+      <label class="ci-consent" id="f-consent-wrap"><input type="checkbox" id="f-consent"> I agree Light Writerz may store my contact info for club communication.</label>
+      <p class="ci-err" id="f-err" hidden></p>
+      <div class="ci-row2">
+        <button class="btn ghost ci-btn" type="button" id="f-cancel">Cancel</button>
+        <button class="btn ci-btn" type="submit" id="f-save">Save</button>
+      </div>
+    </form>
+
+    <!-- Mark present -->
+    <section class="ci-card ci-present" id="v-present" hidden>
+      <h1><span id="p-first"></span>, you are ready</h1>
+      <p class="ci-bigclock" id="bigclock">--:--</p>
+      <button class="btn ci-btn ci-mark" type="button" id="p-mark">Mark as Present</button>
+      <p class="ci-err" id="p-err" hidden></p>
+    </section>
+
+    <!-- Done -->
+    <section class="ci-card ci-done" id="v-done" hidden>
+      <p class="ci-check" aria-hidden="true">&#10003;</p>
+      <h1>You are checked in</h1>
+      <p id="d-time"></p>
+      <p class="note">pics are taken. <strong>Photographs are made.</strong></p>
+    </section>
+  </main>
+  <script type="module" src="js/checkin.js?v=1"></script>
+</body>
+</html>

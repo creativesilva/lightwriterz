@@ -1,0 +1,80 @@
+rules_version = '2';
+// Light Writerz attendance + admin panel.
+// Public (no sign-in): check-in page can READ one masked profile by exact student number (no listing),
+// and WRITE profiles + its own attendance only during the Tuesday meeting window.
+// Admins (Google sign-in on the approved list) can read everything and manage notes and admins.
+service cloud.firestore {
+  match /databases/{db}/documents {
+
+    function signedIn() { return request.auth != null && request.auth.token.email_verified == true; }
+    function myEmail() { return request.auth.token.email.lower(); }
+    // Advisors: permanent admins who can add or remove officer accounts.
+    function isOwner() { return signedIn() && myEmail() in ['creativesilva1@gmail.com', 'lg.artistic1@gmail.com']; }
+    function isAdmin() { return isOwner() || (signedIn() && exists(/databases/$(db)/documents/admins/$(myEmail()))); }
+
+    // Tuesday 12:25 to 1:05 PM Pacific. Rules run in UTC, so this accepts Tue 19:20 to 21:10 UTC
+    // (covers both daylight and standard time); the check-in page enforces the exact minutes.
+    function inWindow() {
+      let t = request.time;
+      let m = t.hours() * 60 + t.minutes();
+      return t.dayOfWeek() == 2 && m >= 1160 && m <= 1270;
+    }
+    // Setup/testing switch, only settable from the Firebase console (no button in the app).
+    function testOpen() {
+      return exists(/databases/$(db)/documents/settings/checkin)
+        && get(/databases/$(db)/documents/settings/checkin).data.testUntil > request.time;
+    }
+    function open() { return inWindow() || testOpen(); }
+
+    function validSid(s) { return s.matches('^[0-9]{6}$'); }
+    function str(v, max) { return v is string && v.size() <= max; }
+    function cls(v) { return v in ['Photography 1', 'Photography 2', 'Not taking photography']; }
+
+    match /settings/{doc} { allow read: if true; allow write: if isOwner(); }
+
+    // Masked profile shown at check-in (first name, grad year, class, masked phone/email).
+    match /members_public/{sid} {
+      allow get: if validSid(sid);
+      allow list: if isAdmin();
+      allow create, update: if (open() || isAdmin()) && validSid(sid)
+        && request.resource.data.keys().hasOnly(['first', 'gradYear', 'cls', 'phoneMask', 'emailMask', 'updatedAt'])
+        && str(request.resource.data.first, 60) && request.resource.data.gradYear is int && cls(request.resource.data.cls)
+        && str(request.resource.data.phoneMask, 20) && str(request.resource.data.emailMask, 80);
+      allow delete: if isOwner();
+    }
+
+    // Full profile: never readable by the public page.
+    match /members/{sid} {
+      allow read: if isAdmin();
+      allow create, update: if (open() || isAdmin()) && validSid(sid)
+        && request.resource.data.sid == sid
+        && request.resource.data.keys().hasOnly(['sid', 'last', 'first', 'gradYear', 'cls', 'phone', 'email', 'consent', 'createdAt', 'updatedAt'])
+        && str(request.resource.data.last, 60) && request.resource.data.last.size() > 0
+        && str(request.resource.data.first, 60) && request.resource.data.first.size() > 0
+        && request.resource.data.gradYear is int && cls(request.resource.data.cls)
+        && str(request.resource.data.phone, 20) && str(request.resource.data.email, 120)
+        && request.resource.data.consent == true;
+      allow delete: if isOwner();
+    }
+
+    // One check-in per student per meeting: id is "YYYY-MM-DD_sid", create only.
+    match /attendance/{id} {
+      allow read: if isAdmin();
+      allow create: if open()
+        && id == request.resource.data.date + '_' + request.resource.data.sid
+        && request.resource.data.date.matches('^20[0-9]{2}-[0-9]{2}-[0-9]{2}$')
+        && validSid(request.resource.data.sid)
+        && exists(/databases/$(db)/documents/members/$(request.resource.data.sid))
+        && request.resource.data.at == request.time
+        && request.resource.data.keys().hasOnly(['sid', 'date', 'at', 'name']);
+      allow delete: if isOwner();
+    }
+
+    match /notes/{id} { allow read, write: if isAdmin(); }
+
+    match /admins/{email} {
+      allow read: if isAdmin();
+      allow write: if isOwner();
+    }
+  }
+}

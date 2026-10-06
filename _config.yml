@@ -4,3 +4,4 @@ exclude:
   - README.md
   - TASKS.md
   - tools/
+  - firebase/
