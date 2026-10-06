@@ -39,7 +39,7 @@ onAuthStateChanged(auth, async user => {
   $("tab-admins").hidden = !isOwner;
   $("v-login").hidden = true; $("v-app").hidden = false;
   await loadData();
-  showTab("attendance");
+  showTab("notes");
 });
 
 // ---------- Tabs ----------
@@ -119,6 +119,7 @@ function template() {
   const today = pacificParts().date;
   const count = attendance.filter(a => a.date === today).length;
   return {
+    meeting: today,
     title: "Meeting, " + dateLabel(today),
     body: `ATTENDANCE COUNT\n${count} present\n\nAGENDA\n- \n\nDECISIONS\n- \n\nACTION ITEMS\n- \n\nNEXT MEETING\n${nextMeetingLabel(new Date(Date.now() + 86400000))}, 12:25 to 1:05 PM\n`
   };
@@ -126,18 +127,29 @@ function template() {
 async function loadNotes() {
   const s = await getDocs(query(collection(db, "notes"), orderBy("updatedAt", "desc")));
   notes = s.docs.map(d => ({ id: d.id, ...d.data() }));
+  if (!current) {
+    // Default: today's meeting note. On a Tuesday it is created from the template if missing.
+    const tpl = template();
+    let n = notes.find(x => x.meeting === tpl.meeting || x.title === tpl.title);
+    if (!n && pacificParts().weekday === "Tue") n = await createNote(tpl);
+    current = n || notes.find(x => x.meeting) || notes[0] || null;
+  }
   renderNoteList();
-  if (!current && notes[0]) openNote(notes[0]);
+  if (current) openNote(current);
+}
+async function createNote(data) {
+  const ref = await addDoc(collection(db, "notes"), { ...data, createdBy: me.email, createdAt: serverTimestamp(), updatedAt: serverTimestamp(), updatedBy: me.email });
+  const n = { id: ref.id, ...data }; notes.unshift(n); return n;
 }
 function renderNoteList() {
   $("nt-items").innerHTML = notes.map(n => `<li><button data-id="${n.id}" ${current && current.id === n.id ? 'aria-current="true"' : ""}>${esc(n.title || "Untitled")}<small>${n.updatedAt ? n.updatedAt.toDate().toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) : ""}</small></button></li>`).join("");
   $("nt-items").querySelectorAll("button").forEach(b => b.addEventListener("click", () => openNote(notes.find(n => n.id === b.dataset.id))));
 }
 function openNote(n) { current = n; $("nt-title").value = n.title || ""; $("nt-body").value = n.body || ""; $("nt-status").textContent = "Saved"; renderNoteList(); }
+// "Start new note": a blank side note (the meeting note is made automatically).
 $("nt-new").addEventListener("click", async () => {
-  const tpl = template();
-  const ref = await addDoc(collection(db, "notes"), { ...tpl, createdBy: me.email, createdAt: serverTimestamp(), updatedAt: serverTimestamp(), updatedBy: me.email });
-  current = { id: ref.id, ...tpl }; notes.unshift(current); openNote(current); $("nt-body").focus();
+  const label = new Date().toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  openNote(await createNote({ title: "Side note, " + label, body: "" })); $("nt-body").focus();
 });
 async function saveNote() {
   if (!current) return;
