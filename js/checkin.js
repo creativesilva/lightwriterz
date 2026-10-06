@@ -93,8 +93,8 @@ $("v-form").addEventListener("submit", async e => {
     phoneMask: phone ? maskPhone(phone) : (editing ? pub.phoneMask || "" : ""),
     emailMask: email ? maskEmail(email) : (editing ? pub.emailMask || "" : "") };
   if (last) full.last = last;
-  if (phone || !editing) full.phone = phone;
-  if (email || !editing) full.email = email;
+  if (phone) full.phone = phone;
+  if (email) full.email = email;
   if (!editing) { full.consent = true; full.createdAt = serverTimestamp(); }
   $("f-save").disabled = true;
   try {

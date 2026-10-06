@@ -52,7 +52,8 @@ service cloud.firestore {
         && str(request.resource.data.last, 60) && request.resource.data.last.size() > 0
         && str(request.resource.data.first, 60) && request.resource.data.first.size() > 0
         && request.resource.data.gradYear is int && cls(request.resource.data.cls)
-        && str(request.resource.data.phone, 20) && str(request.resource.data.email, 120)
+        && (!('phone' in request.resource.data) || str(request.resource.data.phone, 20))
+        && (!('email' in request.resource.data) || str(request.resource.data.email, 120))
         && request.resource.data.consent == true;
       allow delete: if isOwner();
     }
