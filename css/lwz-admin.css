@@ -46,3 +46,14 @@
 .ad-mail textarea { width: 100%; font: inherit; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.05); color: #fff; }
 @media (max-width: 760px) { .ad-notes { grid-template-columns: 1fr; height: auto; } #nt-body { min-height: 50vh; } .ad-user span { display: none; } }
 .ad-tag { display: inline-block; margin-left: 6px; padding: 2px 8px; border-radius: 999px; background: rgba(0,116,116,0.35); border: 1px solid rgba(128,224,224,0.45); color: #80e0e0; font-family: var(--font-head); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; vertical-align: 1px; white-space: nowrap; }
+.ad-hand { display: inline-block; margin-left: 4px; padding: 1px 7px; border-radius: 999px; border: 1px solid rgba(255,107,26,0.5); color: #ffb38a; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; }
+#mp-form label { display: block; margin: 12px 0 6px; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.1em; font-size: 12px; color: #cfdada; }
+#mp-form input:not([type=checkbox]) { width: 100%; font: inherit; font-size: 17px; padding: 12px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.05); color: #fff; }
+#mp-form input:disabled { opacity: 0.4; }
+#mp-form .mp-unknown { display: flex; gap: 8px; align-items: center; text-transform: none; letter-spacing: 0; font-family: var(--font-body); font-size: 14px; }
+#mp-form .btn { width: 100%; margin-top: 16px; }
+#mp-form { width: min(440px, 100%); text-align: left; }
+#mp-form .title, #mp-form > .note { text-align: center; }
+#mp-form input#mp-sid, #mp-form input#mp-name { max-width: none; width: 100%; letter-spacing: normal; text-align: left; }
+#mp-form label.mp-unknown { justify-content: flex-start; width: auto; }
+#mp-form label.mp-unknown input { width: 20px; height: 20px; margin: 0; accent-color: var(--teal); flex-shrink: 0; }

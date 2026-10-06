@@ -67,7 +67,18 @@ service cloud.firestore {
         && exists(/databases/$(db)/documents/members/$(request.resource.data.sid))
         && request.resource.data.at == request.time
         && request.resource.data.keys().hasOnly(['sid', 'date', 'at', 'name']);
-      allow delete: if isOwner();
+      // "Mark present" in the admin panel. Unknown student number: sid '??????' with a name.
+      allow create: if isAdmin()
+        && request.resource.data.date.matches('^20[0-9]{2}-[0-9]{2}-[0-9]{2}$')
+        && request.resource.data.manual == true
+        && request.resource.data.addedBy == myEmail()
+        && request.resource.data.at == request.time
+        && str(request.resource.data.name, 80)
+        && request.resource.data.keys().hasOnly(['sid', 'date', 'at', 'name', 'manual', 'addedBy'])
+        && ((validSid(request.resource.data.sid) && id == request.resource.data.date + '_' + request.resource.data.sid)
+          || (request.resource.data.sid == '??????' && request.resource.data.name.size() > 0
+            && id.matches('^' + request.resource.data.date + '_x[0-9a-z]{6,24}$')));
+      allow delete: if isOwner() || (isAdmin() && resource.data.manual == true);
     }
 
     match /notes/{id} { allow read, write: if isAdmin(); }

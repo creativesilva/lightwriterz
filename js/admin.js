@@ -2,7 +2,7 @@
 import { firebaseConfig, SDK, OWNERS, CHECKIN_URL, pacificParts, nextMeetingLabel } from "./lwz-firebase.js";
 const { initializeApp } = await import(SDK + "firebase-app.js");
 const { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } = await import(SDK + "firebase-auth.js");
-const { getFirestore, collection, getDocs, doc, setDoc, deleteDoc, addDoc, serverTimestamp, query, orderBy } = await import(SDK + "firebase-firestore.js");
+const { getFirestore, collection, getDocs, doc, setDoc, deleteDoc, addDoc, serverTimestamp, query, orderBy, getDoc } = await import(SDK + "firebase-firestore.js");
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app), db = getFirestore(app);
 
@@ -60,25 +60,67 @@ async function loadData() {
   members = {}; m.forEach(d => { members[d.id] = d.data(); });
   // Officer titles: an admin entry with a student number shows its title next to that member.
   titles = {}; ad.forEach(d => { const x = d.data(); if (x.sid) titles[x.sid] = x.name || "Officer"; });
-  attendance = a.docs.map(d => d.data());
-  const today = pacificParts().date;
+  attendance = a.docs.map(d => ({ id: d.id, ...d.data() }));
+  const keep = $("att-date").value, today = pacificParts().date;
   const dates = [...new Set([today, ...attendance.map(x => x.date)])].sort().reverse();
   $("att-date").innerHTML = dates.map(d => `<option value="${d}">${dateLabel(d)}${d === today ? " (today)" : ""}</option>`).join("");
+  if (keep && dates.includes(keep)) $("att-date").value = keep;
 }
 $("att-date").addEventListener("change", renderAttendance);
 
 function attRows() {
   const d = $("att-date").value;
   return attendance.filter(x => x.date === d).sort((a, b) => (a.at?.toMillis() || 0) - (b.at?.toMillis() || 0))
-    .map(x => ({ time: t(x.at), ...(members[x.sid] || { last: "?", first: "?" }), sid: x.sid, title: titles[x.sid] || "" }));
+    .map(x => ({ time: t(x.at), ...(members[x.sid] || { last: "", first: x.name || "?" }), sid: x.sid, title: titles[x.sid] || "", id: x.id, manual: !!x.manual }));
 }
 function renderAttendance() {
   const rows = attRows();
   $("att-count").textContent = rows.length + " present";
   $("att-empty").hidden = rows.length > 0;
   $("att-table").querySelector("tbody").innerHTML = rows.map(r =>
-    `<tr><td>${esc(r.time)}</td><td>${esc(r.last)}</td><td>${esc(r.first)}${tag(r.title)}</td><td>${esc(r.sid)}</td><td>${esc(r.gradYear)}</td><td>${esc(r.cls)}</td></tr>`).join("");
+    `<tr><td>${esc(r.time)}${r.manual ? ` <span class="ad-hand" title="Added by hand">added</span> <button class="ad-link" data-unmark="${esc(r.id)}">Remove</button>` : ""}</td><td>${esc(r.last)}</td><td>${esc(r.first)}${tag(r.title)}</td><td>${esc(r.sid)}</td><td>${esc(r.gradYear)}</td><td>${esc(r.cls)}</td></tr>`).join("");
 }
+$("att-table").addEventListener("click", async e => {
+  const id = e.target.dataset && e.target.dataset.unmark;
+  if (!id || !confirm("Remove this check-in?")) return;
+  await deleteDoc(doc(db, "attendance", id)); await loadData(); renderAttendance();
+});
+
+// ---------- Mark present (by hand) ----------
+const mp = $("mp-modal");
+$("att-add").addEventListener("click", () => {
+  $("mp-date").textContent = "For the meeting on " + dateLabel($("att-date").value);
+  ["mp-sid", "mp-name"].forEach(i => { $(i).value = ""; $(i).disabled = false; });
+  $("mp-unknown").checked = false; $("mp-found").hidden = $("mp-err").hidden = true;
+  mp.hidden = false; $("mp-sid").focus();
+});
+mp.querySelectorAll("[data-close]").forEach(b => b.addEventListener("click", () => { mp.hidden = true; }));
+$("mp-unknown").addEventListener("change", () => {
+  $("mp-sid").disabled = $("mp-unknown").checked; if ($("mp-unknown").checked) $("mp-sid").value = "";
+  $("mp-found").hidden = true; $("mp-name").focus();
+});
+$("mp-sid").addEventListener("input", () => {
+  const v = $("mp-sid").value = $("mp-sid").value.replace(/\D/g, "").slice(0, 6);
+  const m = members[v];
+  $("mp-found").hidden = !m;
+  if (m) { $("mp-found").textContent = "Member on file: " + m.first + " " + m.last; $("mp-name").value = m.first + " " + m.last; }
+});
+$("mp-form").addEventListener("submit", async e => {
+  e.preventDefault();
+  const date = $("att-date").value, unknown = $("mp-unknown").checked;
+  const sid = unknown ? "??????" : $("mp-sid").value, name = $("mp-name").value.trim();
+  const err = m => { $("mp-err").textContent = m; $("mp-err").hidden = false; };
+  if (!unknown && !/^\d{6}$/.test(sid)) return err("Enter the 6 digit student number, or check Number unknown.");
+  if (!name && !members[sid]) return err("Enter their name.");
+  const id = unknown ? `${date}_x${Date.now().toString(36)}` : `${date}_${sid}`;
+  if (!unknown && attendance.some(a => a.id === id)) return err("Already marked present for this meeting.");
+  $("mp-save").disabled = true;
+  try {
+    await setDoc(doc(db, "attendance", id), { sid, date, at: serverTimestamp(), name, manual: true, addedBy: me.email.toLowerCase() });
+    mp.hidden = true; await loadData(); renderAttendance();
+  } catch (x) { console.error(x); err("Could not save. Try again."); }
+  $("mp-save").disabled = false;
+});
 const tag = title => title ? ` <span class="ad-tag">${esc(title)}</span>` : "";
 
 let sortKey = "last", sortDir = 1;

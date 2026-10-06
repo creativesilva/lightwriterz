@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=61">
   <link rel="stylesheet" href="css/lwz-app.css?v=2">
-  <link rel="stylesheet" href="css/lwz-admin.css?v=2">
+  <link rel="stylesheet" href="css/lwz-admin.css?v=3">
 </head>
 <body class="app-body">
   <!-- Signed out -->
@@ -45,6 +45,7 @@
         <h2>Attendance</h2>
         <select id="att-date" aria-label="Meeting date"></select>
         <span class="ad-count" id="att-count"></span>
+        <button class="btn ad-sm" id="att-add">+ Mark present</button>
         <button class="btn dark ad-sm" id="att-csv">Download CSV</button>
       </div>
       <div class="ad-table-wrap"><table class="ad-table" id="att-table"><thead><tr><th>Time</th><th>Last</th><th>First</th><th>Student #</th><th>Grad</th><th>Class</th></tr></thead><tbody></tbody></table></div>
@@ -91,6 +92,24 @@
     </section>
   </div>
 
+  <!-- Mark present dialog -->
+  <div class="reveal-modal" id="mp-modal" hidden>
+    <div class="reveal-backdrop" data-close></div>
+    <form class="sub-gate reveal-panel ad-mail" id="mp-form" autocomplete="off">
+      <button type="button" class="shirt-modal-close" data-close aria-label="Close">&times;</button>
+      <h2 class="title">Mark present</h2>
+      <p class="note" id="mp-date"></p>
+      <label for="mp-sid">Student number</label>
+      <input id="mp-sid" inputmode="numeric" maxlength="6" placeholder="6 digits">
+      <label class="mp-unknown"><input type="checkbox" id="mp-unknown"> Number unknown for now</label>
+      <label for="mp-name">Name</label>
+      <input id="mp-name" placeholder="First and last name">
+      <p class="note" id="mp-found" hidden></p>
+      <p class="ci-err" id="mp-err" hidden></p>
+      <button class="btn" type="submit" id="mp-save">Mark present</button>
+    </form>
+  </div>
+
   <!-- Email note dialog -->
   <div class="reveal-modal" id="mail-modal" hidden>
     <div class="reveal-backdrop" data-close></div>
@@ -106,6 +125,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script type="module" src="js/admin.js?v=3"></script>
+  <script type="module" src="js/admin.js?v=4"></script>
 </body>
 </html>
