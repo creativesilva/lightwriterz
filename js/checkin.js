@@ -27,8 +27,16 @@ $("f-cls").innerHTML = CLASSES.map(c => `<option>${c}</option>`).join("");
 let sid = "", pub = null;
 function start() {
   if (!isOpen()) { $("next").textContent = nextMeetingLabel(); show("v-closed"); return; }
-  $("sid").value = ""; show("v-sid"); $("sid").focus();
+  $("sid").value = ""; paintDots(); show("v-sid"); $("sid").focus();
 }
+// Student number shows as 6 dots that fill in as digits are typed (like a passcode).
+function paintDots() {
+  const n = $("sid").value.length;
+  document.querySelectorAll(".ci-dots i").forEach((d, i) => d.classList.toggle("on", i < n));
+}
+$("sid").addEventListener("input", () => {
+  $("sid").value = $("sid").value.replace(/\D/g, "").slice(0, 6); paintDots(); $("sid-err").hidden = true;
+});
 start();
 setInterval(() => { if (!$("v-closed").hidden && isOpen()) start(); }, 15000);
 

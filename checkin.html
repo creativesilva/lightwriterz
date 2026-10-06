@@ -10,7 +10,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=2">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=61">
-  <link rel="stylesheet" href="css/lwz-app.css?v=2">
+  <link rel="stylesheet" href="css/lwz-app.css?v=3">
 </head>
 <body class="app-body">
   <main class="ci-wrap">
@@ -33,7 +33,7 @@
     <form class="ci-card" id="v-sid" hidden autocomplete="off">
       <h1>Welcome, Light Writer</h1>
       <label for="sid">Student number</label>
-      <input id="sid" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" placeholder="6 digits" required autofocus>
+      <div class="ci-pin"><input id="sid" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required autofocus autocomplete="off" aria-describedby="sid-err"><span class="ci-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
       <p class="ci-err" id="sid-err" hidden>Enter your 6 digit student number.</p>
       <button class="btn ci-btn" type="submit">Continue</button>
     </form>
@@ -76,7 +76,7 @@
 
     <!-- Mark present -->
     <section class="ci-card ci-present" id="v-present" hidden>
-      <h1><span id="p-first"></span>, you are ready</h1>
+      <h1>Thanks for being here, <span id="p-first"></span></h1>
       <p class="ci-bigclock" id="bigclock">--:--</p>
       <button class="btn ci-btn ci-mark" type="button" id="p-mark">Mark as Present</button>
       <p class="ci-err" id="p-err" hidden></p>
@@ -90,6 +90,6 @@
       <p class="note">pics are taken. <strong>Photographs are made.</strong></p>
     </section>
   </main>
-  <script type="module" src="js/checkin.js?v=2"></script>
+  <script type="module" src="js/checkin.js?v=3"></script>
 </body>
 </html>
