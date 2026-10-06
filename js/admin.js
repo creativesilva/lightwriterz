@@ -14,7 +14,7 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const t = d => d ? d.toDate().toLocaleTimeString("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", minute: "2-digit" }) : "";
 const dateLabel = s => new Date(s + "T12:00:00").toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric" });
-let me = null, isOwner = false, members = {}, attendance = [];
+let me = null, isOwner = false, members = {}, attendance = [], titles = {};
 
 // ---------- Sign in ----------
 $("signin").addEventListener("click", async () => {
@@ -56,8 +56,10 @@ function showTab(name) {
 
 // ---------- Data ----------
 async function loadData() {
-  const [m, a] = await Promise.all([getDocs(collection(db, "members")), getDocs(collection(db, "attendance"))]);
+  const [m, a, ad] = await Promise.all([getDocs(collection(db, "members")), getDocs(collection(db, "attendance")), getDocs(collection(db, "admins"))]);
   members = {}; m.forEach(d => { members[d.id] = d.data(); });
+  // Officer titles: an admin entry with a student number shows its title next to that member.
+  titles = {}; ad.forEach(d => { const x = d.data(); if (x.sid) titles[x.sid] = x.name || "Officer"; });
   attendance = a.docs.map(d => d.data());
   const today = pacificParts().date;
   const dates = [...new Set([today, ...attendance.map(x => x.date)])].sort().reverse();
@@ -68,15 +70,16 @@ $("att-date").addEventListener("change", renderAttendance);
 function attRows() {
   const d = $("att-date").value;
   return attendance.filter(x => x.date === d).sort((a, b) => (a.at?.toMillis() || 0) - (b.at?.toMillis() || 0))
-    .map(x => ({ time: t(x.at), ...(members[x.sid] || { last: "?", first: "?" }), sid: x.sid }));
+    .map(x => ({ time: t(x.at), ...(members[x.sid] || { last: "?", first: "?" }), sid: x.sid, title: titles[x.sid] || "" }));
 }
 function renderAttendance() {
   const rows = attRows();
   $("att-count").textContent = rows.length + " present";
   $("att-empty").hidden = rows.length > 0;
   $("att-table").querySelector("tbody").innerHTML = rows.map(r =>
-    `<tr><td>${esc(r.time)}</td><td>${esc(r.last)}</td><td>${esc(r.first)}</td><td>${esc(r.sid)}</td><td>${esc(r.gradYear)}</td><td>${esc(r.cls)}</td></tr>`).join("");
+    `<tr><td>${esc(r.time)}</td><td>${esc(r.last)}</td><td>${esc(r.first)}${tag(r.title)}</td><td>${esc(r.sid)}</td><td>${esc(r.gradYear)}</td><td>${esc(r.cls)}</td></tr>`).join("");
 }
+const tag = title => title ? ` <span class="ad-tag">${esc(title)}</span>` : "";
 
 let sortKey = "last", sortDir = 1;
 document.querySelectorAll("#mem-table th[data-k]").forEach(th => th.addEventListener("click", () => {
@@ -87,7 +90,7 @@ function memRows() {
   const q = $("mem-q").value.trim().toLowerCase();
   return Object.values(members).map(m => {
     const mine = attendance.filter(a => a.sid === m.sid).map(a => a.date).sort();
-    return { ...m, visits: mine.length, lastSeen: mine[mine.length - 1] || "" };
+    return { ...m, title: titles[m.sid] || "", visits: mine.length, lastSeen: mine[mine.length - 1] || "" };
   }).filter(m => !q || `${m.last} ${m.first} ${m.sid}`.toLowerCase().includes(q))
     .sort((a, b) => (a[sortKey] > b[sortKey] ? 1 : a[sortKey] < b[sortKey] ? -1 : 0) * sortDir);
 }
@@ -95,7 +98,7 @@ function renderMembers() {
   const rows = memRows();
   $("mem-count").textContent = rows.length + " members";
   $("mem-table").querySelector("tbody").innerHTML = rows.map(m =>
-    `<tr><td>${esc(m.last)}</td><td>${esc(m.first)}</td><td>${esc(m.sid)}</td><td>${esc(m.gradYear)}</td><td>${esc(m.cls)}</td><td>${esc(m.phone)}</td><td>${esc(m.email)}</td><td>${m.visits}</td><td>${m.lastSeen ? dateLabel(m.lastSeen) : ""}</td></tr>`).join("");
+    `<tr><td>${esc(m.last)}</td><td>${esc(m.first)}${tag(m.title)}</td><td>${esc(m.sid)}</td><td>${esc(m.gradYear)}</td><td>${esc(m.cls)}</td><td>${esc(m.phone)}</td><td>${esc(m.email)}</td><td>${m.visits}</td><td>${m.lastSeen ? dateLabel(m.lastSeen) : ""}</td></tr>`).join("");
 }
 
 // ---------- CSV ----------
@@ -107,11 +110,11 @@ function csv(name, header, rows) {
   a.download = name; a.click(); URL.revokeObjectURL(a.href);
 }
 $("att-csv").addEventListener("click", () => csv(`LWZ-attendance-${$("att-date").value}.csv`,
-  ["Date", "Time", "Last", "First", "Student #", "Grad year", "Class"],
-  attRows().map(r => [$("att-date").value, r.time, r.last, r.first, r.sid, r.gradYear, r.cls])));
+  ["Date", "Time", "Last", "First", "Officer title", "Student #", "Grad year", "Class"],
+  attRows().map(r => [$("att-date").value, r.time, r.last, r.first, r.title, r.sid, r.gradYear, r.cls])));
 $("mem-csv").addEventListener("click", () => csv(`LWZ-members-${pacificParts().date}.csv`,
-  ["Last", "First", "Student #", "Grad year", "Class", "Cell", "Personal email", "Meetings attended", "Last seen"],
-  memRows().map(m => [m.last, m.first, m.sid, m.gradYear, m.cls, m.phone, m.email, m.visits, m.lastSeen])));
+  ["Last", "First", "Officer title", "Student #", "Grad year", "Class", "Cell", "Personal email", "Meetings attended", "Last seen"],
+  memRows().map(m => [m.last, m.first, m.title, m.sid, m.gradYear, m.cls, m.phone, m.email, m.visits, m.lastSeen])));
 
 // ---------- Notes ----------
 let notes = [], current = null, saveTimer = null;
@@ -205,7 +208,7 @@ $("qr-full").addEventListener("click", () => {
 // ---------- Admins (advisors only) ----------
 async function loadAdmins() {
   const s = await getDocs(collection(db, "admins"));
-  $("adm-list").innerHTML = s.docs.map(d => `<li><span>${esc(d.id)}${d.data().name ? " &middot; " + esc(d.data().name) : ""}</span><button class="ad-link" data-rm="${esc(d.id)}">Remove</button></li>`).join("") || '<li class="note">No officers added yet.</li>';
+  $("adm-list").innerHTML = s.docs.map(d => `<li><span>${esc(d.id)}${d.data().name ? " &middot; " + esc(d.data().name) : ""}${d.data().sid ? " &middot; #" + esc(d.data().sid) : ' &middot; <em class="note">no student #</em>'}</span><button class="ad-link" data-rm="${esc(d.id)}">Remove</button></li>`).join("") || '<li class="note">No officers added yet.</li>';
   $("adm-list").querySelectorAll("[data-rm]").forEach(b => b.addEventListener("click", async () => {
     if (!confirm("Remove " + b.dataset.rm + " from LWZ admins?")) return;
     await deleteDoc(doc(db, "admins", b.dataset.rm)); loadAdmins();
@@ -213,7 +216,8 @@ async function loadAdmins() {
 }
 $("adm-form").addEventListener("submit", async e => {
   e.preventDefault();
-  const email = $("adm-email").value.trim().toLowerCase();
-  await setDoc(doc(db, "admins", email), { name: $("adm-name").value.trim(), addedBy: me.email, addedAt: serverTimestamp() });
-  $("adm-email").value = ""; $("adm-name").value = ""; loadAdmins();
+  const email = $("adm-email").value.trim().toLowerCase(), sid = $("adm-sid").value.trim();
+  if (sid && !/^\d{6}$/.test(sid)) { alert("Student number must be 6 digits."); return; }
+  await setDoc(doc(db, "admins", email), { name: $("adm-name").value.trim(), ...(sid ? { sid } : {}), addedBy: me.email, addedAt: serverTimestamp() });
+  $("adm-email").value = ""; $("adm-name").value = ""; $("adm-sid").value = ""; loadAdmins(); loadData();
 });

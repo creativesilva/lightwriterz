@@ -1024,3 +1024,10 @@ img.lb-zoom:focus-visible { outline: 2px solid var(--teal-light-accent); outline
 .officer .ph img.lb-zoom:hover { transform: scale(1.03); }
 
 .card.founder img.head.lb-zoom:hover { transform: scale(1.05); filter: brightness(1.1); }
+
+/* Open officer slot (LW logo placeholder until the vote). Matches photo card height; a lone last card centers. */
+.officer.is-open .ph { aspect-ratio: 4 / 5 !important; }
+.officer.is-open .ph img { width: 42%; opacity: 0.55; }
+.officer.is-open .off-name { color: var(--gray); font-style: italic; }
+@media (min-width: 761px) { .officers > .officer:last-child:nth-child(3n+1) { grid-column: 2; } }
+@media (max-width: 760px) { .officers > .officer:last-child:nth-child(2n+1) { grid-column: 1 / -1; justify-self: center; width: calc(50% - 7px); } }
