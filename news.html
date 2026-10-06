@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Student Gallery | Light Writerz</title>
-  <meta name="description" content="The best student photographs from Light Writerz, the Pioneer Valley High School photography club.">
-  <meta property="og:title" content="Student Gallery | Light Writerz">
-  <meta property="og:description" content="The best student photographs from Light Writerz, the Pioneer Valley High School photography club.">
+  <title>LWZ News | Light Writerz</title>
+  <meta name="description" content="News from Light Writerz, the Pioneer Valley High School photography club: elections, guest speakers, events, and club happenings.">
+  <meta property="og:title" content="LWZ News | Light Writerz">
+  <meta property="og:description" content="News from Light Writerz, the Pioneer Valley High School photography club: elections, guest speakers, events, and club happenings.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.lightwriterz.org/gallery.html">
+  <meta property="og:url" content="https://www.lightwriterz.org/news.html">
   <meta property="og:site_name" content="Light Writerz">
   <meta property="og:image" content="https://www.lightwriterz.org/og-image.png">
   <meta property="og:image:width" content="1200">
@@ -54,8 +54,8 @@
         <li><a href="mission.html">Mission &amp; Statement</a></li>
         <li><a href="officers.html">Officers</a></li>
         <li><a href="admin.html">LWZ Admin</a></li>
-        <li><a href="gallery.html" aria-current="page">Student Gallery</a></li>
-        <li><a href="news.html">LWZ News</a></li>
+        <li><a href="gallery.html">Student Gallery</a></li>
+        <li><a href="news.html" aria-current="page">LWZ News</a></li>
         <li><a href="contact.html">Contact &amp; Donate</a></li>
         <li class="nav-donate"><a href="contact.html#donate">Donate a Camera</a></li>
       </ul>
@@ -64,59 +64,43 @@
 
   <main id="main">
 
-    <section class="hero page hero-silva-45">
+    <section class="hero page hero-landscapes-1">
       <div class="wrap">
-        <p class="eyebrow">Photographs, made by our members</p>
-        <h1>Student<br>Gallery</h1>
+        <p class="eyebrow">What is happening in LWZ</p>
+        <h1>LWZ News</h1>
       </div>
     </section>
-
-    <section class="gal-intro">
-      <div class="wrap">
-        <p class="gal-kicker">The Exhibition</p>
-        <p class="gal-statement">Every image here was made, not taken. Selected with intention from the work of our members.</p>
-        <p class="gal-meta" id="gal-meta" hidden></p>
-        <nav class="gal-index" id="gal-index" aria-label="Collections" hidden></nav>
-      </div>
-    </section>
-
-    <div id="gal-collections"></div>
 
     <section class="band">
-      <div class="wrap">
-        <div class="empty-gallery" id="empty" hidden>
-          <img src="logos/lwz-white-500.png" alt="">
-          <h3>The first gallery is being curated</h3>
-          <p>Our members are making photographs right now. Their best work will appear here soon.</p>
-        </div>
+      <div class="wrap news-list">
+        <article class="card news-post gold-top" id="management-assistant-election">
+          <p class="date"><time datetime="2026-10-06">October 6, 2026</time> &middot; Election</p>
+          <h2>New officer position: Management Assistant</h2>
+          <p>Light Writerz is adding a new student officer position: Management Assistant.</p>
+          <p>Members will vote at the LWZ meeting on Tuesday, October 13. Interested in running? Talk to an advisor or a current officer before the meeting.</p>
+          <p class="news-link"><a href="officers.html">See the officer team</a></p>
+        </article>
+        <article class="card news-post" id="digital-check-in">
+          <p class="date"><time datetime="2026-10-06">October 6, 2026</time> &middot; Club</p>
+          <h2>Meeting check-in goes digital</h2>
+          <p>Starting October 6, members check in to LWZ meetings by scanning a QR code with their phone and entering their student number.</p>
+          <p>Your first check-in builds your LWZ member profile. After that, checking in takes a few seconds.</p>
+        </article>
+        <article class="card news-post gold-top" id="officers-2026-2027">
+          <p class="date"><time datetime="2026-09-29">September 29, 2026</time> &middot; Officers</p>
+          <h2>Meet your 2026 / 2027 officers</h2>
+          <p>The votes are in. Leo Rodriguez leads Light Writerz as President, with Ashley Ortega as Vice President, Mary Rojas as Secretary, Gloria R. as Treasurer, Wendy Linarez Ortuño as Public Relations / Media Officer, and Robert Carter as Creative Director.</p>
+          <p class="news-link"><a href="officers.html">Meet the officers</a></p>
+        </article>
       </div>
     </section>
-
-    <!-- Full screen viewer: arrows / keys / swipe; X, Esc, or backdrop to close. -->
-    <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Photograph viewer" hidden>
-      <div class="viewer-top">
-        <p class="viewer-count" aria-live="polite"></p>
-        <button type="button" class="viewer-close" aria-label="Close">&times;</button>
-      </div>
-      <div class="viewer-stage">
-        <button type="button" class="viewer-nav prev" aria-label="Previous photograph">&#8249;</button>
-        <figure class="viewer-fig">
-          <img alt="">
-        </figure>
-        <button type="button" class="viewer-nav next" aria-label="Next photograph">&#8250;</button>
-      </div>
-      <div class="viewer-cap">
-        <p class="viewer-title"></p>
-        <p class="viewer-credit"></p>
-      </div>
-    </div>
   </main>
 
   <footer class="site">
     <div class="wrap">
       <div class="cols">
         <div>
-          <a class="foot-logo" href="submit.html" aria-label="Light Writerz"><img src="logos/lwz-white-500.png" alt="Light Writerz logo" width="96" height="96"></a>
+          <a class="foot-logo" href="index.html" aria-label="Light Writerz home"><img src="logos/lwz-white-500.png" alt="Light Writerz logo" width="96" height="96"></a>
           <p class="motto"><span class="motto-pics">pics are taken.</span><br>Photographs are made.</p>
           <p>Founded in 2010 by four professional photographers, Light Writerz (LWZ) has been the photography club of Pioneer Valley High School since 2021.</p>
         </div>
@@ -154,6 +138,5 @@
   </footer>
 
   <script src="js/main.js?v=15"></script>
-  <script src="js/gallery.js?v=8"></script>
 </body>
 </html>

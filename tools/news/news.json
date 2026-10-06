@@ -1,0 +1,41 @@
+{
+  "posts": [
+    {
+      "id": "management-assistant-election",
+      "date": "2026-10-06",
+      "tag": "Election",
+      "accent": "gold",
+      "title": "New officer position: Management Assistant",
+      "summary": "LWZ is adding a seventh student officer position. Members vote at the meeting on Tuesday, October 13.",
+      "body": [
+        "Light Writerz is adding a new student officer position: Management Assistant.",
+        "Members will vote at the LWZ meeting on Tuesday, October 13. Interested in running? Talk to an advisor or a current officer before the meeting."
+      ],
+      "link": { "href": "officers.html", "text": "See the officer team" }
+    },
+    {
+      "id": "digital-check-in",
+      "date": "2026-10-06",
+      "tag": "Club",
+      "accent": "teal",
+      "title": "Meeting check-in goes digital",
+      "summary": "Members now check in to LWZ meetings by scanning a QR code with their phone.",
+      "body": [
+        "Starting October 6, members check in to LWZ meetings by scanning a QR code with their phone and entering their student number.",
+        "Your first check-in builds your LWZ member profile. After that, checking in takes a few seconds."
+      ]
+    },
+    {
+      "id": "officers-2026-2027",
+      "date": "2026-09-29",
+      "tag": "Officers",
+      "accent": "gold",
+      "title": "Meet your 2026 / 2027 officers",
+      "summary": "The votes are in. Leo Rodriguez leads Light Writerz as President, with a full team of student officers ready for the year.",
+      "body": [
+        "The votes are in. Leo Rodriguez leads Light Writerz as President, with Ashley Ortega as Vice President, Mary Rojas as Secretary, Gloria R. as Treasurer, Wendy Linarez Ortuño as Public Relations / Media Officer, and Robert Carter as Creative Director."
+      ],
+      "link": { "href": "officers.html", "text": "Meet the officers" }
+    }
+  ]
+}
