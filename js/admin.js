@@ -52,6 +52,7 @@ function showTab(name) {
   if (name === "notes") loadNotes();
   if (name === "qr") renderQR();
   if (name === "admins") loadAdmins();
+  if (name === "nominations") loadNominations();
 }
 
 // ---------- Data ----------
@@ -265,6 +266,24 @@ $("qr-full").addEventListener("click", () => {
   const el = $("qr-box");
   (el.requestFullscreen || el.webkitRequestFullscreen || (() => {})).call(el);
 });
+
+// ---------- Nominations (from LWZ News) ----------
+let noms = [];
+async function loadNominations() {
+  const s = await getDocs(collection(db, "nominations"));
+  noms = s.docs.map(d => d.data()).sort((a, b) => (b.at?.toMillis() || 0) - (a.at?.toMillis() || 0)).map(n => {
+    const m = members[n.sid], by = m ? `${m.first} ${m.last}` : n.first;
+    return { ...n, by, nomineeFull: n.self ? by : n.nominee,
+      when: n.at ? n.at.toDate().toLocaleString("en-US", { timeZone: "America/Los_Angeles", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) : "" };
+  });
+  $("nom-count").textContent = noms.length + (noms.length === 1 ? " nomination" : " nominations");
+  $("nom-empty").hidden = noms.length > 0;
+  $("nom-table").querySelector("tbody").innerHTML = noms.map(n =>
+    `<tr><td>${esc(n.nomineeFull)}${n.self ? ' <span class="ad-tag">self</span>' : ""}</td><td>${esc(n.by)}${tag(titles[n.sid])}</td><td>${esc(n.sid)}</td><td>${esc(n.when)}</td><td class="nom-why">${esc(n.reason)}</td></tr>`).join("");
+}
+$("nom-csv").addEventListener("click", () => csv(`LWZ-nominations-${pacificParts().date}.csv`,
+  ["Nominee", "Self nomination", "Submitted by", "Student #", "When", "Why"],
+  noms.map(n => [n.nomineeFull, n.self ? "yes" : "no", n.by, n.sid, n.when, n.reason])));
 
 // ---------- Admins (advisors only) ----------
 async function loadAdmins() {

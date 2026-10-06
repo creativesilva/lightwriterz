@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=66">
+  <link rel="stylesheet" href="css/style.css?v=67">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -73,12 +73,13 @@
 
     <section class="band">
       <div class="wrap news-list">
-        <article class="card news-post gold-top" id="management-assistant-election">
+        <article class="card news-post gold-top is-nominate" id="management-assistant-election" data-nominate tabindex="0" role="button" aria-label="New officer position: Management Assistant. Read more and submit a name">
           <p class="date"><time datetime="2026-10-06">October 6, 2026</time> &middot; Election</p>
           <h2>New officer position: Management Assistant</h2>
-          <p>Light Writerz is adding a new student officer position: Management Assistant.</p>
-          <p>Members will vote at the LWZ meeting on Tuesday, October 13. Interested in running? Talk to an advisor or a current officer before the meeting.</p>
-          <p class="news-link"><a href="officers.html">See the officer team</a></p>
+          <p>The Management Assistant supports the whole officer team, helping any officer in any capacity. One week that might mean helping the President run a meeting; the next, covering for the Vice President, helping the Secretary with attendance and notes, tracking supplies with the Treasurer, gathering photos for the PR / Media Officer, or setting up a project with the Creative Director.</p>
+          <p>It is a great fit for a member who is reliable, organized, and ready to pitch in wherever LWZ needs it. It is also the best seat in the club for learning how every officer role works.</p>
+          <p>Members vote at the LWZ meeting on Tuesday, October 13. Any member who has attended a meeting can submit a name: their own or another member's. Nominations close when that meeting starts.</p>
+          <p class="news-link"><span class="btn orange nom-cta">Submit a name</span></p>
         </article>
         <article class="card news-post" id="digital-check-in">
           <p class="date"><time datetime="2026-10-06">October 6, 2026</time> &middot; Club</p>
@@ -138,5 +139,49 @@
   </footer>
 
   <script src="js/main.js?v=15"></script>
+
+  <div class="reveal-modal nom-modal" id="nom-modal" hidden role="dialog" aria-modal="true" aria-label="Management Assistant nominations"
+    data-election="management-assistant-2026" data-closes="2026-10-13T19:25:00Z" data-role="Management Assistant" data-vote="Tuesday, October 13">
+    <div class="reveal-backdrop" data-close></div>
+    <div class="nom-panel">
+      <button type="button" class="shirt-modal-close" data-close aria-label="Close">&times;</button>
+      <section id="n-about">
+        <p class="eyebrow">Election &middot; Vote Tuesday, October 13</p>
+        <h2>Management Assistant</h2>
+        <p>The Management Assistant supports the whole officer team, helping any officer in any capacity. One week that might mean helping the President run a meeting; the next, covering for the Vice President, helping the Secretary with attendance and notes, tracking supplies with the Treasurer, gathering photos for the PR / Media Officer, or setting up a project with the Creative Director.</p>
+        <p>It is a great fit for a member who is reliable, organized, and ready to pitch in wherever LWZ needs it. It is also the best seat in the club for learning how every officer role works.</p>
+        <p>Members vote at the LWZ meeting on Tuesday, October 13. Any member who has attended a meeting can submit a name: their own or another member's. Nominations close when that meeting starts.</p>
+        <p class="nom-closed" id="n-closed" hidden>Nominations are closed. The vote is at the meeting.</p>
+        <button type="button" class="btn orange nom-go" id="n-start">Submit a name</button>
+      </section>
+      <form id="n-gate" hidden autocomplete="off">
+        <p class="eyebrow">Members only</p>
+        <h2>Your student number</h2>
+        <p>Only members who have checked in at an LWZ meeting can submit a name.</p>
+        <div class="ci-pin"><input id="n-sid" inputmode="numeric" maxlength="6" aria-label="Student number"><span class="ci-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+        <p class="nom-err" id="n-gate-err" hidden></p>
+        <button type="submit" class="btn nom-go">Continue</button>
+      </form>
+      <form id="n-form" hidden autocomplete="off">
+        <p class="eyebrow">Management Assistant nomination</p>
+        <h2>Hi, <span id="n-first"></span></h2>
+        <fieldset class="nom-who"><legend>Who are you nominating?</legend>
+          <label><input type="radio" name="who" value="self" checked> Myself</label>
+          <label><input type="radio" name="who" value="other"> Another member</label>
+        </fieldset>
+        <label class="nom-field" id="n-name-wrap" hidden>Their first and last name<input id="n-name" autocapitalize="words"></label>
+        <label class="nom-field">Why would they be great? <span class="opt">(optional)</span><textarea id="n-reason" rows="3" maxlength="500"></textarea></label>
+        <p class="nom-note">You can submit one name. Submitting again replaces your earlier choice.</p>
+        <p class="nom-err" id="n-form-err" hidden></p>
+        <button type="submit" class="btn orange nom-go" id="n-submit">Submit</button>
+      </form>
+      <section id="n-done" hidden>
+        <p class="nom-check" aria-hidden="true">&#10003;</p>
+        <h2>Thank you</h2>
+        <p id="n-done-msg"></p>
+      </section>
+    </div>
+  </div>
+  <script type="module" src="js/nominate.js?v=1"></script>
 </body>
 </html>

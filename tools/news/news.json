@@ -6,12 +6,18 @@
       "tag": "Election",
       "accent": "gold",
       "title": "New officer position: Management Assistant",
-      "summary": "LWZ is adding a seventh student officer position. Members vote at the meeting on Tuesday, October 13.",
+      "summary": "A new officer role that supports the whole team. Members vote Tuesday, October 13. Tap to read more and submit a name.",
       "body": [
-        "Light Writerz is adding a new student officer position: Management Assistant.",
-        "Members will vote at the LWZ meeting on Tuesday, October 13. Interested in running? Talk to an advisor or a current officer before the meeting."
+        "The Management Assistant supports the whole officer team, helping any officer in any capacity. One week that might mean helping the President run a meeting; the next, covering for the Vice President, helping the Secretary with attendance and notes, tracking supplies with the Treasurer, gathering photos for the PR / Media Officer, or setting up a project with the Creative Director.",
+        "It is a great fit for a member who is reliable, organized, and ready to pitch in wherever LWZ needs it. It is also the best seat in the club for learning how every officer role works.",
+        "Members vote at the LWZ meeting on Tuesday, October 13. Any member who has attended a meeting can submit a name: their own or another member's. Nominations close when that meeting starts."
       ],
-      "link": { "href": "officers.html", "text": "See the officer team" }
+      "nominate": {
+        "election": "management-assistant-2026",
+        "role": "Management Assistant",
+        "vote": "Tuesday, October 13",
+        "closes": "2026-10-13T19:25:00Z"
+      }
     },
     {
       "id": "digital-check-in",
@@ -35,7 +41,10 @@
       "body": [
         "The votes are in. Leo Rodriguez leads Light Writerz as President, with Ashley Ortega as Vice President, Mary Rojas as Secretary, Gloria R. as Treasurer, Wendy Linarez Ortuño as Public Relations / Media Officer, and Robert Carter as Creative Director."
       ],
-      "link": { "href": "officers.html", "text": "Meet the officers" }
+      "link": {
+        "href": "officers.html",
+        "text": "Meet the officers"
+      }
     }
   ]
 }

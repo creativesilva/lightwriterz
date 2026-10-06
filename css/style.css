@@ -1055,3 +1055,41 @@ img.lb-zoom:focus-visible { outline: 2px solid var(--teal-light-accent); outline
 @media (min-width: 761px) and (max-width: 1199px) { .mainnav a { padding: 15px 12px; font-size: 15px; } }
 @media (min-width: 761px) and (max-width: 919px) { .mainnav a { padding: 15px 7px; font-size: 13.5px; letter-spacing: 0.05em; } }
 @media (min-width: 761px) and (max-width: 919px) { .mainnav a.dock-logo { display: none; } }
+
+/* Home news cards: the whole card is the link. */
+.card.is-link { position: relative; transition: transform 0.2s ease, border-color 0.2s ease; }
+.card.is-link .card-link::after { content: ""; position: absolute; inset: 0; }
+.card.is-link:hover { transform: translateY(-3px); }
+/* News post with a nomination pop-up */
+.news-post.is-nominate { cursor: pointer; transition: transform 0.2s ease, border-color 0.2s ease; }
+.news-post.is-nominate:hover, .news-post.is-nominate:focus-visible { transform: translateY(-3px); border-color: rgba(245,179,1,0.5); outline: none; }
+.nom-cta { pointer-events: none; }
+.nom-panel { position: relative; width: min(620px, 100%); max-height: calc(100vh - 40px); overflow: auto; padding: 38px 32px 32px;
+  background: linear-gradient(170deg, #161d1d, #0a0e0e); border: 1px solid var(--surface-border); border-top: 4px solid var(--gold); border-radius: 12px; box-shadow: var(--glow); }
+.nom-panel h2 { font-family: var(--font-head); text-transform: uppercase; font-size: clamp(26px, 4vw, 34px); letter-spacing: 0.03em; line-height: 1.1; margin-bottom: 12px; }
+.nom-panel p { color: #c3cfcf; font-size: 16px; }
+.nom-panel p + p { margin-top: 12px; }
+.nom-panel .eyebrow { color: var(--gold); margin-bottom: 6px; }
+.nom-panel .btn.nom-go { width: 100%; margin-top: 22px; padding: 15px; font-size: 17px; }
+.nom-closed { color: #ffb38a !important; font-weight: 600; margin-top: 18px !important; }
+.nom-err { color: #ffb38a !important; font-size: 14px !important; margin-top: 10px !important; }
+.nom-note { font-size: 13px !important; color: var(--gray) !important; margin-top: 12px !important; }
+.nom-who { border: 0; display: flex; gap: 10px; margin: 6px 0 14px; flex-wrap: wrap; }
+.nom-who legend { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.1em; font-size: 12px; color: #cfdada; margin-bottom: 8px; }
+.nom-who label { flex: 1; min-width: 140px; display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.16); border-radius: 8px; cursor: pointer; }
+.nom-who label:has(input:checked) { border-color: var(--gold); background: rgba(245,179,1,0.08); }
+.nom-who input { accent-color: var(--gold); width: 18px; height: 18px; }
+.nom-field { display: block; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.1em; font-size: 12px; color: #cfdada; margin-top: 12px; }
+.nom-field .opt { text-transform: none; letter-spacing: 0; color: var(--gray); font-family: var(--font-body); }
+.nom-field input, .nom-field textarea { display: block; width: 100%; margin-top: 6px; font: 17px/1.5 var(--font-body); padding: 12px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.05); color: #fff; text-transform: none; letter-spacing: 0; }
+.nom-field input:focus, .nom-field textarea:focus { outline: none; border-color: var(--teal-light-accent); }
+.nom-check { font-size: 60px; color: var(--teal-light-accent); line-height: 1; text-align: center; }
+#n-done h2, #n-done p { text-align: center; }
+/* 6-dot student number (same as the meeting check-in) */
+.nom-panel .ci-pin { position: relative; margin-top: 16px; }
+.nom-panel .ci-pin input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.01; font-size: 16px; border: 0; z-index: 1; }
+.nom-panel .ci-dots { display: flex; justify-content: center; gap: 16px; padding: 22px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.05); }
+.nom-panel .ci-pin:focus-within .ci-dots { border-color: var(--teal-light-accent); }
+.nom-panel .ci-dots i { width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,0.18); transition: background 0.15s, transform 0.15s; }
+.nom-panel .ci-dots i.on { background: #fff; transform: scale(1.1); }
+@media (max-width: 760px) { .nom-panel { padding: 52px 20px 24px; } }
