@@ -62,3 +62,6 @@
 .ad-table tr.ad-group th { background: rgba(0,116,116,0.18); color: #fff; font-size: 13px; letter-spacing: 0.14em; padding: 10px 12px; border-top: 1px solid rgba(128,224,224,0.25); cursor: default; }
 .ad-table tr.ad-group th span { color: var(--teal-light-accent); margin-left: 6px; }
 .ad-table tr.ad-group:hover th { background: rgba(0,116,116,0.18); }
+/* Officer badges sit in their own column, all the same width, so they line up. */
+.ad-table .ad-tagcol { width: 1%; padding-left: 0; padding-right: 18px; }
+.ad-table .ad-tagcol .ad-tag { margin-left: 0; min-width: 148px; text-align: center; }

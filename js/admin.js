@@ -79,7 +79,7 @@ function renderAttendance() {
   $("att-count").textContent = rows.length + " present";
   $("att-empty").hidden = rows.length > 0;
   $("att-table").querySelector("tbody").innerHTML = rows.map(r =>
-    `<tr><td>${esc(r.time)}${r.manual ? ` <span class="ad-hand" title="Added by hand">added</span> <button class="ad-link" data-unmark="${esc(r.id)}">Remove</button>` : ""}</td><td>${esc(r.first)}${tag(r.title)}</td><td>${esc(r.last)}</td><td>${esc(r.sid)}</td><td>${esc(r.gradYear)}</td><td>${esc(r.cls)}</td></tr>`).join("");
+    `<tr><td>${esc(r.time)}${r.manual ? ` <span class="ad-hand" title="Added by hand">added</span> <button class="ad-link" data-unmark="${esc(r.id)}">Remove</button>` : ""}</td><td>${esc(r.first)}</td><td class="ad-tagcol">${tag(r.title)}</td><td>${esc(r.last)}</td><td>${esc(r.sid)}</td><td>${esc(r.gradYear)}</td><td>${esc(r.cls)}</td></tr>`).join("");
 }
 $("att-table").addEventListener("click", async e => {
   const id = e.target.dataset && e.target.dataset.unmark;
@@ -122,7 +122,7 @@ $("mp-form").addEventListener("submit", async e => {
   } catch (x) { console.error(x); err("Could not save. Try again."); }
   $("mp-save").disabled = false;
 });
-const tag = title => title ? ` <span class="ad-tag">${esc(title)}</span>` : "";
+const tag = title => title ? `<span class="ad-tag">${esc(title)}</span>` : "";
 
 let sortKey = "first", sortDir = 1;
 // Officers list first, in rank order (same order as the Officers page).
@@ -144,8 +144,8 @@ function renderMembers() {
   const rows = memRows();
   const officers = rows.filter(m => m.title).sort((a, b) => rank(a.title) - rank(b.title));
   const others = rows.filter(m => !m.title);
-  const row = m => `<tr><td>${esc(m.first)}${tag(m.title)}</td><td>${esc(m.last)}</td><td>${esc(m.sid)}</td><td>${esc(m.gradYear)}</td><td>${esc(m.cls)}</td><td>${esc(m.phone)}</td><td>${esc(m.email)}</td><td>${m.visits}</td><td>${m.lastSeen ? dateLabel(m.lastSeen) : ""}</td></tr>`;
-  const group = (name, list) => list.length ? `<tr class="ad-group"><th colspan="9">${name} <span>${list.length}</span></th></tr>` + list.map(row).join("") : "";
+  const row = m => `<tr><td>${esc(m.first)}</td><td class="ad-tagcol">${tag(m.title)}</td><td>${esc(m.last)}</td><td>${esc(m.sid)}</td><td>${esc(m.gradYear)}</td><td>${esc(m.cls)}</td><td>${esc(m.phone)}</td><td>${esc(m.email)}</td><td>${m.visits}</td><td>${m.lastSeen ? dateLabel(m.lastSeen) : ""}</td></tr>`;
+  const group = (name, list) => list.length ? `<tr class="ad-group"><th colspan="10">${name} <span>${list.length}</span></th></tr>` + list.map(row).join("") : "";
   $("mem-count").textContent = rows.length + " members";
   $("mem-table").querySelector("tbody").innerHTML = group("Officers", officers) + group("Members", others);
 }
@@ -285,7 +285,7 @@ async function loadNominations() {
   $("nom-count").textContent = noms.length + (noms.length === 1 ? " nomination" : " nominations");
   $("nom-empty").hidden = noms.length > 0;
   $("nom-table").querySelector("tbody").innerHTML = noms.map(n =>
-    `<tr><td>${esc(n.nomineeFull)}${n.self ? ' <span class="ad-tag">self</span>' : ""}</td><td>${esc(n.by)}${tag(titles[n.sid])}</td><td>${esc(n.sid)}</td><td>${esc(n.when)}</td><td class="nom-why">${esc(n.reason)}</td></tr>`).join("");
+    `<tr><td>${esc(n.nomineeFull)}${n.self ? ' <span class="ad-tag">self</span>' : ""}</td><td>${esc(n.by)}</td><td class="ad-tagcol">${tag(titles[n.sid])}</td><td>${esc(n.sid)}</td><td>${esc(n.when)}</td><td class="nom-why">${esc(n.reason)}</td></tr>`).join("");
 }
 $("nom-csv").addEventListener("click", () => csv(`LWZ-nominations-${pacificParts().date}.csv`,
   ["Nominee", "Self nomination", "Submitted by", "Student #", "When", "Why"],
