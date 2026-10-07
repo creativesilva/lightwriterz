@@ -134,13 +134,13 @@
   });
 
   // Contact form: sends to info@lightwriterz.org through the Light Writerz Apps Script (MailApp).
-  // Falls back to EmailJS (creativesilva.com account), then to the visitor's email app.
+  // Falls back to EmailJS (LWZ Meeting Notes template, sends from creativesilva1@gmail.com), then to the visitor's email app.
   var form = document.getElementById("contactForm");
   if (form) {
     var btn = document.getElementById("contactSubmit");
     var note = document.getElementById("formNote");
     var LWZ_ENDPOINT = "https://script.google.com/macros/s/AKfycbwKgAWHt-MerxhSJN81C-LfuGkqINYlb6VyMTBY11z6pLc7ewpw0ajSX2FE7CXq78tL/exec";
-    var EMAILJS = { publicKey: "68UkiTjqHIKZMkeCC", service: "service_4mhkbik", template: "template_creativesilva" };
+    var EMAILJS = { publicKey: "Z2UjAu1N-IFmF2pbc", service: "service_i53d3dk", template: "template_lwz_notes" };
     function mailtoFallback(f) {
       var subject = "[Light Writerz] " + f.topic.value + " from " + f.name.value;
       var body = f.message.value + "\n\n" + f.name.value + "\n" + f.email.value;
@@ -176,8 +176,9 @@
           console.warn("Apps Script contact failed, trying EmailJS:", err);
           if (!window.emailjs) { mailtoFallback(f); btn.disabled = false; btn.textContent = "Send Message"; return; }
           window.emailjs.send(EMAILJS.service, EMAILJS.template, {
-            name: payload.name, email: payload.email,
-            message: "[Light Writerz] " + payload.topic + "\n\n" + payload.message
+            to_email: "info@lightwriterz.org", subject: "[Light Writerz] " + payload.topic + " from " + payload.name,
+            title: payload.topic + " from " + payload.name, body: payload.message + "\n\n" + payload.name + "\n" + payload.email,
+            from_name: payload.name, reply_to: payload.email
           }, { publicKey: EMAILJS.publicKey }).then(done, fail);
         });
     });

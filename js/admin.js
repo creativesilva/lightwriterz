@@ -7,7 +7,8 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app), db = getFirestore(app);
 
 // EmailJS for "Save & Email" (template set up for LWZ notes). Falls back to the email app if blank.
-const EMAILJS = { publicKey: "", service: "", template: "" };
+// LWZ Meeting Notes template on the EmailJS "CreativeSilva" service (sends from creativesilva1@gmail.com).
+const EMAILJS = { publicKey: "Z2UjAu1N-IFmF2pbc", service: "service_i53d3dk", template: "template_lwz_notes" };
 const NOTE_RECIPIENTS = ["info@lightwriterz.org", "creativesilva1@gmail.com", "lg.artistic1@gmail.com"];
 
 const $ = id => document.getElementById(id);
