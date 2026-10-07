@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=67">
   <link rel="stylesheet" href="css/lwz-app.css?v=2">
-  <link rel="stylesheet" href="css/lwz-admin.css?v=13">
+  <link rel="stylesheet" href="css/lwz-admin.css?v=14">
 </head>
 <body class="app-body">
   <!-- Signed out -->
@@ -119,6 +119,7 @@
         <div id="qr"></div>
         <p class="qr-label" id="qr-label"></p>
         <p class="qr-clock" id="qr-clock"></p>
+        <p class="qr-live" id="qr-live" aria-live="polite"><span class="qr-count" id="qr-count">0</span> <span id="qr-count-label">checked in today</span></p>
         <p class="note">lightwriterz.org/checkin.html</p>
       </div>
       <button class="btn ad-sm" id="qr-full">Full screen</button>
@@ -189,6 +190,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script type="module" src="js/admin.js?v=14"></script>
+  <script type="module" src="js/admin.js?v=15"></script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 import { firebaseConfig, SDK, OWNERS, CHECKIN_URL, pacificParts, nextMeetingLabel, nextMeetingStart, inMeetingWindow } from "./lwz-firebase.js?v=2";
 const { initializeApp } = await import(SDK + "firebase-app.js");
 const { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } = await import(SDK + "firebase-auth.js");
-const { getFirestore, collection, getDocs, doc, setDoc, deleteDoc, addDoc, serverTimestamp, query, orderBy, getDoc } = await import(SDK + "firebase-firestore.js");
+const { getFirestore, collection, getDocs, doc, setDoc, deleteDoc, addDoc, serverTimestamp, query, orderBy, getDoc, onSnapshot, where } = await import(SDK + "firebase-firestore.js");
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app), db = getFirestore(app);
 
@@ -47,7 +47,7 @@ document.addEventListener("keydown", e => { if (e.key === "Escape") setMenu(fals
 window.addEventListener("resize", () => { if (window.innerWidth > 760) setMenu(false); });
 
 onAuthStateChanged(auth, async user => {
-  if (!user) { $("v-app").hidden = true; $("v-login").hidden = false; return; }
+  if (!user) { stopLive(); $("v-app").hidden = true; $("v-login").hidden = false; return; }
   const email = (user.email || "").toLowerCase();
   isOwner = OWNERS.includes(email);
   try { await getDocs(collection(db, "admins")); }
@@ -61,6 +61,7 @@ onAuthStateChanged(auth, async user => {
   $("tab-admins").hidden = !isOwner;
   $("v-login").hidden = true; $("v-app").hidden = false;
   await loadData();
+  watchLive();
   showTab("notes");
 });
 
@@ -120,6 +121,34 @@ $("att-table").addEventListener("click", async e => {
   if (!id || !confirm("Remove this check-in?")) return;
   await deleteDoc(doc(db, "attendance", id)); await loadData(); renderAttendance();
 });
+
+// ---------- Live updates ----------
+// Today's check-ins and member profiles stream in as students mark themselves present,
+// so the QR screen counter and the Attendance list update without a refresh.
+let liveDay = "", liveUnsubs = [];
+function stopLive() { liveUnsubs.forEach(u => u()); liveUnsubs = []; liveDay = ""; }
+function watchLive() {
+  stopLive();
+  const today = liveDay = pacificParts().date;
+  liveUnsubs.push(onSnapshot(collection(db, "members"), snap => {
+    snap.docChanges().forEach(c => { if (c.type === "removed") delete members[c.doc.id]; else members[c.doc.id] = c.doc.data(); });
+    if (!$("p-attendance").hidden) renderAttendance();
+  }, e => console.error("members live", e)));
+  liveUnsubs.push(onSnapshot(query(collection(db, "attendance"), where("date", "==", today)), snap => {
+    attendance = attendance.filter(a => a.date !== today).concat(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+    setLiveCount(snap.size);
+    if (!$("p-attendance").hidden) renderAttendance();
+  }, e => { console.error("attendance live", e); $("qr-live").classList.add("is-off"); }));
+}
+// New day (for example the iPad left open overnight): follow the new date.
+setInterval(() => { if (me && liveDay && pacificParts().date !== liveDay) watchLive(); }, 60000);
+let shownCount = -1;
+function setLiveCount(n) {
+  $("qr-count").textContent = n;
+  $("qr-count-label").textContent = n === 1 ? "checked in today" : "checked in today";
+  if (shownCount >= 0 && n > shownCount) { const el = $("qr-live"); el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); }
+  shownCount = n;
+}
 
 // ---------- Mark present (by hand) ----------
 const mp = $("mp-modal");

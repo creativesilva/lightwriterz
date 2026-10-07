@@ -1,9 +1,98 @@
 {
   "collections": [
     {
+      "id": "multiples",
+      "title": "Multiples",
+      "kicker": "Collection 01",
+      "note": "Portraits built from more than one exposure. Students layer a single subject across time and light in one frame, turning a portrait into a study of presence, motion, and identity.",
+      "rows": [
+        4,
+        2,
+        2
+      ],
+      "photos": [
+        {
+          "file": "multiples-01.jpg",
+          "w": 1067,
+          "h": 1600,
+          "bg": "#632a77",
+          "alt": "Portrait of a student in a striped sweater under violet light",
+          "student": "",
+          "title": "",
+          "year": "2023"
+        },
+        {
+          "file": "multiples-02.jpg",
+          "w": 1067,
+          "h": 1600,
+          "bg": "#585858",
+          "alt": "Black and white multiple exposure portrait of a student",
+          "student": "",
+          "title": "",
+          "year": "2023"
+        },
+        {
+          "file": "multiples-03.jpg",
+          "w": 1067,
+          "h": 1600,
+          "bg": "#884185",
+          "alt": "Multiple exposure portrait of a student with glasses in violet and red light",
+          "student": "",
+          "title": "",
+          "year": "2023"
+        },
+        {
+          "file": "multiples-04.jpg",
+          "w": 1067,
+          "h": 1600,
+          "bg": "#717171",
+          "alt": "Black and white triple exposure portrait of a student",
+          "student": "",
+          "title": "",
+          "year": "2023"
+        },
+        {
+          "file": "light-09.jpg",
+          "w": 1600,
+          "h": 1067,
+          "bg": "#243b5e",
+          "alt": "Two exposures of a student with headphones and a burst of light",
+          "student": "",
+          "title": ""
+        },
+        {
+          "file": "light-10.jpg",
+          "w": 1600,
+          "h": 1067,
+          "bg": "#0e1733",
+          "alt": "Three exposures of the same student in one frame, peace signs up",
+          "student": "",
+          "title": ""
+        },
+        {
+          "file": "light-11.jpg",
+          "w": 1600,
+          "h": 1067,
+          "bg": "#0d142a",
+          "alt": "Three exposures of one student, thumbs up, in blue light",
+          "student": "",
+          "title": ""
+        },
+        {
+          "file": "light-12.jpg",
+          "w": 1600,
+          "h": 1067,
+          "bg": "#101118",
+          "alt": "A double exposure portrait of a student in low, moody light",
+          "student": "",
+          "title": ""
+        }
+      ]
+    },
+    {
       "id": "writing-with-light",
       "title": "Writing with Light",
-      "kicker": "Collection 01",
+      "kicker": "Collection 02",
       "note": "Long exposures in a darkened room. The shutter stays open while students draw with handheld lights, writing directly onto the frame. Every mark is intentional, made in the dark, and seen only when the exposure ends.",
       "rows": [
         1,
@@ -90,95 +179,6 @@
           "h": 1067,
           "bg": "#273040",
           "alt": "A smiling teacher inside a halo of light loops",
-          "student": "",
-          "title": ""
-        }
-      ]
-    },
-    {
-      "id": "multiples",
-      "title": "Multiples",
-      "kicker": "Collection 02",
-      "note": "Portraits built from more than one exposure. Students layer a single subject across time and light in one frame, turning a portrait into a study of presence, motion, and identity.",
-      "rows": [
-        4,
-        2,
-        2
-      ],
-      "photos": [
-        {
-          "file": "multiples-01.jpg",
-          "w": 1067,
-          "h": 1600,
-          "bg": "#632a77",
-          "alt": "Portrait of a student in a striped sweater under violet light",
-          "student": "",
-          "title": "",
-          "year": "2023"
-        },
-        {
-          "file": "multiples-02.jpg",
-          "w": 1067,
-          "h": 1600,
-          "bg": "#585858",
-          "alt": "Black and white multiple exposure portrait of a student",
-          "student": "",
-          "title": "",
-          "year": "2023"
-        },
-        {
-          "file": "multiples-03.jpg",
-          "w": 1067,
-          "h": 1600,
-          "bg": "#884185",
-          "alt": "Multiple exposure portrait of a student with glasses in violet and red light",
-          "student": "",
-          "title": "",
-          "year": "2023"
-        },
-        {
-          "file": "multiples-04.jpg",
-          "w": 1067,
-          "h": 1600,
-          "bg": "#717171",
-          "alt": "Black and white triple exposure portrait of a student",
-          "student": "",
-          "title": "",
-          "year": "2023"
-        },
-        {
-          "file": "light-09.jpg",
-          "w": 1600,
-          "h": 1067,
-          "bg": "#243b5e",
-          "alt": "Two exposures of a student with headphones and a burst of light",
-          "student": "",
-          "title": ""
-        },
-        {
-          "file": "light-10.jpg",
-          "w": 1600,
-          "h": 1067,
-          "bg": "#0e1733",
-          "alt": "Three exposures of the same student in one frame, peace signs up",
-          "student": "",
-          "title": ""
-        },
-        {
-          "file": "light-11.jpg",
-          "w": 1600,
-          "h": 1067,
-          "bg": "#0d142a",
-          "alt": "Three exposures of one student, thumbs up, in blue light",
-          "student": "",
-          "title": ""
-        },
-        {
-          "file": "light-12.jpg",
-          "w": 1600,
-          "h": 1067,
-          "bg": "#101118",
-          "alt": "A double exposure portrait of a student in low, moody light",
           "student": "",
           "title": ""
         }
