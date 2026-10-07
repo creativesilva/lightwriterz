@@ -1093,3 +1093,23 @@ img.lb-zoom:focus-visible { outline: 2px solid var(--teal-light-accent); outline
 .nom-panel .ci-dots i { width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,0.18); transition: background 0.15s, transform 0.15s; }
 .nom-panel .ci-dots i.on { background: #fff; transform: scale(1.1); }
 @media (max-width: 760px) { .nom-panel { padding: 52px 20px 24px; } }
+
+/* Header: Donate a Camera + teal countdown tile to the next meeting (same height). */
+.mast-actions { display: flex; align-items: stretch; gap: 12px; }
+.meet-cd { display: flex; align-items: center; gap: 10px; border-radius: 6px; padding: 13px 20px; border: 2px solid var(--teal);
+  background: linear-gradient(160deg, #008585, #006060); color: #fff; font-family: var(--font-head); text-transform: uppercase; white-space: nowrap; }
+.meet-cd[hidden] { display: none; }
+.meet-cd-label { font-size: 13px; letter-spacing: 0.14em; color: var(--teal-light-accent); }
+.meet-cd-time { font-size: 17px; font-weight: 600; letter-spacing: 0.06em; font-variant-numeric: tabular-nums; }
+@media (max-width: 760px) { .meet-cd { display: none !important; } }
+.masthead .cta { white-space: nowrap; }
+@media (min-width: 761px) and (max-width: 980px) {
+  .mast-actions { gap: 8px; }
+  .masthead .cta, .meet-cd { padding: 11px 14px; font-size: 15px; }
+  .meet-cd-label { display: none; }
+  .meet-cd-time::before { content: "Meeting in "; font-size: 12px; letter-spacing: 0.1em; color: var(--teal-light-accent); font-weight: 400; }
+  .brand-name { white-space: nowrap; }
+}
+@media (min-width: 761px) and (max-width: 860px) { .brand-sub .est { display: none; } .brand-name { font-size: 28px; } .brand img { width: 64px; height: 64px; } }
+/* Countdown tile: teal outline only, dark header shows through. */
+.meet-cd { background: transparent; border-color: var(--teal); }

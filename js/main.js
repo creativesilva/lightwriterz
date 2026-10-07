@@ -122,6 +122,38 @@
     document.addEventListener("visibilitychange", function () { if (document.hidden) clearTimeout(timer); else play(); });
   }
 
+  // Header countdown to the next LWZ meeting (Tuesdays 12:25 to 1:05 PM, Pacific time).
+  var cd = document.querySelector(".meet-cd");
+  if (cd) {
+    var cdTime = cd.querySelector(".meet-cd-time"), cdLabel = cd.querySelector(".meet-cd-label");
+    var pac = function (d) {
+      var p = {};
+      new Intl.DateTimeFormat("en-US", { timeZone: "America/Los_Angeles", weekday: "short", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false })
+        .formatToParts(d).forEach(function (x) { p[x.type] = x.value; });
+      return { wd: p.weekday, y: +p.year, m: +p.month, d: +p.day, mins: (+p.hour % 24) * 60 + (+p.minute) };
+    };
+    var nextStart = function (now) {
+      for (var k = 0; k <= 7; k++) {
+        var p = pac(new Date(now.getTime() + k * 86400000));
+        if (p.wd !== "Tue") continue;
+        var t = new Date(Date.UTC(p.y, p.m - 1, p.d, 19, 25));          // 12:25 PM when Pacific is UTC-7
+        t = new Date(t.getTime() + (745 - pac(t).mins) * 60000);        // adjust for UTC-8
+        if (t.getTime() + 40 * 60000 > now.getTime()) return t;         // until 1:05 PM that day
+      }
+    };
+    var tickCd = function () {
+      var now = new Date(), start = nextStart(now), left = Math.floor((start - now) / 1000);
+      if (left <= 0) { cdLabel.textContent = "Meeting now"; cdTime.textContent = "Check-in open"; }
+      else {
+        var d = Math.floor(left / 86400), h = Math.floor(left % 86400 / 3600), m = Math.floor(left % 3600 / 60);
+        cdLabel.textContent = "Next meeting";
+        cdTime.textContent = (d ? d + "d " : "") + (d || h ? h + "h " : "") + m + "m";
+      }
+      cd.hidden = false;
+    };
+    tickCd(); setInterval(tickCd, 15000);
+  }
+
   var yr = document.getElementById("yr");
   if (yr) yr.textContent = new Date().getFullYear();
 
