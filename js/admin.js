@@ -77,6 +77,13 @@ function attRows() {
 function renderAttendance() {
   const rows = attRows();
   $("att-count").textContent = rows.length + " present";
+  // Stat cards: present at the selected meeting, members on file, average across meetings held.
+  const held = new Set(attendance.map(x => x.date));
+  $("st-present").textContent = rows.length;
+  $("st-present-sub").textContent = "on " + dateLabel($("att-date").value);
+  $("st-members").textContent = Object.keys(members).length;
+  $("st-avg").textContent = held.size ? (Math.round(attendance.length / held.size * 10) / 10) : 0;
+  $("st-avg-sub").textContent = held.size + (held.size === 1 ? " meeting so far" : " meetings so far");
   $("att-empty").hidden = rows.length > 0;
   $("att-table").querySelector("tbody").innerHTML = rows.map(r =>
     `<tr><td>${esc(r.time)}${r.manual ? ` <span class="ad-hand" title="Added by hand">added</span> <button class="ad-link" data-unmark="${esc(r.id)}">Remove</button>` : ""}</td><td>${esc(r.first)}</td><td class="ad-tagcol">${tag(r.title)}</td><td>${esc(r.last)}</td><td>${esc(r.sid)}</td><td>${esc(r.gradYear)}</td><td>${esc(r.cls)}</td></tr>`).join("");
@@ -144,7 +151,7 @@ function renderMembers() {
   const rows = memRows();
   const officers = rows.filter(m => m.title).sort((a, b) => rank(a.title) - rank(b.title));
   const others = rows.filter(m => !m.title);
-  const row = m => `<tr><td>${esc(m.first)}</td><td class="ad-tagcol">${tag(m.title)}</td><td>${esc(m.last)}</td><td>${esc(m.sid)}</td><td>${esc(m.gradYear)}</td><td>${esc(m.cls)}</td><td>${esc(m.phone)}</td><td>${esc(m.email)}</td><td>${m.visits}</td><td>${m.lastSeen ? dateLabel(m.lastSeen) : ""}</td></tr>`;
+  const row = m => `<tr><td>${esc(m.first)}</td><td class="ad-tagcol">${tag(m.title)}</td><td>${esc(m.last)}</td><td>${esc(m.sid)}</td><td>${esc(m.gradYear)}</td><td>${esc(m.cls)}</td><td>${esc(m.phone)}</td><td>${esc(m.email).replace("@", "<wbr>@")}</td><td>${m.visits}</td><td>${m.lastSeen ? dateLabel(m.lastSeen) : ""}</td></tr>`;
   const group = (name, list) => list.length ? `<tr class="ad-group"><th colspan="10">${name} <span>${list.length}</span></th></tr>` + list.map(row).join("") : "";
   $("mem-count").textContent = rows.length + " members";
   $("mem-table").querySelector("tbody").innerHTML = group("Officers", officers) + group("Members", others);

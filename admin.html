@@ -9,100 +9,147 @@
   <link rel="icon" href="favicon.ico?v=2" sizes="48x48">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=2">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=61">
+  <link rel="stylesheet" href="css/style.css?v=67">
   <link rel="stylesheet" href="css/lwz-app.css?v=2">
-  <link rel="stylesheet" href="css/lwz-admin.css?v=7">
+  <link rel="stylesheet" href="css/lwz-admin.css?v=8">
 </head>
 <body class="app-body">
   <!-- Signed out -->
   <main class="ad-login" id="v-login">
-    <div class="ci-card" style="max-width:380px;margin:0 auto;text-align:center;justify-items:center">
-      <img src="logos/lw-minimal-192.png" alt="" width="64" height="64">
-      <h1>LWZ Admin</h1>
-      <p class="note">Officers and advisors only.</p>
-      <button class="btn ci-btn" id="signin">Sign in with Google</button>
-      <p class="ci-err" id="login-err" hidden></p>
-      <a class="note" href="index.html">&larr; Back to lightwriterz.org</a>
+    <section class="hero page hero-city-1 ad-login-hero">
+      <div class="wrap">
+        <p class="eyebrow">Officers &amp; Advisors only</p>
+        <h1>LWZ Admin</h1>
+      </div>
+    </section>
+    <div class="wrap ad-login-body">
+      <div class="card ad-login-card">
+        <img src="logos/lw-minimal-192.png" alt="" width="64" height="64">
+        <p>Sign in with the Google account an advisor approved for you.</p>
+        <button class="btn ci-btn" id="signin">Sign in with Google</button>
+        <p class="ci-err" id="login-err" hidden></p>
+        <a class="ad-back" href="index.html">&larr; Back to lightwriterz.org</a>
+      </div>
+      <p class="motto ad-motto"><span class="motto-pics">pics are taken.</span><br>Photographs are made.</p>
     </div>
   </main>
 
   <!-- Signed in -->
   <div class="ad-app" id="v-app" hidden>
-    <header class="ad-top">
-      <a href="index.html" class="ad-brand"><img src="logos/lw-minimal-192.png" alt="" width="34" height="34"><span>LWZ Admin</span></a>
-      <nav class="ad-tabs" role="tablist">
+    <header class="ad-mast">
+      <div class="wrap">
+        <a href="index.html" class="brand ad-brand"><img src="logos/lw-minimal-192.png" alt="" width="64" height="64">
+          <div><div class="brand-name">LWZ Admin</div><div class="brand-sub">Officers &amp; Advisors<span class="ad-who"> &middot; <span id="who"></span></span></div></div></a>
+        <button class="btn dark ad-sm" id="signout">Sign out</button>
+      </div>
+    </header>
+    <nav class="ad-nav" aria-label="Admin">
+      <div class="wrap ad-tabs" role="tablist">
         <button data-tab="attendance" aria-selected="true">Attendance</button>
         <button data-tab="members">Members</button>
         <button data-tab="notes">Notes</button>
         <button data-tab="qr">Check-in QR</button>
         <button data-tab="nominations">Nominations</button>
         <button data-tab="admins" id="tab-admins" hidden>Admins</button>
-      </nav>
-      <div class="ad-user"><span id="who"></span><button class="ad-link" id="signout">Sign out</button></div>
-    </header>
+      </div>
+    </nav>
 
-    <section class="ad-pane" id="p-attendance">
+    <section class="ad-pane wrap" id="p-attendance">
+      <div class="section-head ad-head">
+        <div><p class="eyebrow">Tuesday meetings &middot; 12:25 to 1:05 PM</p><h2>Attendance</h2></div>
+        <span class="sub" id="att-count"></span>
+      </div>
+      <div class="cards ad-stats">
+        <article class="card"><p class="date">Present</p><p class="ad-stat" id="st-present">0</p><p class="ad-stat-sub" id="st-present-sub">at this meeting</p></article>
+        <article class="card gold-top"><p class="date">Total members</p><p class="ad-stat" id="st-members">0</p><p class="ad-stat-sub">with a profile</p></article>
+        <article class="card orange-top"><p class="date">Average per meeting</p><p class="ad-stat" id="st-avg">0</p><p class="ad-stat-sub" id="st-avg-sub"></p></article>
+      </div>
       <div class="ad-bar">
-        <h2>Attendance</h2>
         <select id="att-date" aria-label="Meeting date"></select>
-        <span class="ad-count" id="att-count"></span>
-        <button class="btn ad-sm" id="att-add">+ Mark present</button>
+        <span class="ad-spacer"></span>
+        <button class="btn orange ad-sm" id="att-add">+ Mark present</button>
         <button class="btn dark ad-sm" id="att-csv">Download CSV</button>
       </div>
       <div class="ad-table-wrap"><table class="ad-table" id="att-table"><thead><tr><th>Time</th><th>First</th><th class="ad-tagcol"></th><th>Last</th><th>Student #</th><th>Grad</th><th>Class</th></tr></thead><tbody></tbody></table></div>
-      <p class="note" id="att-empty" hidden>No check-ins yet for this meeting.</p>
+      <p class="note ad-empty" id="att-empty" hidden>No check-ins yet for this meeting.</p>
     </section>
 
-    <section class="ad-pane" id="p-members" hidden>
+    <section class="ad-pane wrap" id="p-members" hidden>
+      <div class="section-head ad-head">
+        <div><p class="eyebrow">Light Writerz roster</p><h2>Members</h2></div>
+        <span class="sub" id="mem-count"></span>
+      </div>
       <div class="ad-bar">
-        <h2>Members</h2>
         <input id="mem-q" type="search" placeholder="Search name or number">
-        <span class="ad-count" id="mem-count"></span>
+        <span class="ad-spacer"></span>
         <button class="btn dark ad-sm" id="mem-csv">Download CSV</button>
       </div>
       <div class="ad-table-wrap"><table class="ad-table" id="mem-table"><thead><tr><th data-k="first">First</th><th class="ad-tagcol"></th><th data-k="last">Last</th><th data-k="sid">Student #</th><th data-k="gradYear">Grad</th><th data-k="cls">Class</th><th>Cell</th><th>Email</th><th data-k="visits">Meetings</th><th data-k="lastSeen">Last seen</th></tr></thead><tbody></tbody></table></div>
     </section>
 
-    <section class="ad-pane ad-notes" id="p-notes" hidden>
-      <aside class="nt-list">
-        <button class="btn ad-sm" id="nt-new">+ Start new note</button>
-        <ul id="nt-items"></ul>
-      </aside>
-      <div class="nt-editor">
-        <input id="nt-title" placeholder="Title" aria-label="Note title">
-        <textarea id="nt-body" aria-label="Note" placeholder="Select or create a note"></textarea>
-        <div class="nt-foot"><span class="note" id="nt-status"></span><button class="btn dark ad-sm" id="nt-email">Save &amp; Email</button></div>
+    <section class="ad-pane wrap" id="p-notes" hidden>
+      <div class="section-head ad-head">
+        <div><p class="eyebrow">Secretary</p><h2>Meeting Notes</h2></div>
+        <span class="sub">Saves as you type</span>
+      </div>
+      <div class="ad-notes">
+        <aside class="nt-list">
+          <button class="btn ad-sm" id="nt-new">+ Start new note</button>
+          <ul id="nt-items"></ul>
+        </aside>
+        <div class="nt-editor card">
+          <input id="nt-title" placeholder="Title" aria-label="Note title">
+          <textarea id="nt-body" aria-label="Note" placeholder="Select or create a note"></textarea>
+          <div class="nt-foot"><span class="note" id="nt-status"></span><button class="btn dark ad-sm" id="nt-email">Save &amp; Email</button></div>
+        </div>
       </div>
     </section>
 
-    <section class="ad-pane ad-qr" id="p-qr" hidden>
+    <section class="ad-pane wrap ad-qr" id="p-qr" hidden>
+      <div class="section-head ad-head">
+        <div><p class="eyebrow">Meeting check-in</p><h2>Check-in QR</h2></div>
+        <span class="sub">Tuesdays 12:25 to 1:05 PM</span>
+      </div>
       <div class="qr-box" id="qr-box">
         <p class="ci-kicker">Scan to check in</p>
         <div id="qr"></div>
         <p class="qr-label" id="qr-label"></p>
         <p class="qr-clock" id="qr-clock"></p>
-        <p class="note">Tuesdays 12:25 to 1:05 PM &middot; lightwriterz.org/checkin.html</p>
+        <p class="note">lightwriterz.org/checkin.html</p>
       </div>
       <button class="btn ad-sm" id="qr-full">Full screen</button>
     </section>
 
-    <section class="ad-pane" id="p-nominations" hidden>
+    <section class="ad-pane wrap" id="p-nominations" hidden>
+      <div class="section-head ad-head">
+        <div><p class="eyebrow">Election &middot; Management Assistant</p><h2>Nominations</h2></div>
+        <span class="sub" id="nom-count"></span>
+      </div>
       <div class="ad-bar">
-        <h2>Nominations</h2>
-        <span class="ad-count" id="nom-count"></span>
+        <p class="note ad-bar-note">Submitted from LWZ News. Closes Tuesday, October 13 at 12:25 PM. One name per member; a resubmission replaces the earlier one. Check typed names against Members.</p>
+        <span class="ad-spacer"></span>
         <button class="btn dark ad-sm" id="nom-csv">Download CSV</button>
       </div>
-      <p class="note" style="margin-bottom:14px">Management Assistant &middot; submitted from LWZ News &middot; closes Tuesday, October 13 at 12:25 PM. One name per member; a resubmission replaces the earlier one. Names typed by members: check them against Members.</p>
       <div class="ad-table-wrap"><table class="ad-table" id="nom-table"><thead><tr><th>Nominee</th><th>Submitted by</th><th class="ad-tagcol"></th><th>Student #</th><th>When</th><th>Why</th></tr></thead><tbody></tbody></table></div>
-      <p class="note" id="nom-empty" hidden>No nominations yet.</p>
+      <p class="note ad-empty" id="nom-empty" hidden>No nominations yet.</p>
     </section>
 
-    <section class="ad-pane" id="p-admins" hidden>
-      <div class="ad-bar"><h2>Admins</h2></div>
+    <section class="ad-pane wrap" id="p-admins" hidden>
+      <div class="section-head ad-head">
+        <div><p class="eyebrow">Advisors only</p><h2>Admins</h2></div>
+        <span class="sub">Who can sign in here</span>
+      </div>
       <p class="note">Advisors (always admins): creativesilva1@gmail.com, lg.artistic1@gmail.com. Add officers by their Google (Gmail) address. Their title shows next to their name in Attendance and Members when the student number is filled in. To change one, remove it and add it again.</p>
       <form class="ad-add" id="adm-form"><input id="adm-email" type="email" placeholder="officer@gmail.com" required><input id="adm-name" placeholder="Title, e.g. President"><input id="adm-sid" inputmode="numeric" maxlength="6" placeholder="Student # (shows title on attendance)"><button class="btn ad-sm">Add</button></form>
       <ul class="ad-admins" id="adm-list"></ul>
     </section>
+
+    <footer class="ad-foot">
+      <div class="wrap">
+        <p class="motto"><span class="motto-pics">pics are taken.</span> Photographs are made.</p>
+        <p>Light Writerz &middot; LWZ Admin &middot; <a href="index.html">lightwriterz.org</a></p>
+      </div>
+    </footer>
   </div>
 
   <!-- Mark present dialog -->
@@ -138,6 +185,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script type="module" src="js/admin.js?v=8"></script>
+  <script type="module" src="js/admin.js?v=10"></script>
 </body>
 </html>

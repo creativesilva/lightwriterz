@@ -1,37 +1,23 @@
 /* LWZ admin panel: built for iPad (A16) landscape with keyboard, works on laptop. */
-.ad-login { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
-.ad-top { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 16px; padding: 10px 20px; background: #070b0b; border-bottom: 1px solid var(--line); }
-.ad-brand { display: flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.08em; }
-.ad-tabs { display: flex; gap: 4px; flex: 1; overflow-x: auto; }
-.ad-tabs button { background: none; border: 0; color: #c9d4d4; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.08em; font-size: 14px; padding: 10px 14px; border-radius: 8px; cursor: pointer; white-space: nowrap; }
-.ad-tabs button[aria-selected="true"] { background: var(--teal); color: #fff; }
-.ad-user { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--gray); }
 .ad-link { background: none; border: 0; color: var(--teal-light-accent); cursor: pointer; font: inherit; }
-.ad-pane { padding: 22px 20px 40px; max-width: 1400px; margin: 0 auto; }
 .ad-bar { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
-.ad-bar h2 { font-family: var(--font-head); text-transform: uppercase; font-size: 26px; margin-right: auto; }
 .ad-bar select, .ad-bar input, .ad-add input { font: inherit; padding: 10px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.05); color: #fff; }
 .ad-bar select option { background: #101717; }
 .ad-count { color: var(--teal-light-accent); font-family: var(--font-head); letter-spacing: 0.08em; }
 .ad-sm { padding: 10px 16px; font-size: 14px; border-radius: 8px; }
-.ad-table-wrap { overflow-x: auto; border: 1px solid var(--surface-border); border-radius: 10px; }
 .ad-table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
 .ad-table th { text-align: left; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.08em; font-size: 12px; color: var(--teal-light-accent); padding: 12px; background: rgba(255,255,255,0.03); cursor: default; white-space: nowrap; }
 .ad-table th[data-k] { cursor: pointer; }
 .ad-table td { padding: 11px 12px; border-top: 1px solid var(--line); color: #dfe8e8; white-space: nowrap; }
 .ad-table tr:hover td { background: rgba(0,116,116,0.08); }
-.ad-notes { display: grid; grid-template-columns: 280px 1fr; gap: 18px; height: calc(100vh - 70px); padding-top: 16px; }
 .nt-list { display: flex; flex-direction: column; gap: 10px; overflow-y: auto; }
 .nt-list ul { list-style: none; display: grid; gap: 6px; }
 .nt-list li button { width: 100%; text-align: left; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line); background: rgba(255,255,255,0.03); color: #e6ecec; cursor: pointer; font: inherit; }
 .nt-list li button small { display: block; color: var(--gray); font-size: 12px; }
-.nt-list li button[aria-current="true"] { border-color: var(--teal-light-accent); background: rgba(0,116,116,0.15); }
 .nt-editor { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
 #nt-title { font-family: var(--font-head); font-size: 24px; text-transform: none; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--line); background: rgba(255,255,255,0.04); color: #fff; }
-#nt-body { flex: 1; min-height: 0; resize: none; font: 17px/1.6 var(--font-body); padding: 16px; border-radius: 10px; border: 1px solid var(--line); background: #0b1010; color: #eef3f3; }
 #nt-title:focus, #nt-body:focus { outline: none; border-color: var(--teal-light-accent); }
 .nt-foot { display: flex; justify-content: space-between; align-items: center; }
-.ad-qr { display: grid; justify-items: center; gap: 16px; }
 .qr-box { background: #fff; color: #111; border-radius: 16px; padding: 26px 30px; text-align: center; display: grid; justify-items: center; gap: 10px; }
 .qr-box .ci-kicker { color: #007474; font-size: 16px; }
 .qr-box .note { color: #333; }
@@ -44,7 +30,6 @@
 .ad-admins { list-style: none; display: grid; gap: 8px; max-width: 700px; }
 .ad-admins li { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; }
 .ad-mail textarea { width: 100%; font: inherit; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.05); color: #fff; }
-@media (max-width: 760px) { .ad-notes { grid-template-columns: 1fr; height: auto; } #nt-body { min-height: 50vh; } .ad-user span { display: none; } }
 .ad-tag { display: inline-block; margin-left: 6px; padding: 2px 8px; border-radius: 999px; background: rgba(0,116,116,0.35); border: 1px solid rgba(128,224,224,0.45); color: #80e0e0; font-family: var(--font-head); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; vertical-align: 1px; white-space: nowrap; }
 .ad-hand { display: inline-block; margin-left: 4px; padding: 1px 7px; border-radius: 999px; border: 1px solid rgba(255,107,26,0.5); color: #ffb38a; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; }
 #mp-form label { display: block; margin: 12px 0 6px; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.1em; font-size: 12px; color: #cfdada; }
@@ -65,3 +50,101 @@
 /* Officer badges sit in their own column, all the same width, so they line up. */
 .ad-table .ad-tagcol { width: 1%; padding-left: 0; padding-right: 18px; }
 .ad-table .ad-tagcol .ad-tag { margin-left: 0; min-width: 148px; text-align: center; }
+
+/* ---------- Site look (matches the public pages) ---------- */
+/* Header: logo row + teal tab bar with a white underline on the open tab, like the site nav. */
+.ad-mast { background: linear-gradient(180deg, #0a0f0f 0%, #0f1818 100%); border-bottom: 1px solid var(--line); }
+.ad-mast .wrap { display: flex; align-items: center; justify-content: space-between; min-height: 92px; gap: 20px; }
+.ad-mast .brand img { width: 64px; height: 64px; }
+.ad-mast .brand-name { font-size: 30px; }
+.ad-nav { position: sticky; top: 0; z-index: 50; background: linear-gradient(180deg, #008080 0%, #006565 100%); box-shadow: 0 6px 24px rgba(0,0,0,0.45); }
+.ad-tabs { display: flex; justify-content: center; overflow-x: auto; scrollbar-width: none; }
+.ad-tabs::-webkit-scrollbar { display: none; }
+.ad-tabs button { background: none; border: 0; border-bottom: 3px solid transparent; color: #fff; cursor: pointer; white-space: nowrap;
+  padding: 15px 22px; font-family: var(--font-head); font-weight: 600; font-size: 17px; letter-spacing: 0.08em; text-transform: uppercase; }
+.ad-tabs button:hover { background: var(--teal-dark); }
+.ad-tabs button[aria-selected="true"] { border-bottom-color: #fff; }
+/* Panes: site width, section heading with the light teal accent bar. */
+.ad-pane { padding-top: 48px; padding-bottom: 56px; }
+.ad-head { margin-bottom: 26px; }
+.ad-head .eyebrow { margin-bottom: 6px; }
+.ad-head .sub { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.12em; font-size: 15px; color: var(--teal-light-accent); }
+.ad-bar { gap: 12px; margin-bottom: 18px; }
+.ad-spacer { flex: 1; }
+.ad-bar-note { max-width: 720px; margin: 0; }
+.ad-bar input[type=search] { min-width: 280px; }
+.ad-empty { margin-top: 16px; }
+/* Stat cards, same as the home page Club News cards. */
+.ad-stats { margin-bottom: 30px; gap: 22px; }
+.ad-stats .card { padding: 22px 24px; }
+.ad-stat { font-family: var(--font-head); font-weight: 600; font-size: 46px; line-height: 1; color: #fff; }
+.ad-stat-sub { color: var(--gray); font-size: 14px; margin-top: 8px; }
+/* Tables sit in a site card: glass panel, soft shadow, teal top stripe. */
+.ad-table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--surface-border); border-top: 4px solid var(--teal); border-radius: 6px; box-shadow: var(--glow); }
+.ad-table th { background: rgba(0,0,0,0.25); padding: 14px 12px; }
+.ad-table td { padding: 13px 12px; }
+/* Notes: list of small cards (open one gets the gold stripe), editor in a card. */
+.ad-notes { display: grid; grid-template-columns: 280px 1fr; gap: 22px; height: max(480px, calc(100vh - 330px)); }
+.nt-list li button { border-radius: 6px; border: 1px solid var(--surface-border); border-top: 3px solid transparent; background: var(--surface); padding: 12px 14px; }
+.nt-list li button[aria-current="true"] { border-top-color: var(--gold); background: rgba(245,179,1,0.06); }
+.nt-editor.card { padding: 16px; border-top-color: var(--gold); display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+#nt-body { flex: 1; min-height: 0; resize: none; font: 17px/1.6 var(--font-body); padding: 16px; border-radius: 8px; border: 1px solid var(--line); background: rgba(0,0,0,0.25); color: #eef3f3; }
+/* Check-in QR */
+.ad-qr { display: block; }
+.ad-qr .qr-box { width: fit-content; margin: 0 auto 18px; box-shadow: var(--glow); border-top: 4px solid var(--teal); }
+.ad-qr #qr-full { display: block; margin: 0 auto; }
+.qr-clock { font-size: 46px; font-weight: 600; letter-spacing: 0.02em; }
+/* Admins list as small cards */
+.ad-admins li { background: var(--surface); border: 1px solid var(--surface-border); border-radius: 6px; }
+/* Footer with the motto */
+.ad-foot { border-top: 1px solid var(--line); background: radial-gradient(900px 400px at 80% 0%, rgba(0,116,116,0.16), transparent 70%), #040606; padding: 34px 0 calc(30px + env(safe-area-inset-bottom)); color: #bdbdbd; font-size: 14px; }
+.ad-foot .motto { font-family: var(--font-head); text-transform: uppercase; color: #fff; font-size: 20px; letter-spacing: 0.03em; margin-bottom: 6px; }
+/* Sign in: photo banner like the page tops, card, motto. */
+.ad-login { min-height: 100vh; }
+.ad-login-hero { min-height: 340px; }
+.ad-login-body { display: grid; justify-items: center; gap: 26px; margin-top: -40px; padding-bottom: 60px; position: relative; }
+.ad-login-card { width: min(420px, 100%); display: grid; justify-items: center; gap: 14px; text-align: center; padding: 30px 28px; }
+.ad-login-card p { color: #c3cfcf; font-size: 15px; }
+.ad-back { font-size: 14px; color: var(--gray); }
+.ad-motto { font-family: var(--font-head); text-transform: uppercase; color: #fff; font-size: 22px; line-height: 1.2; text-align: center; }
+@media (max-width: 760px) {
+  .ad-mast .wrap { min-height: 70px; }
+  .ad-mast .brand img { width: 42px; height: 42px; }
+  .ad-mast .brand-name { font-size: 22px; }
+  .ad-who { display: none; }
+  .ad-tabs { justify-content: flex-start; }
+  .ad-tabs button { padding: 13px 14px; font-size: 15px; }
+  .ad-pane { padding-top: 30px; }
+  .ad-stats { grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .ad-stats .card { padding: 14px; }
+  .ad-stat { font-size: 32px; }
+  .ad-notes { grid-template-columns: 1fr; height: auto; }
+  #nt-body { min-height: 50vh; }
+  .ad-bar input[type=search] { min-width: 0; flex: 1; }
+}
+@media (min-width: 761px) and (max-width: 1100px) { .ad-tabs button { padding: 15px 14px; font-size: 15px; } }
+@media (max-width: 760px) { .ad-mast .brand { display: flex; gap: 12px; min-height: 0; } .ad-mast .brand > div { text-align: left; } }
+.ad-stats .card .ad-stat { font-family: var(--font-head); font-weight: 600; font-size: 52px; line-height: 1; color: #fff; margin: 4px 0 0; }
+.ad-stats .card .ad-stat-sub { color: var(--gray); font-size: 14px; margin-top: 10px; }
+.ad-login-hero .wrap { text-align: center; }
+@media (max-width: 760px) {
+  .ad-stats .card .ad-stat { font-size: 34px; }
+  .ad-stats .card .ad-stat-sub { display: none; }
+  .ad-stats .card .date { font-size: 11px; letter-spacing: 0.08em; }
+}
+.qr-box p { margin: 0; }
+.qr-box .qr-label { margin-top: 6px; }
+.ad-login-hero .wrap > * { margin-left: auto; margin-right: auto; text-align: center; }
+/* Wide tables: use more width than the site text column, stay compact, dark scrollbar. */
+.ad-pane.wrap { max-width: 1440px; }
+.ad-pane.wrap.ad-qr, #p-admins.wrap { max-width: var(--max); }
+.ad-table { font-size: 14px; }
+.ad-table th, .ad-table td { padding-left: 10px; padding-right: 10px; }
+.ad-table .ad-tagcol { padding-left: 0; padding-right: 12px; }
+.ad-table .ad-tagcol .ad-tag { min-width: 132px; font-size: 10.5px; }
+.ad-table-wrap { scrollbar-color: rgba(128,224,224,0.35) transparent; }
+.ad-table td { white-space: normal; }
+.ad-table td.ad-tagcol { white-space: nowrap; }
+#mem-table td:nth-child(6) { min-width: 110px; }
+#mem-table td:nth-child(8) { min-width: 150px; }
+#mem-table td:nth-child(10), #att-table td:first-child { white-space: nowrap; }
