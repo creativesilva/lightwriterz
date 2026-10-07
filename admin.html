@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=67">
   <link rel="stylesheet" href="css/lwz-app.css?v=2">
-  <link rel="stylesheet" href="css/lwz-admin.css?v=9">
+  <link rel="stylesheet" href="css/lwz-admin.css?v=10">
 </head>
 <body class="app-body">
   <!-- Signed out -->
@@ -41,16 +41,20 @@
         <a href="index.html" class="brand ad-brand"><img src="logos/lw-minimal-192.png" alt="" width="64" height="64">
           <div><div class="brand-name">LWZ Admin</div><div class="brand-sub">Officers &amp; Advisors<span class="ad-who"> &middot; <span id="who"></span></span></div></div></a>
         <button class="btn dark ad-sm" id="signout">Sign out</button>
+        <button class="navtoggle ad-menu-btn" id="ad-menu-btn" aria-expanded="false" aria-controls="ad-tabs" aria-label="Open menu"><span class="bars" aria-hidden="true"></span></button>
       </div>
     </header>
-    <nav class="ad-nav" aria-label="Admin">
-      <div class="wrap ad-tabs" role="tablist">
+    <nav class="ad-nav" id="ad-nav" aria-label="Admin">
+      <button class="ad-current" id="ad-current" type="button" aria-controls="ad-tabs">Attendance</button>
+      <div class="wrap ad-tabs" id="ad-tabs" role="tablist">
         <button data-tab="attendance" aria-selected="true">Attendance</button>
         <button data-tab="members">Members</button>
         <button data-tab="notes">Notes</button>
         <button data-tab="qr">Check-in QR</button>
         <button data-tab="nominations">Nominations</button>
         <button data-tab="admins" id="tab-admins" hidden>Admins</button>
+        <button class="ad-menu-only ad-menu-signout" id="signout-m" type="button">Sign out</button>
+        <a class="ad-menu-only ad-menu-site" href="index.html">&larr; Back to lightwriterz.org</a>
       </div>
     </nav>
 
@@ -185,6 +189,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script type="module" src="js/admin.js?v=11"></script>
+  <script type="module" src="js/admin.js?v=12"></script>
 </body>
 </html>

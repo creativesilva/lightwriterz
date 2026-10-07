@@ -30,6 +30,20 @@ $("signin").addEventListener("click", async () => {
   }
 });
 $("signout").addEventListener("click", () => signOut(auth));
+$("signout-m").addEventListener("click", () => { setMenu(false); signOut(auth); });
+
+// Phone menu: the tab bar folds into a hamburger (same look as the public site menu).
+function setMenu(open) {
+  if (open) $("ad-nav").style.setProperty("--menu-top", Math.max(0, $("ad-nav").getBoundingClientRect().bottom) + "px");
+  $("ad-nav").classList.toggle("open", open);
+  document.documentElement.classList.toggle("menu-open", open);
+  $("ad-menu-btn").setAttribute("aria-expanded", open ? "true" : "false");
+  $("ad-menu-btn").setAttribute("aria-label", open ? "Close menu" : "Open menu");
+}
+$("ad-menu-btn").addEventListener("click", () => setMenu(!$("ad-nav").classList.contains("open")));
+$("ad-current").addEventListener("click", () => setMenu(!$("ad-nav").classList.contains("open")));
+document.addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
+window.addEventListener("resize", () => { if (window.innerWidth > 760) setMenu(false); });
 
 onAuthStateChanged(auth, async user => {
   if (!user) { $("v-app").hidden = true; $("v-login").hidden = false; return; }
@@ -50,10 +64,11 @@ onAuthStateChanged(auth, async user => {
 });
 
 // ---------- Tabs ----------
-document.querySelectorAll(".ad-tabs button").forEach(b => b.addEventListener("click", () => showTab(b.dataset.tab)));
+document.querySelectorAll(".ad-tabs button[data-tab]").forEach(b => b.addEventListener("click", () => { setMenu(false); showTab(b.dataset.tab); window.scrollTo(0, 0); }));
 function showTab(name) {
-  document.querySelectorAll(".ad-tabs button").forEach(b => {
+  document.querySelectorAll(".ad-tabs button[data-tab]").forEach(b => {
     const on = b.dataset.tab === name;
+    if (on) $("ad-current").textContent = b.textContent;
     b.setAttribute("aria-selected", on ? "true" : "false");
     if (on) b.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
   });
@@ -146,7 +161,7 @@ const tag = title => title ? `<span class="ad-tag">${esc(title)}</span>` : "";
 const cardName = (name, title, extra = "") => `<td class="ad-cardname"><strong>${esc(name)}</strong>${extra}${tag(title)}</td>`;
 const td = (label, html) => `<td data-label="${label}">${html === "" || html == null ? "" : `<span>${html}</span>`}</td>`;
 const tel = p => p ? `<a href="tel:${esc(String(p).replace(/[^\d+]/g, ""))}">${esc(p)}</a>` : "";
-const mail = e => e ? `<a href="mailto:${esc(e)}">${esc(e).replace("@", "<wbr>@")}</a>` : "";
+const mailLink = e => e ? `<a href="mailto:${esc(e)}">${esc(e).replace("@", "<wbr>@")}</a>` : "";
 
 let sortKey = "first", sortDir = 1;
 // Officers list first, in rank order (same order as the Officers page).
@@ -168,7 +183,7 @@ function renderMembers() {
   const rows = memRows();
   const officers = rows.filter(m => m.title).sort((a, b) => rank(a.title) - rank(b.title));
   const others = rows.filter(m => !m.title);
-  const row = m => `<tr>${cardName(`${m.first} ${m.last}`, m.title)}<td class="ad-tbl">${esc(m.first)}</td><td class="ad-tagcol ad-tbl">${tag(m.title)}</td><td class="ad-tbl">${esc(m.last)}</td>${td("Student #", esc(m.sid))}${td("Grad", esc(m.gradYear))}${td("Class", esc(m.cls))}${td("Cell", tel(m.phone))}${td("Email", mail(m.email))}${td("Meetings", m.visits)}${td("Last seen", m.lastSeen ? dateLabel(m.lastSeen) : "")}</tr>`;
+  const row = m => `<tr>${cardName(`${m.first} ${m.last}`, m.title)}<td class="ad-tbl">${esc(m.first)}</td><td class="ad-tagcol ad-tbl">${tag(m.title)}</td><td class="ad-tbl">${esc(m.last)}</td>${td("Student #", esc(m.sid))}${td("Grad", esc(m.gradYear))}${td("Class", esc(m.cls))}${td("Cell", tel(m.phone))}${td("Email", mailLink(m.email))}${td("Meetings", m.visits)}${td("Last seen", m.lastSeen ? dateLabel(m.lastSeen) : "")}</tr>`;
   const group = (name, list) => list.length ? `<tr class="ad-group"><th colspan="10">${name} <span>${list.length}</span></th></tr>` + list.map(row).join("") : "";
   $("mem-count").textContent = rows.length + " members";
   $("mem-table").querySelector("tbody").innerHTML = group("Officers", officers) + group("Members", others);
