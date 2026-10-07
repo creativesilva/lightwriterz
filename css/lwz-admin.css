@@ -252,3 +252,7 @@
 .ad-pane { padding-top: 22px; }
 .ad-head { margin-bottom: 22px; }
 @media (max-width: 760px) { .ad-pane { padding-top: 16px; } .ad-head { margin-bottom: 18px; } }
+/* Days / hours / minutes countdown: a bit smaller so it stays on one line on the iPad. */
+.qr-clock.is-long { font-size: 38px; }
+.qr-box:fullscreen .qr-clock.is-long { font-size: 56px; }
+@media (max-width: 760px) { .qr-clock.is-long { font-size: 28px; line-height: 1.2; } }

@@ -290,6 +290,7 @@ function renderQR() {
   // (days and hours until meeting day, then hours:minutes:seconds).
   const tick = () => {
     const now = new Date();
+    $("qr-clock").classList.toggle("is-long", !inMeetingWindow(now) && pacificParts(nextMeetingStart(now)).date !== pacificParts(now).date);
     if (inMeetingWindow(now)) {
       $("qr-label").textContent = "Check-in open";
       $("qr-clock").textContent = now.toLocaleTimeString("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", minute: "2-digit", second: "2-digit" });
@@ -299,8 +300,8 @@ function renderQR() {
     const plural = (n, w) => n + " " + w + (n === 1 ? "" : "s");
     $("qr-label").textContent = "Next meeting in";
     if (pacificParts(start).date !== pacificParts(now).date) {
-      const days = Math.floor(left / 86400), hours = Math.floor(left % 86400 / 3600);
-      $("qr-clock").textContent = (days ? plural(days, "day") + " " : "") + plural(hours, "hour");
+      const days = Math.floor(left / 86400), hours = Math.floor(left % 86400 / 3600), mins = Math.floor(left % 3600 / 60);
+      $("qr-clock").textContent = (days ? plural(days, "day") + " " : "") + plural(hours, "hour") + " " + plural(mins, "minute");
     } else {
       const h = Math.floor(left / 3600), m = Math.floor(left % 3600 / 60), s = left % 60;
       $("qr-clock").textContent = `${h}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
