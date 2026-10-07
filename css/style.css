@@ -1113,3 +1113,16 @@ img.lb-zoom:focus-visible { outline: 2px solid var(--teal-light-accent); outline
 @media (min-width: 761px) and (max-width: 860px) { .brand-sub .est { display: none; } .brand-name { font-size: 28px; } .brand img { width: 64px; height: 64px; } }
 /* Countdown tile: teal outline only, dark header shows through. */
 .meet-cd { background: transparent; border-color: var(--teal); }
+
+/* Countdown tile is a button that opens "Join Light Writerz". */
+button.meet-cd { cursor: pointer; font: inherit; font-family: var(--font-head); transition: border-color 0.2s, background 0.2s; }
+button.meet-cd:hover, button.meet-cd:focus-visible { border-color: var(--teal-light-accent); background: rgba(0,116,116,0.15); outline: none; }
+.meet-panel { border-top-color: var(--teal); }
+.meet-panel .eyebrow { color: var(--teal-light-accent); }
+.meet-panel .btn.nom-go { display: block; text-align: center; }
+.meet-facts { margin: 18px 0; display: grid; gap: 0; }
+.meet-facts div { display: grid; grid-template-columns: 130px 1fr; gap: 12px; padding: 11px 0; border-top: 1px solid var(--line); }
+.meet-facts div:last-child { border-bottom: 1px solid var(--line); }
+.meet-facts dt { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.12em; font-size: 13px; color: var(--teal-light-accent); padding-top: 2px; }
+.meet-facts dd { margin: 0; color: #fff; font-size: 16px; }
+@media (max-width: 760px) { .meet-facts div { grid-template-columns: 1fr; gap: 2px; } }

@@ -152,6 +152,36 @@
       cd.hidden = false;
     };
     tickCd(); setInterval(tickCd, 15000);
+
+    // Tapping the countdown opens "Join Light Writerz": who can join, when, where, who to ask.
+    var jm = document.createElement("div");
+    jm.className = "reveal-modal meet-modal"; jm.hidden = true;
+    jm.setAttribute("role", "dialog"); jm.setAttribute("aria-modal", "true"); jm.setAttribute("aria-label", "Join Light Writerz");
+    jm.innerHTML =
+      '<div class="reveal-backdrop" data-close></div>' +
+      '<div class="nom-panel meet-panel">' +
+      '<button type="button" class="shirt-modal-close" data-close aria-label="Close">&times;</button>' +
+      '<p class="eyebrow">LWZ meetings &middot; Pioneer Valley High School</p>' +
+      '<h2>Join Light Writerz</h2>' +
+      '<p>Light Writerz is open to any Pioneer Valley High School student. You do not need to be in a photography class, just passionate about the true art of making photographs.</p>' +
+      '<dl class="meet-facts">' +
+      '<div><dt>When</dt><dd>Every Tuesday at lunch, 12:25 to 1:05 PM</dd></div>' +
+      '<div><dt>Where</dt><dd>Room 322</dd></div>' +
+      '<div><dt>Next meeting</dt><dd class="meet-modal-cd"></dd></div>' +
+      '</dl>' +
+      '<p>Questions? Drop in to Room 322 any time during the school day and check in with Mr. Silva or Mrs. Garcia, or reach out to any LWZ officer.</p>' +
+      '<a class="btn nom-go" href="officers.html">Meet the officers</a>' +
+      '</div>';
+    document.body.appendChild(jm);
+    var jmOpen = function () {
+      jm.querySelector(".meet-modal-cd").textContent = cdLabel.textContent === "Meeting now" ? "Happening now, come by Room 322" : "In " + cdTime.textContent;
+      jm.hidden = false; document.documentElement.classList.add("modal-open");
+      jm.querySelector(".shirt-modal-close").focus();
+    };
+    var jmClose = function () { jm.hidden = true; document.documentElement.classList.remove("modal-open"); cd.focus(); };
+    cd.addEventListener("click", jmOpen);
+    jm.querySelectorAll("[data-close]").forEach(function (b) { b.addEventListener("click", jmClose); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !jm.hidden) jmClose(); });
   }
 
   var yr = document.getElementById("yr");
