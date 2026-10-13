@@ -90,7 +90,7 @@ service cloud.firestore {
       allow read, delete: if isAdmin();
       allow create, update: if validSid(request.resource.data.sid)
         && request.resource.data.election == 'management-assistant-2026'
-        && request.time < timestamp.value(1791919500000)
+        && request.time < timestamp.value(1791916613274)
         && id == request.resource.data.election + '_' + request.resource.data.sid
         && exists(/databases/$(db)/documents/members_public/$(request.resource.data.sid))
         && request.resource.data.keys().hasOnly(['election', 'sid', 'first', 'self', 'nominee', 'reason', 'at'])

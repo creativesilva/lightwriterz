@@ -44,3 +44,14 @@ label[for="sid"] { text-align: center; }
   font-family: var(--font-head); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; font-size: 22px; transition: border-color 0.15s, background 0.15s; }
 .vt-choice:hover, .vt-choice:focus-visible { border-color: var(--teal-light-accent); background: rgba(0,116,116,0.2); outline: none; }
 .vt-pick { text-align: center; font-family: var(--font-head); font-weight: 600; text-transform: uppercase; font-size: 30px; letter-spacing: 0.04em; color: var(--teal-light-accent); }
+/* Voting page in the site framework: site header, teal band, section heading, site cards. */
+.vt-body .vt-band { height: 8px; background: linear-gradient(90deg, #005f5f 0%, #009090 50%, #005f5f 100%); box-shadow: 0 6px 24px rgba(0,0,0,0.45); }
+.vt-main { max-width: 720px; padding-top: 36px; padding-bottom: 60px; }
+.vt-head { margin-bottom: 24px; }
+.vt-head .sub { font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.12em; color: var(--teal-light-accent); font-variant-numeric: tabular-nums; }
+.vt-main .ci-card { background: var(--surface); border: 1px solid var(--surface-border); border-top: 4px solid var(--gold); border-radius: 6px; box-shadow: var(--glow); padding: 28px 26px; }
+.vt-main .ci-card h1 { text-align: left; font-size: 30px; }
+.vt-main .ci-card h1 + .note { text-align: left; }
+.vt-main label[for="sid"] { text-align: left; }
+.vt-main .ci-done h1, .vt-main .ci-done p { text-align: center; }
+@media (max-width: 760px) { .vt-main { padding-top: 22px; } .vt-main .ci-card { padding: 22px 18px; } .vt-main .ci-card h1 { font-size: 26px; } }

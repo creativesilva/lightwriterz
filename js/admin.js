@@ -378,12 +378,6 @@ function renderVotes() {
     const k = votes.filter(v => v.choice === c).length, pct = n ? Math.round(k / n * 100) : 0;
     return `<div class="vt-row"><div class="vt-row-top"><strong>${esc(c)}</strong><span>${k}</span></div><div class="vt-bar"><i style="width:${pct}%"></i></div></div>`;
   }).join("");
-  $("vt-empty").hidden = n > 0;
-  $("vt-table").querySelector("tbody").innerHTML = votes.map(v => {
-    const m = members[v.sid], who = m ? `${m.first} ${m.last}` : v.first;
-    const when = v.at ? v.at.toDate().toLocaleTimeString("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", minute: "2-digit", second: "2-digit" }) : "";
-    return `<tr>${cardName(who, titles[v.sid])}${td("Time", esc(when))}<td class="ad-tbl">${esc(who)}</td><td class="ad-tagcol ad-tbl">${tag(titles[v.sid])}</td>${td("Student #", esc(v.sid))}${td("Voted for", `<strong>${esc(v.choice)}</strong>`)}</tr>`;
-  }).join("");
 }
 function renderVoteQR() {
   if (!$("vt-qr").firstChild) { const q = qrcode(0, "M"); q.addData("https://www.lightwriterz.org/vote.html"); q.make(); $("vt-qr").innerHTML = q.createSvgTag({ cellSize: 8, margin: 2 }); }

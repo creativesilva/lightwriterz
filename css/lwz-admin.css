@@ -285,3 +285,4 @@
 @media (max-width: 900px) { .vt-admin { grid-template-columns: 1fr; justify-items: center; } .vt-side { width: 100%; } }
 .vt-toggle { justify-self: stretch !important; padding: 16px; font-size: 18px; }
 .vt-hint { margin: -4px 0 4px; font-size: 14px; }
+.vt-private { margin: 0 0 6px; font-size: 14px; }
