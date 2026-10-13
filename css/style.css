@@ -1023,7 +1023,7 @@ img.lb-zoom:focus-visible { outline: 2px solid var(--teal-light-accent); outline
 .officer .ph { overflow: hidden; }
 .officer .ph img.lb-zoom:hover { transform: scale(1.03); }
 
-.card.founder img.head.lb-zoom:hover { transform: scale(1.05); filter: brightness(1.1); }
+.card.founder img.head.lb-zoom:hover { transform: scale(1.05); filter: grayscale(1) brightness(1.1); }
 
 /* Open officer slot (LW logo placeholder until the vote). Matches photo card height; a lone last card centers. */
 .officer.is-open .ph { aspect-ratio: 4 / 5 !important; }
