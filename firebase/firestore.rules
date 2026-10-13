@@ -12,7 +12,7 @@ service cloud.firestore {
     function isOwner() { return signedIn() && myEmail() in ['creativesilva1@gmail.com', 'lg.artistic1@gmail.com']; }
     function isAdmin() { return isOwner() || (signedIn() && exists(/databases/$(db)/documents/admins/$(myEmail()))); }
 
-    // Tuesday 12:25 to 12:45 PM Pacific. Rules run in UTC, so this accepts Tue 19:20 to 21:10 UTC
+    // Tuesday 12:25 to 1:05 PM Pacific. Rules run in UTC, so this accepts Tue 19:20 to 21:10 UTC
     // (covers both daylight and standard time); the check-in page enforces the exact minutes.
     function inWindow() {
       let t = request.time;
@@ -101,7 +101,7 @@ service cloud.firestore {
         && request.resource.data.at == request.time;
     }
 
-    // Officer election vote (Management Assistant, Tue Oct 13 2026, 12:25 to 12:45 PM Pacific).
+    // Officer election vote (Management Assistant, Tue Oct 13 2026, 12:25 to 1:05 PM Pacific).
     // One vote per student number (id "election_sid", create only, never changed). The voter must
     // have checked in at today's meeting (attendance doc made in the last 3 hours). Admins read.
     // "voted/" is a public yes/no marker so a voter can be told they already voted, without
@@ -110,7 +110,7 @@ service cloud.firestore {
       allow read: if isAdmin();
       allow create: if request.resource.data.election == 'management-assistant-2026'
         && exists(/databases/$(db)/documents/settings/vote) && get(/databases/$(db)/documents/settings/vote).data.open == true
-        && ((request.time >= timestamp.value(1791919500000) && request.time < timestamp.value(1791920700000)) || testOpen())
+        && ((request.time >= timestamp.value(1791919500000) && request.time < timestamp.value(1791921900000)) || testOpen())
         && validSid(request.resource.data.sid)
         && id == request.resource.data.election + '_' + request.resource.data.sid
         && request.resource.data.date.matches('^20[0-9]{2}-[0-9]{2}-[0-9]{2}$')

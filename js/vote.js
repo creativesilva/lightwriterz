@@ -7,7 +7,7 @@ const { getFirestore, doc, getDoc, writeBatch, serverTimestamp, onSnapshot } = a
 const db = getFirestore(initializeApp(firebaseConfig));
 
 const ELECTION = "management-assistant-2026";
-const OPENS = Date.parse("2026-10-13T19:25:00Z"), CLOSES = Date.parse("2026-10-13T19:45:00Z");
+const OPENS = Date.parse("2026-10-13T19:25:00Z"), CLOSES = Date.parse("2026-10-13T20:05:00Z");
 const $ = id => document.getElementById(id);
 const views = ["v-closed", "v-sid", "v-ballot", "v-confirm", "v-done"];
 const show = v => views.forEach(x => { $(x).hidden = x !== v; });
@@ -15,7 +15,7 @@ const show = v => views.forEach(x => { $(x).hidden = x !== v; });
 let testUntil = 0;
 try { const s = await getDoc(doc(db, "settings", "checkin")); if (s.exists() && s.data().testUntil) testUntil = s.data().testUntil.toMillis(); } catch (e) {}
 // Voting starts when an officer presses Open voting (after attendance fills in) and ends on Close
-// voting or at 12:45 PM. The page follows the switch live.
+// voting or at 1:05 PM. The page follows the switch live.
 let switchOn = false, everOpened = false;
 const inTime = () => (Date.now() >= OPENS && Date.now() < CLOSES) || Date.now() < testUntil;
 const isOpen = () => switchOn && inTime();
