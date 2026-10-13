@@ -66,3 +66,4 @@ label[for="sid"] { text-align: center; }
   font-family: var(--font-head); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; font-size: 20px; }
 .ci-classbtn:hover, .ci-classbtn:focus-visible { border-color: var(--teal-light-accent); background: rgba(0,116,116,0.2); outline: none; }
 .ci-classbtn:disabled { opacity: 0.6; }
+.ci-classbtn small { display: block; margin-top: 4px; font-family: var(--font-body); font-weight: 400; text-transform: none; letter-spacing: 0; font-size: 13px; color: #b8c4c4; }

@@ -114,7 +114,7 @@ function renderAttendance() {
   $("st-avg-sub").textContent = held.size + (held.size === 1 ? " meeting so far" : " meetings so far");
   $("att-empty").hidden = rows.length > 0;
   $("att-table").querySelector("tbody").innerHTML = rows.map(r =>
-    `<tr>${cardName(`${r.first} ${r.last}`.trim(), r.title)}${td("Time", esc(r.time) + (r.manual ? ` <span class="ad-hand" title="Added by hand">added</span> <button class="ad-link" data-unmark="${esc(r.id)}">Remove</button>` : ""))}<td class="ad-tbl">${esc(r.first)}</td><td class="ad-tagcol ad-tbl">${tag(r.title)}</td><td class="ad-tbl">${esc(r.last)}</td>${td("Student #", esc(r.sid))}${td("Grad", esc(r.gradYear))}${td("Class", esc(r.cls))}</tr>`).join("");
+    `<tr>${cardName(`${r.first} ${r.last}`.trim(), r.title)}${td("Time", esc(r.time) + (r.manual ? ` <span class="ad-hand" title="Added by hand">added</span> <button class="ad-link" data-unmark="${esc(r.id)}">Remove</button>` : ""))}<td class="ad-tbl">${esc(r.first)}</td><td class="ad-tagcol ad-tbl">${tag(r.title)}</td><td class="ad-tbl">${esc(r.last)}</td>${td("Student #", esc(r.sid))}${td("Grad", esc(r.gradYear))}${td("Class", esc(clsLabel(r.cls)))}</tr>`).join("");
 }
 $("att-table").addEventListener("click", async e => {
   const id = e.target.dataset && e.target.dataset.unmark;
@@ -190,6 +190,8 @@ $("mp-form").addEventListener("submit", async e => {
   } catch (x) { console.error(x); err("Could not save. Try again."); }
   $("mp-save").disabled = false;
 });
+// Shown wording for the class field (stored value "Not taking photography").
+const clsLabel = c => c === "Not taking photography" ? "Self-taught photographer" : (c || "");
 const tag = title => title ? `<span class="ad-tag">${esc(title)}</span>` : "";
 // Phones and iPad portrait show each row as a card: .ad-cardname is the card's header,
 // cells marked .ad-tbl only show in the wide table, the rest get a label from data-label.
@@ -218,7 +220,7 @@ function renderMembers() {
   const rows = memRows();
   const officers = rows.filter(m => m.title).sort((a, b) => rank(a.title) - rank(b.title));
   const others = rows.filter(m => !m.title);
-  const row = m => `<tr>${cardName(`${m.first} ${m.last}`, m.title)}<td class="ad-tbl">${esc(m.first)}</td><td class="ad-tagcol ad-tbl">${tag(m.title)}</td><td class="ad-tbl">${esc(m.last)}</td>${td("Student #", esc(m.sid))}${td("Grad", esc(m.gradYear))}${td("Class", esc(m.cls))}${td("Cell", tel(m.phone))}${td("Email", mailLink(m.email))}${td("Meetings", m.visits)}${td("Last seen", m.lastSeen ? dateLabel(m.lastSeen) : "")}</tr>`;
+  const row = m => `<tr>${cardName(`${m.first} ${m.last}`, m.title)}<td class="ad-tbl">${esc(m.first)}</td><td class="ad-tagcol ad-tbl">${tag(m.title)}</td><td class="ad-tbl">${esc(m.last)}</td>${td("Student #", esc(m.sid))}${td("Grad", esc(m.gradYear))}${td("Class", esc(clsLabel(m.cls)))}${td("Cell", tel(m.phone))}${td("Email", mailLink(m.email))}${td("Meetings", m.visits)}${td("Last seen", m.lastSeen ? dateLabel(m.lastSeen) : "")}</tr>`;
   const group = (name, list) => list.length ? `<tr class="ad-group"><th colspan="10">${name} <span>${list.length}</span></th></tr>` + list.map(row).join("") : "";
   $("mem-count").textContent = rows.length + " members";
   $("mem-table").querySelector("tbody").innerHTML = group("Officers", officers) + group("Members", others);
@@ -234,10 +236,10 @@ function csv(name, header, rows) {
 }
 $("att-csv").addEventListener("click", () => csv(`LWZ-attendance-${$("att-date").value}.csv`,
   ["Date", "Time", "First", "Last", "Officer title", "Student #", "Grad year", "Class"],
-  attRows().map(r => [$("att-date").value, r.time, r.first, r.last, r.title, r.sid, r.gradYear, r.cls])));
+  attRows().map(r => [$("att-date").value, r.time, r.first, r.last, r.title, r.sid, r.gradYear, clsLabel(r.cls)])));
 $("mem-csv").addEventListener("click", () => csv(`LWZ-members-${pacificParts().date}.csv`,
   ["First", "Last", "Officer title", "Student #", "Grad year", "Class", "Cell", "Personal email", "Meetings attended", "Last seen"],
-  [...memRows().filter(m => m.title).sort((a, b) => rank(a.title) - rank(b.title)), ...memRows().filter(m => !m.title)].map(m => [m.first, m.last, m.title, m.sid, m.gradYear, m.cls, m.phone, m.email, m.visits, m.lastSeen])));
+  [...memRows().filter(m => m.title).sort((a, b) => rank(a.title) - rank(b.title)), ...memRows().filter(m => !m.title)].map(m => [m.first, m.last, m.title, m.sid, m.gradYear, clsLabel(m.cls), m.phone, m.email, m.visits, m.lastSeen])));
 
 // ---------- Notes ----------
 let notes = [], current = null, saveTimer = null;

@@ -10,7 +10,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=2">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=61">
-  <link rel="stylesheet" href="css/lwz-app.css?v=6">
+  <link rel="stylesheet" href="css/lwz-app.css?v=7">
 </head>
 <body class="app-body">
   <main class="ci-wrap">
@@ -45,7 +45,7 @@
       <dl class="ci-info">
         <div class="ci-sidrow"><dt>Student #</dt><dd id="c-sid"></dd></div>
         <div><dt>Class of</dt><dd id="c-grad"></dd></div>
-        <div><dt>Photo class on file</dt><dd id="c-cls"></dd></div>
+        <div><dt>Photography path</dt><dd id="c-cls"></dd></div>
         <div><dt>Cell</dt><dd id="c-phone"></dd></div>
         <div><dt>Email</dt><dd id="c-email"></dd></div>
       </dl>
@@ -58,14 +58,14 @@
 
     <!-- Every check-in: confirm the photography class right now (updates the member profile) -->
     <section class="ci-card" id="v-class" hidden>
-      <h1>Your photography class</h1>
-      <p class="note">Which photography class are you enrolled in right now?</p>
+      <h1>Your photography path</h1>
+      <p class="note">How are you making photographs this year?</p>
       <div class="ci-classes">
+        <button type="button" class="ci-classbtn" data-cls="Not taking photography">Self-taught photographer<small>I make photographs on my own, outside a photo class</small></button>
         <button type="button" class="ci-classbtn" data-cls="Photography 1">Photography 1</button>
         <button type="button" class="ci-classbtn" data-cls="Photography 2">Photography 2</button>
-        <button type="button" class="ci-classbtn" data-cls="Not taking photography">Not taking photography</button>
       </div>
-      <p class="note">Any student can be in LWZ. This keeps your member profile accurate.</p>
+      <p class="note">Every path counts. LWZ is for anyone passionate about the art of making photographs.</p>
       <p class="ci-err" id="k-err" hidden></p>
     </section>
 
@@ -78,7 +78,7 @@
         <div><label for="f-first">First name</label><input id="f-first" autocapitalize="words" autocomplete="given-name"></div>
         <div><label for="f-last">Last name</label><input id="f-last" autocapitalize="words" autocomplete="family-name"></div>
         <div><label for="f-grad">Graduation year</label><select id="f-grad"></select></div>
-        <div><label for="f-cls">Photography class right now</label><select id="f-cls" required></select></div>
+        <div><label for="f-cls">How you make photographs</label><select id="f-cls" required></select></div>
         <div><label for="f-phone">Cell phone <span class="opt">(optional)</span></label><input id="f-phone" type="tel" inputmode="tel" autocomplete="tel"></div>
         <div><label for="f-email">Personal email <span class="opt">(optional)</span></label><input id="f-email" type="email" inputmode="email" autocapitalize="off" spellcheck="false" autocomplete="email"></div>
       </div>
@@ -106,6 +106,6 @@
       <p class="note">pics are taken. <strong>Photographs are made.</strong></p>
     </section>
   </main>
-  <script type="module" src="js/checkin.js?v=6"></script>
+  <script type="module" src="js/checkin.js?v=7"></script>
 </body>
 </html>

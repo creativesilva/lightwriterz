@@ -23,7 +23,9 @@ tick(); setInterval(tick, 1000);
 
 $("f-grad").innerHTML = GRAD_YEARS.map(y => `<option value="${y}">${y}</option>`).join("");
 // No default class: students must choose (the old default made everyone look like Photography 1).
-$("f-cls").innerHTML = '<option value="" disabled>Choose your class</option>' + CLASSES.map(c => `<option>${c}</option>`).join("");
+// Shown wording: being self-taught is listed first and stated positively (stored value unchanged).
+const CLASS_LABEL = { "Not taking photography": "Self-taught photographer", "Photography 1": "Photography 1", "Photography 2": "Photography 2" };
+$("f-cls").innerHTML = '<option value="" disabled>Choose one</option>' + ["Not taking photography", "Photography 1", "Photography 2"].map(c => `<option value="${c}">${CLASS_LABEL[c]}</option>`).join("");
 
 let sid = "", pub = null;
 function start() {
@@ -52,7 +54,7 @@ $("v-sid").addEventListener("submit", async e => {
     $("c-first").textContent = pub.first;
     $("c-sid").textContent = sid;
     $("c-grad").textContent = pub.gradYear;
-    $("c-cls").textContent = pub.cls;
+    $("c-cls").textContent = CLASS_LABEL[pub.cls] || pub.cls;
     $("c-phone").textContent = pub.phoneMask || "Not on file";
     $("c-email").textContent = pub.emailMask || "Not on file";
     show("v-confirm");
@@ -107,7 +109,7 @@ $("v-form").addEventListener("submit", async e => {
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return err("That email does not look right.");
   if (!editing && !$("f-consent").checked) return err("Please check the box to continue.");
   const gradYear = +$("f-grad").value, cls = $("f-cls").value;
-  if (!cls) return err("Please choose your photography class.");
+  if (!cls) return err("Please choose how you make photographs.");
   const full = { sid, first, gradYear, cls, updatedAt: serverTimestamp() };
   const pubDoc = { first, gradYear, cls, updatedAt: serverTimestamp(),
     phoneMask: phone ? maskPhone(phone) : (editing ? pub.phoneMask || "" : ""),
