@@ -10,8 +10,8 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=2">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=67">
-  <link rel="stylesheet" href="css/lwz-app.css?v=2">
-  <link rel="stylesheet" href="css/lwz-admin.css?v=14">
+  <link rel="stylesheet" href="css/lwz-app.css?v=4">
+  <link rel="stylesheet" href="css/lwz-admin.css?v=15">
 </head>
 <body class="app-body">
   <!-- Signed out -->
@@ -127,6 +127,26 @@
 
     <section class="ad-pane wrap" id="p-nominations" hidden>
       <div class="section-head ad-head">
+        <div><p class="eyebrow">Election &middot; Today 12:25 to 1:05 PM</p><h2>Vote: Management Assistant</h2></div>
+        <span class="sub" id="vt-count">0 votes</span>
+      </div>
+      <div class="vt-admin">
+        <div class="qr-box vt-qr" id="vt-box">
+          <p class="ci-kicker">Scan to vote</p>
+          <div id="vt-qr"></div>
+          <p class="qr-label" id="vt-state"></p>
+          <p class="note">lightwriterz.org/vote.html &middot; check in first</p>
+        </div>
+        <div class="vt-side">
+          <div class="vt-tally" id="vt-tally"></div>
+          <button class="btn ad-sm" id="vt-full">Full screen QR</button>
+          <button class="btn dark ad-sm" id="vt-csv">Download votes CSV</button>
+        </div>
+      </div>
+      <div class="ad-table-wrap"><table class="ad-table" id="vt-table"><thead><tr><th>Time</th><th>Voter</th><th class="ad-tagcol"></th><th>Student #</th><th>Voted for</th></tr></thead><tbody></tbody></table></div>
+      <p class="note ad-empty" id="vt-empty">No votes yet.</p>
+      <div class="vt-gap"></div>
+      <div class="section-head ad-head">
         <div><p class="eyebrow">Election &middot; Management Assistant</p><h2>Nominations</h2></div>
         <span class="sub" id="nom-count"></span>
       </div>
@@ -190,6 +210,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script type="module" src="js/admin.js?v=15"></script>
+  <script type="module" src="js/admin.js?v=16"></script>
 </body>
 </html>

@@ -267,3 +267,19 @@
 @keyframes qrPulse { 70% { box-shadow: 0 0 0 8px rgba(31,191,106,0); } 100% { box-shadow: 0 0 0 0 rgba(31,191,106,0); } }
 @keyframes qrBump { 0% { transform: scale(1); color: #111; } 40% { transform: scale(1.35); color: #1fbf6a; } 100% { transform: scale(1); color: #111; } }
 @media (prefers-reduced-motion: reduce) { .qr-live::before, .qr-live.bump .qr-count { animation: none; } }
+/* Election vote block (Nominations tab) */
+.vt-admin { display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: start; margin-bottom: 22px; }
+.vt-qr { box-shadow: var(--glow); border-top: 4px solid var(--teal); }
+.vt-qr p { margin: 0; }
+#vt-qr svg { width: min(46vh, 340px); height: auto; display: block; }
+.qr-box.vt-qr:fullscreen #vt-qr svg { width: min(70vh, 640px); }
+.vt-side { display: grid; gap: 14px; align-content: start; }
+.vt-tally { display: grid; gap: 14px; background: var(--surface); border: 1px solid var(--surface-border); border-top: 4px solid var(--gold); border-radius: 6px; padding: 18px 20px; box-shadow: var(--glow); }
+.vt-row-top { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.05em; }
+.vt-row-top strong { font-size: 20px; color: #fff; }
+.vt-row-top span { font-size: 34px; font-weight: 600; color: var(--gold); }
+.vt-bar { height: 10px; border-radius: 6px; background: rgba(255,255,255,0.08); overflow: hidden; margin-top: 6px; }
+.vt-bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--teal), var(--teal-light-accent)); transition: width 0.5s ease; }
+.vt-side .btn { justify-self: start; }
+.vt-gap { height: 44px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
+@media (max-width: 900px) { .vt-admin { grid-template-columns: 1fr; justify-items: center; } .vt-side { width: 100%; } }

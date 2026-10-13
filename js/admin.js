@@ -80,7 +80,7 @@ function showTab(name) {
   if (name === "notes") loadNotes();
   if (name === "qr") renderQR();
   if (name === "admins") loadAdmins();
-  if (name === "nominations") loadNominations();
+  if (name === "nominations") { loadNominations(); renderVoteQR(); renderVotes(); }
 }
 
 // ---------- Data ----------
@@ -134,6 +134,10 @@ function watchLive() {
     snap.docChanges().forEach(c => { if (c.type === "removed") delete members[c.doc.id]; else members[c.doc.id] = c.doc.data(); });
     if (!$("p-attendance").hidden) renderAttendance();
   }, e => console.error("members live", e)));
+  liveUnsubs.push(onSnapshot(query(collection(db, "votes"), where("election", "==", ELECTION)), snap => {
+    votes = snap.docs.map(d => d.data()).sort((a, b) => (b.at?.toMillis() || 0) - (a.at?.toMillis() || 0));
+    renderVotes();
+  }, e => console.error("votes live", e)));
   liveUnsubs.push(onSnapshot(query(collection(db, "attendance"), where("date", "==", today)), snap => {
     attendance = attendance.filter(a => a.date !== today).concat(snap.docs.map(d => ({ id: d.id, ...d.data() })));
     setLiveCount(snap.size);
@@ -361,6 +365,35 @@ async function loadNominations() {
 $("nom-csv").addEventListener("click", () => csv(`LWZ-nominations-${pacificParts().date}.csv`,
   ["Nominee", "Self nomination", "Submitted by", "Student #", "When", "Why"],
   noms.map(n => [n.nomineeFull, n.self ? "yes" : "no", n.by, n.sid, n.when, n.reason])));
+
+// ---------- Election vote (live) ----------
+const ELECTION = "management-assistant-2026", CANDIDATES = ["Brianna Cisneros", "Hadasa Sierra"];
+const VOTE_OPENS = Date.parse("2026-10-13T19:25:00Z"), VOTE_CLOSES = Date.parse("2026-10-13T20:05:00Z");
+let votes = [];
+function renderVotes() {
+  const n = votes.length;
+  $("vt-count").textContent = n + (n === 1 ? " vote" : " votes");
+  $("vt-tally").innerHTML = CANDIDATES.map(c => {
+    const k = votes.filter(v => v.choice === c).length, pct = n ? Math.round(k / n * 100) : 0;
+    return `<div class="vt-row"><div class="vt-row-top"><strong>${esc(c)}</strong><span>${k}</span></div><div class="vt-bar"><i style="width:${pct}%"></i></div></div>`;
+  }).join("");
+  $("vt-empty").hidden = n > 0;
+  $("vt-table").querySelector("tbody").innerHTML = votes.map(v => {
+    const m = members[v.sid], who = m ? `${m.first} ${m.last}` : v.first;
+    const when = v.at ? v.at.toDate().toLocaleTimeString("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", minute: "2-digit", second: "2-digit" }) : "";
+    return `<tr>${cardName(who, titles[v.sid])}${td("Time", esc(when))}<td class="ad-tbl">${esc(who)}</td><td class="ad-tagcol ad-tbl">${tag(titles[v.sid])}</td>${td("Student #", esc(v.sid))}${td("Voted for", `<strong>${esc(v.choice)}</strong>`)}</tr>`;
+  }).join("");
+}
+function renderVoteQR() {
+  if (!$("vt-qr").firstChild) { const q = qrcode(0, "M"); q.addData("https://www.lightwriterz.org/vote.html"); q.make(); $("vt-qr").innerHTML = q.createSvgTag({ cellSize: 8, margin: 2 }); }
+  const now = Date.now();
+  $("vt-state").textContent = now < VOTE_OPENS ? "Opens at 12:25 PM" : now < VOTE_CLOSES ? "Voting open until 1:05 PM" : "Voting closed";
+}
+setInterval(() => { if (!$("p-nominations").hidden) renderVoteQR(); }, 15000);
+$("vt-full").hidden = !(document.fullscreenEnabled || document.webkitFullscreenEnabled);
+$("vt-full").addEventListener("click", () => { const el = $("vt-box"); (el.requestFullscreen || el.webkitRequestFullscreen || (() => {})).call(el); });
+$("vt-csv").addEventListener("click", () => csv(`LWZ-votes-${ELECTION}.csv`, ["Time", "Voter", "Officer title", "Student #", "Voted for"],
+  votes.map(v => { const m = members[v.sid]; return [v.at ? v.at.toDate().toLocaleString("en-US", { timeZone: "America/Los_Angeles" }) : "", m ? `${m.first} ${m.last}` : v.first, titles[v.sid] || "", v.sid, v.choice]; })));
 
 // ---------- Admins (advisors only) ----------
 async function loadAdmins() {

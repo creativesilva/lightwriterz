@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>LWZ Vote | Light Writerz</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0a0f0f">
+  <link rel="icon" href="favicon.ico?v=2" sizes="48x48">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=2">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=61">
+  <link rel="stylesheet" href="css/lwz-app.css?v=4">
+</head>
+<body class="app-body">
+  <main class="ci-wrap">
+    <header class="ci-head">
+      <p class="ci-kicker">LWZ Officer Election</p>
+      <p class="ci-clock" id="clock">--:--</p>
+      <p class="ci-date">Management Assistant</p>
+    </header>
+
+    <!-- Closed -->
+    <section class="ci-card" id="v-closed" hidden>
+      <h1>Voting is closed</h1>
+      <p id="closed-msg">Voting is open during the LWZ meeting on Tuesday, October 13, 12:25 to 1:05 PM.</p>
+    </section>
+
+    <!-- Step 1: student number -->
+    <form class="ci-card" id="v-sid" hidden autocomplete="off">
+      <h1>Cast your vote</h1>
+      <label for="sid">Student number</label>
+      <div class="ci-pin"><input id="sid" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required autocomplete="off"><span class="ci-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
+      <p class="ci-err" id="sid-err" hidden></p>
+      <button class="btn ci-btn" type="submit" id="sid-go">Continue</button>
+      <p class="note vt-note">You must check in at today's meeting before you vote. One vote per student.</p>
+    </form>
+
+    <!-- Step 2: ballot -->
+    <section class="ci-card" id="v-ballot" hidden>
+      <h1>Hi, <span id="b-first"></span></h1>
+      <p class="note">Who should be the LWZ Management Assistant?</p>
+      <div class="vt-choices">
+        <button type="button" class="vt-choice" data-choice="Brianna Cisneros">Brianna Cisneros</button>
+        <button type="button" class="vt-choice" data-choice="Hadasa Sierra">Hadasa Sierra</button>
+      </div>
+    </section>
+
+    <!-- Step 3: confirm -->
+    <section class="ci-card" id="v-confirm" hidden>
+      <h1>Confirm your vote</h1>
+      <p class="vt-pick" id="c-pick"></p>
+      <p class="note">Your vote is final and cannot be changed.</p>
+      <p class="ci-err" id="c-err" hidden></p>
+      <div class="ci-row2">
+        <button class="btn ghost ci-btn" type="button" id="c-back">Back</button>
+        <button class="btn ci-btn ci-mark" type="button" id="c-vote">Vote</button>
+      </div>
+    </section>
+
+    <!-- Done -->
+    <section class="ci-card ci-done" id="v-done" hidden>
+      <p class="ci-check" aria-hidden="true">&#10003;</p>
+      <h1>Your vote is in</h1>
+      <p id="d-msg"></p>
+      <p class="note">pics are taken. <strong>Photographs are made.</strong></p>
+    </section>
+  </main>
+  <script type="module" src="js/vote.js?v=1"></script>
+</body>
+</html>
