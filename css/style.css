@@ -1167,3 +1167,8 @@ button.meet-cd:hover, button.meet-cd:focus-visible { border-color: var(--teal-li
 .news-rules li::marker { font-family: var(--font-head); color: var(--gold); }
 @media (max-width: 760px) { .news-icon { float: none; display: block; width: 120px; margin: 0 0 8px -6px; } }
 .officer.is-elected .ph img { opacity: 0.4; }
+
+/* News post with a headshot thumbnail */
+.news-photo { float: right; width: 180px; aspect-ratio: 4 / 5; object-fit: cover; margin: 0 0 12px 24px; border-radius: 6px; border: 1px solid var(--surface-border); box-shadow: var(--glow); }
+.news-card-photo { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 25%; border-radius: 4px; margin-bottom: 14px; }
+@media (max-width: 760px) { .news-photo { float: none; display: block; width: 100%; max-width: 280px; margin: 4px 0 14px; } }

@@ -1,16 +1,36 @@
 {
   "posts": [
     {
+      "id": "brianna-cisneros-management-assistant",
+      "date": "2026-10-13",
+      "tag": "Officers",
+      "accent": "gold",
+      "image": "images/officers/officer-7.jpg",
+      "imageAlt": "Brianna Cisneros, Management Assistant",
+      "photo": true,
+      "title": "Welcome, Brianna Cisneros, our new Management Assistant",
+      "summary": "Members elected Brianna Cisneros as Management Assistant at today's meeting, after a close race between two outstanding candidates.",
+      "body": [
+        "Light Writerz members have elected Brianna Cisneros as our new Management Assistant. The vote was held at today's meeting, and it was a close race.",
+        "Both candidates, Brianna Cisneros and Hadasa Sierra, showed the initiative, reliability, and care for the club that this role calls for. Thank you, Hadasa, for stepping forward and putting your name in. LWZ is stronger because members like you are ready to lead.",
+        "As Management Assistant, Brianna joins the officer team and will support every officer role, helping wherever LWZ needs it. Congratulations, Brianna!"
+      ],
+      "link": {
+        "href": "officers.html",
+        "text": "Meet the officers"
+      }
+    },
+    {
       "id": "vote-today-management-assistant",
       "date": "2026-10-13",
       "tag": "Election",
       "accent": "gold",
       "image": "images/news/voting-icon.png",
       "imageAlt": "Vote",
-      "title": "Vote today: Management Assistant",
-      "summary": "The vote for our new Management Assistant is today at the LWZ meeting. Check in first, then vote when the officers open voting. The winner is announced before the meeting ends.",
+      "title": "The vote: Management Assistant",
+      "summary": "Members voted for our new Management Assistant at the October 13 meeting. Here is how the vote worked.",
       "body": [
-        "Today's LWZ meeting includes the vote for our new Management Assistant. The nominees are Brianna Cisneros and Hadasa Sierra. Nominations are now closed.",
+        "The October 13 LWZ meeting included the vote for our new Management Assistant. The nominees were Brianna Cisneros and Hadasa Sierra.",
         "How the vote works:"
       ],
       "list": [
@@ -19,7 +39,7 @@
         "Scan the voting QR, enter your 6 digit student number, and choose your candidate.",
         "One vote per student. Your vote is final once you tap Vote.",
         "Ballots stay private. Only the totals are announced.",
-        "Voting closes at 1:05 PM, and the new Management Assistant is announced before the end of the meeting."
+        "Voting closed at 1:05 PM, and the new Management Assistant was announced at the meeting."
       ]
     },
     {
