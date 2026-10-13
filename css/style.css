@@ -1166,3 +1166,4 @@ button.meet-cd:hover, button.meet-cd:focus-visible { border-color: var(--teal-li
 .news-rules { margin: 14px 0 0 22px; display: grid; gap: 8px; color: #c3cfcf; }
 .news-rules li::marker { font-family: var(--font-head); color: var(--gold); }
 @media (max-width: 760px) { .news-icon { float: none; display: block; width: 120px; margin: 0 0 8px -6px; } }
+.officer.is-elected .ph img { opacity: 0.4; }
