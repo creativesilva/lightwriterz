@@ -21,7 +21,7 @@ Audit done 2026-09-30. Approved to run as one pass. Read CLAUDE.md first (no em 
 ### Waiting on Chris
 - D4 Advisors cards: balance bio lengths (Chris vs Laura)?
 - D5 / M2 Home page trim: drop the stats band or shrink Club News?
-- S4 + Y6 FAQ: meeting day, time, room (OK to publish?). Then add FAQ section + FAQPage JSON-LD.
+- S4 + Y6 FAQ: meeting day, time, room now public (Tue 12:25 to 1:05 PM, Room 322; header countdown pop-up, 2026-10-07). Then add FAQ section + FAQPage JSON-LD.
 - Y1 Google Search Console: verify domain (GoDaddy TXT), submit sitemap. Walk Chris through step by step.
 - Y2 Bing Webmaster Tools: same (feeds ChatGPT search, Copilot, DuckDuckGo).
 - Y3 Ask PVHS clubs page, ASB list, Canvas, chrisandlaura.com to link lightwriterz.org.
