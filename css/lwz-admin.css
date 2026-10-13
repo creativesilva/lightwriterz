@@ -283,3 +283,5 @@
 .vt-side .btn { justify-self: start; }
 .vt-gap { height: 44px; border-bottom: 1px solid var(--line); margin-bottom: 36px; }
 @media (max-width: 900px) { .vt-admin { grid-template-columns: 1fr; justify-items: center; } .vt-side { width: 100%; } }
+.vt-toggle { justify-self: stretch !important; padding: 16px; font-size: 18px; }
+.vt-hint { margin: -4px 0 4px; font-size: 14px; }

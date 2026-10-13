@@ -109,6 +109,7 @@ service cloud.firestore {
     match /votes/{id} {
       allow read: if isAdmin();
       allow create: if request.resource.data.election == 'management-assistant-2026'
+        && exists(/databases/$(db)/documents/settings/vote) && get(/databases/$(db)/documents/settings/vote).data.open == true
         && ((request.time >= timestamp.value(1791919500000) && request.time < timestamp.value(1791921900000)) || testOpen())
         && validSid(request.resource.data.sid)
         && id == request.resource.data.election + '_' + request.resource.data.sid
@@ -120,6 +121,12 @@ service cloud.firestore {
         && request.resource.data.keys().hasOnly(['election', 'sid', 'date', 'first', 'choice', 'at'])
         && request.resource.data.at == request.time;
       allow delete: if isOwner();
+    }
+    // Open / Close voting switch (admin panel). Everyone can read it so the ballot page updates live.
+    match /settings/vote {
+      allow read: if true;
+      allow write: if isAdmin() && request.resource.data.keys().hasOnly(['open', 'by', 'at'])
+        && request.resource.data.open is bool && request.resource.data.at == request.time;
     }
     match /voted/{id} {
       allow get: if true;

@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=67">
   <link rel="stylesheet" href="css/lwz-app.css?v=4">
-  <link rel="stylesheet" href="css/lwz-admin.css?v=15">
+  <link rel="stylesheet" href="css/lwz-admin.css?v=16">
 </head>
 <body class="app-body">
   <!-- Signed out -->
@@ -138,6 +138,8 @@
           <p class="note">lightwriterz.org/vote.html &middot; check in first</p>
         </div>
         <div class="vt-side">
+          <button class="btn orange vt-toggle" id="vt-toggle" type="button">Open voting</button>
+          <p class="note vt-hint" id="vt-hint">Press Open voting once today's attendance is in. Only students checked in today can vote.</p>
           <div class="vt-tally" id="vt-tally"></div>
           <button class="btn ad-sm" id="vt-full">Full screen QR</button>
           <button class="btn dark ad-sm" id="vt-csv">Download votes CSV</button>
@@ -210,6 +212,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script type="module" src="js/admin.js?v=16"></script>
+  <script type="module" src="js/admin.js?v=17"></script>
 </body>
 </html>

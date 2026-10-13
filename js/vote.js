@@ -3,7 +3,7 @@
 // checked in at today's meeting, that voting is open, and that each number votes only once.
 import { firebaseConfig, SDK, pacificParts } from "./lwz-firebase.js?v=2";
 const { initializeApp } = await import(SDK + "firebase-app.js");
-const { getFirestore, doc, getDoc, writeBatch, serverTimestamp } = await import(SDK + "firebase-firestore.js");
+const { getFirestore, doc, getDoc, writeBatch, serverTimestamp, onSnapshot } = await import(SDK + "firebase-firestore.js");
 const db = getFirestore(initializeApp(firebaseConfig));
 
 const ELECTION = "management-assistant-2026";
@@ -14,7 +14,11 @@ const show = v => views.forEach(x => { $(x).hidden = x !== v; });
 
 let testUntil = 0;
 try { const s = await getDoc(doc(db, "settings", "checkin")); if (s.exists() && s.data().testUntil) testUntil = s.data().testUntil.toMillis(); } catch (e) {}
-const isOpen = () => (Date.now() >= OPENS && Date.now() < CLOSES) || Date.now() < testUntil;
+// Voting starts when an officer presses Open voting (after attendance fills in) and ends on Close
+// voting or at 1:05 PM. The page follows the switch live.
+let switchOn = false, everOpened = false;
+const inTime = () => (Date.now() >= OPENS && Date.now() < CLOSES) || Date.now() < testUntil;
+const isOpen = () => switchOn && inTime();
 
 const fmt = d => d.toLocaleTimeString("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", minute: "2-digit", second: "2-digit" });
 setInterval(() => { $("clock").textContent = fmt(new Date()); }, 1000); $("clock").textContent = fmt(new Date());
@@ -22,14 +26,18 @@ setInterval(() => { $("clock").textContent = fmt(new Date()); }, 1000); $("clock
 let sid = "", first = "", choice = "";
 function start() {
   if (!isOpen()) {
-    $("closed-msg").textContent = Date.now() >= CLOSES ? "Voting has ended. Thank you, Light Writers. Results will be announced by the officers."
-      : "Voting opens during the LWZ meeting today, Tuesday, October 13, 12:25 to 1:05 PM.";
+    $("closed-msg").textContent = Date.now() >= CLOSES || (everOpened && !switchOn) ? "Voting has ended. Thank you, Light Writers. Results will be announced by the officers."
+      : "Voting has not started yet. Check in at today's meeting first. This page opens the ballot by itself when the officers start the vote.";
     show("v-closed"); return;
   }
   $("sid").value = ""; paint(); $("sid-err").hidden = true; show("v-sid"); $("sid").focus();
 }
 function paint() { const n = $("sid").value.length; document.querySelectorAll(".ci-dots i").forEach((d, i) => d.classList.toggle("on", i < n)); }
 $("sid").addEventListener("input", () => { $("sid").value = $("sid").value.replace(/\D/g, "").slice(0, 6); paint(); $("sid-err").hidden = true; });
+onSnapshot(doc(db, "settings", "vote"), s => {
+  const was = isOpen(); switchOn = !!(s.exists() && s.data().open); if (switchOn) everOpened = true;
+  if (isOpen() !== was && $("v-done").hidden) start();
+}, () => {});
 start();
 setInterval(() => { if ((!$("v-closed").hidden && isOpen()) || (!isOpen() && $("v-done").hidden && $("v-closed").hidden)) start(); }, 15000);
 

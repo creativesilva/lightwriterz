@@ -134,6 +134,7 @@ function watchLive() {
     snap.docChanges().forEach(c => { if (c.type === "removed") delete members[c.doc.id]; else members[c.doc.id] = c.doc.data(); });
     if (!$("p-attendance").hidden) renderAttendance();
   }, e => console.error("members live", e)));
+  liveUnsubs.push(onSnapshot(doc(db, "settings", "vote"), s => { voteOn = !!(s.exists() && s.data().open); renderVoteQR(); }, e => console.error("vote switch", e)));
   liveUnsubs.push(onSnapshot(query(collection(db, "votes"), where("election", "==", ELECTION)), snap => {
     votes = snap.docs.map(d => d.data()).sort((a, b) => (b.at?.toMillis() || 0) - (a.at?.toMillis() || 0));
     renderVotes();
@@ -369,7 +370,7 @@ $("nom-csv").addEventListener("click", () => csv(`LWZ-nominations-${pacificParts
 // ---------- Election vote (live) ----------
 const ELECTION = "management-assistant-2026", CANDIDATES = ["Brianna Cisneros", "Hadasa Sierra"];
 const VOTE_OPENS = Date.parse("2026-10-13T19:25:00Z"), VOTE_CLOSES = Date.parse("2026-10-13T20:05:00Z");
-let votes = [];
+let votes = [], voteOn = false;
 function renderVotes() {
   const n = votes.length;
   $("vt-count").textContent = n + (n === 1 ? " vote" : " votes");
@@ -386,9 +387,22 @@ function renderVotes() {
 }
 function renderVoteQR() {
   if (!$("vt-qr").firstChild) { const q = qrcode(0, "M"); q.addData("https://www.lightwriterz.org/vote.html"); q.make(); $("vt-qr").innerHTML = q.createSvgTag({ cellSize: 8, margin: 2 }); }
-  const now = Date.now();
-  $("vt-state").textContent = now < VOTE_OPENS ? "Opens at 12:25 PM" : now < VOTE_CLOSES ? "Voting open until 1:05 PM" : "Voting closed";
+  const now = Date.now(), ended = now >= VOTE_CLOSES;
+  $("vt-state").textContent = ended ? "Voting closed" : !voteOn ? "Waiting for Open voting" : now < VOTE_OPENS ? "Opened early: counts from 12:25 PM" : "Voting open";
+  $("vt-toggle").textContent = voteOn ? "Close voting" : "Open voting";
+  $("vt-toggle").classList.toggle("orange", !voteOn); $("vt-toggle").classList.toggle("dark", voteOn);
+  $("vt-toggle").disabled = ended;
+  $("vt-hint").textContent = ended ? "Voting ended at 1:05 PM." : voteOn ? "Voting is open. Students checked in today can vote now. Press Close voting when everyone has voted."
+    : "Press Open voting once today's attendance is in. Only students checked in today can vote.";
 }
+$("vt-toggle").addEventListener("click", async () => {
+  const open = !voteOn;
+  if (!open && !confirm("Close voting now? Students will no longer be able to vote.")) return;
+  $("vt-toggle").disabled = true;
+  try { await setDoc(doc(db, "settings", "vote"), { open, by: me.email.toLowerCase(), at: serverTimestamp() }); }
+  catch (e) { console.error(e); alert("Could not change voting. Please try again."); }
+  finally { $("vt-toggle").disabled = false; }
+});
 setInterval(() => { if (!$("p-nominations").hidden) renderVoteQR(); }, 15000);
 $("vt-full").hidden = !(document.fullscreenEnabled || document.webkitFullscreenEnabled);
 $("vt-full").addEventListener("click", () => { const el = $("vt-box"); (el.requestFullscreen || el.webkitRequestFullscreen || (() => {})).call(el); });
