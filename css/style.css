@@ -1159,3 +1159,10 @@ button.meet-cd:hover, button.meet-cd:focus-visible { border-color: var(--teal-li
 @media (max-width: 760px) { .gal-head.wrap::before { left: 16px; right: 16px; } }
 .hero.page.hero-gal-lw { min-height: 470px; background-position: 62% 30%; }
 @media (max-width: 760px) { .hero.page.hero-gal-lw { min-height: 340px; background-position: 58% 30%; } }
+
+/* News posts with an icon and a numbered rules list */
+.news-icon { float: right; width: 150px; height: auto; margin: -6px 0 10px 24px; }
+.news-card-icon { width: 96px; height: auto; margin: -8px 0 6px -8px; }
+.news-rules { margin: 14px 0 0 22px; display: grid; gap: 8px; color: #c3cfcf; }
+.news-rules li::marker { font-family: var(--font-head); color: var(--gold); }
+@media (max-width: 760px) { .news-icon { float: none; display: block; width: 120px; margin: 0 0 8px -6px; } }

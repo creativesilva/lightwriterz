@@ -1,12 +1,34 @@
 {
   "posts": [
     {
+      "id": "vote-today-management-assistant",
+      "date": "2026-10-13",
+      "tag": "Election",
+      "accent": "gold",
+      "image": "images/news/voting-icon.png",
+      "imageAlt": "Vote",
+      "title": "Vote today: Management Assistant",
+      "summary": "The vote for our new Management Assistant is today at the LWZ meeting. Check in first, then vote when the officers open voting. The winner is announced before the meeting ends.",
+      "body": [
+        "Today's LWZ meeting includes the vote for our new Management Assistant. The nominees are Brianna Cisneros and Hadasa Sierra. Nominations are now closed.",
+        "How the vote works:"
+      ],
+      "list": [
+        "Check in first. Scan the meeting check-in QR and tap Mark as Present. Only students on today's attendance can vote.",
+        "Wait for the vote to open. Once attendance is taken, the officers open voting and show the voting QR.",
+        "Scan the voting QR, enter your 6 digit student number, and choose your candidate.",
+        "One vote per student. Your vote is final once you tap Vote.",
+        "Ballots stay private. Only the totals are announced.",
+        "Voting closes at 12:45 PM, and the new Management Assistant is announced before the end of the meeting."
+      ]
+    },
+    {
       "id": "management-assistant-election",
       "date": "2026-10-06",
       "tag": "Election",
       "accent": "gold",
       "title": "New officer position: Management Assistant",
-      "summary": "A new officer role that supports the whole team. Members vote Tuesday, October 13. Tap to read more and submit a name.",
+      "summary": "A new officer role that supports the whole team. Nominations are closed, and members vote at today's meeting.",
       "body": [
         "The Management Assistant supports the whole officer team, helping any officer in any capacity. One week that might mean helping the President run a meeting; the next, covering for the Vice President, helping the Secretary with attendance and notes, tracking supplies with the Treasurer, gathering photos for the PR / Media Officer, or setting up a project with the Creative Director.",
         "It is a great fit for a member who is reliable, organized, and ready to pitch in wherever LWZ needs it. It is also the best seat in the club for learning how every officer role works.",

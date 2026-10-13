@@ -7,6 +7,7 @@ const { posts } = JSON.parse(readFileSync("tools/news/news.json", "utf8"));
 posts.sort((a, b) => b.date.localeCompare(a.date));
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const day = d => new Date(d + "T12:00:00").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+const nomOpen = p => p.nominate && Date.parse(p.nominate.closes) > Date.now();
 const top = p => (p.accent && p.accent !== "teal" ? ` ${p.accent}-top` : "");
 const link = (href, text) => `<p class="news-link"><a href="${esc(href)}">${esc(text)}</a></p>`;
 
@@ -18,7 +19,7 @@ const desc = "News from Light Writerz, the Pioneer Valley High School photograph
 const articles = posts.map(p => `        <article class="card news-post${top(p)}${p.nominate ? " is-nominate" : ""}" id="${esc(p.id)}"${p.nominate ? ' data-nominate tabindex="0" role="button" aria-label="' + esc(p.title) + '. Read more and submit a name"' : ""}>
           <p class="date"><time datetime="${p.date}">${day(p.date)}</time> &middot; ${esc(p.tag)}</p>
           <h2>${esc(p.title)}</h2>
-          ${p.body.map(t => `<p>${esc(t)}</p>`).join("\n          ")}${p.link ? "\n          " + link(p.link.href, p.link.text) : ""}${p.nominate ? '\n          <p class="news-link"><span class="btn orange nom-cta">Submit a name</span></p>' : ""}
+          ${p.image ? `<img class="news-icon" src="${esc(p.image)}" alt="${esc(p.imageAlt || "")}" width="500" height="400">\n          ` : ""}${p.body.map(t => `<p>${esc(t)}</p>`).join("\n          ")}${p.list ? "\n          <ol class=\"news-rules\">" + p.list.map(t => `<li>${esc(t)}</li>`).join("") + "</ol>" : ""}${p.link ? "\n          " + link(p.link.href, p.link.text) : ""}${nomOpen(p) ? '\n          <p class="news-link"><span class="btn orange nom-cta">Submit a name</span></p>' : ""}
         </article>`).join("\n");
 // Nomination pop-up (members only, gated by student number) for a post with "nominate".
 const nom = posts.find(p => p.nominate);
@@ -92,10 +93,10 @@ writeFileSync("news.html", page);
 
 // Home page: latest 3 between the NEWS markers.
 const cards = posts.slice(0, 3).map(p => `          <article class="card is-link${top(p)}">
-            <p class="date">${day(p.date)}</p>
+            ${p.image ? `<img class="news-card-icon" src="${esc(p.image)}" alt="" width="500" height="400">` : ""}<p class="date">${day(p.date)}</p>
             <h3>${esc(p.title)}</h3>
             <p>${esc(p.summary)}</p>
-            <p style="margin-top:14px"><a class="card-link" href="news.html${p.nominate ? "?nominate=1" : ""}#${esc(p.id)}">${p.nominate ? "Read more and submit a name" : "Read more"}</a></p>
+            <p style="margin-top:14px"><a class="card-link" href="news.html${nomOpen(p) ? "?nominate=1" : ""}#${esc(p.id)}">${nomOpen(p) ? "Read more and submit a name" : "Read more"}</a></p>
           </article>`).join("\n");
 const idx = readFileSync("index.html", "utf8");
 const a = idx.indexOf("<!-- NEWS:START -->"), b = idx.indexOf("<!-- NEWS:END -->");
