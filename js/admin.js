@@ -369,7 +369,7 @@ $("nom-csv").addEventListener("click", () => csv(`LWZ-nominations-${pacificParts
 
 // ---------- Election vote (live) ----------
 const ELECTION = "management-assistant-2026", CANDIDATES = ["Brianna Cisneros", "Hadasa Sierra"];
-const VOTE_OPENS = Date.parse("2026-10-13T19:25:00Z"), VOTE_CLOSES = Date.parse("2026-10-13T20:05:00Z");
+const VOTE_OPENS = Date.parse("2026-10-13T19:25:00Z"), VOTE_CLOSES = Date.parse("2026-10-13T19:45:00Z");
 let votes = [], voteOn = false;
 function renderVotes() {
   const n = votes.length;
@@ -392,7 +392,7 @@ function renderVoteQR() {
   $("vt-toggle").textContent = voteOn ? "Close voting" : "Open voting";
   $("vt-toggle").classList.toggle("orange", !voteOn); $("vt-toggle").classList.toggle("dark", voteOn);
   $("vt-toggle").disabled = ended;
-  $("vt-hint").textContent = ended ? "Voting ended at 1:05 PM." : voteOn ? "Voting is open. Students checked in today can vote now. Press Close voting when everyone has voted."
+  $("vt-hint").textContent = ended ? "Voting ended at 12:45 PM." : voteOn ? "Voting is open. Students checked in today can vote now. Press Close voting when everyone has voted."
     : "Press Open voting once today's attendance is in. Only students checked in today can vote.";
 }
 $("vt-toggle").addEventListener("click", async () => {
