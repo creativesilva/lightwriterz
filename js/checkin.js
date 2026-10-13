@@ -5,7 +5,7 @@ const { getFirestore, doc, getDoc, setDoc, serverTimestamp } = await import(SDK 
 const db = getFirestore(initializeApp(firebaseConfig));
 
 const $ = id => document.getElementById(id);
-const views = ["v-closed", "v-sid", "v-confirm", "v-form", "v-present", "v-done"];
+const views = ["v-closed", "v-sid", "v-confirm", "v-class", "v-form", "v-present", "v-done"];
 function show(v) { views.forEach(x => { $(x).hidden = x !== v; }); }
 const fmtTime = d => d.toLocaleTimeString("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", minute: "2-digit", second: "2-digit" });
 
@@ -22,7 +22,8 @@ function tick() {
 tick(); setInterval(tick, 1000);
 
 $("f-grad").innerHTML = GRAD_YEARS.map(y => `<option value="${y}">${y}</option>`).join("");
-$("f-cls").innerHTML = CLASSES.map(c => `<option>${c}</option>`).join("");
+// No default class: students must choose (the old default made everyone look like Photography 1).
+$("f-cls").innerHTML = '<option value="" disabled>Choose your class</option>' + CLASSES.map(c => `<option>${c}</option>`).join("");
 
 let sid = "", pub = null;
 function start() {
@@ -49,6 +50,7 @@ $("v-sid").addEventListener("submit", async e => {
   if (snap.exists()) {
     pub = snap.data();
     $("c-first").textContent = pub.first;
+    $("c-sid").textContent = sid;
     $("c-grad").textContent = pub.gradYear;
     $("c-cls").textContent = pub.cls;
     $("c-phone").textContent = pub.phoneMask || "Not on file";
@@ -67,7 +69,8 @@ function openForm(editing) {
   $("f-email").placeholder = editing ? (pub.emailMask || "Optional") : "Optional";
   $("f-first").value = editing ? pub.first : "";
   $("f-grad").value = editing ? pub.gradYear : GRAD_YEARS[0];
-  $("f-cls").value = editing ? pub.cls : CLASSES[0];
+  $("f-cls").value = editing ? pub.cls : "";
+  $("f-sid").textContent = sid;
   $("f-consent-wrap").hidden = editing;
   $("f-consent").checked = false;
   $("f-save").textContent = editing ? "Update" : "Save";
@@ -75,7 +78,23 @@ function openForm(editing) {
   show("v-form");
 }
 $("c-edit").addEventListener("click", () => openForm(true));
-$("c-ok").addEventListener("click", () => toPresent(pub.first));
+// OK -> confirm the class they are in right now, saved to their member profile.
+$("c-ok").addEventListener("click", () => { $("k-err").hidden = true; show("v-class"); });
+$("c-notme").addEventListener("click", start);
+$("f-notme").addEventListener("click", start);
+document.querySelectorAll(".ci-classbtn").forEach(b => b.addEventListener("click", async () => {
+  const cls = b.dataset.cls;
+  document.querySelectorAll(".ci-classbtn").forEach(x => { x.disabled = true; });
+  try {
+    if (cls !== pub.cls) {
+      await setDoc(doc(db, "members", sid), { sid, cls, updatedAt: serverTimestamp() }, { merge: true });
+      await setDoc(doc(db, "members_public", sid), { cls, updatedAt: serverTimestamp() }, { merge: true });
+      pub.cls = cls;
+    }
+  } catch (x) { console.error("class update", x); }   // never block attendance over a profile update
+  finally { document.querySelectorAll(".ci-classbtn").forEach(x => { x.disabled = false; }); }
+  toPresent(pub.first);
+}));
 $("f-cancel").addEventListener("click", () => (pub ? show("v-confirm") : start()));
 
 $("v-form").addEventListener("submit", async e => {
@@ -88,6 +107,7 @@ $("v-form").addEventListener("submit", async e => {
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return err("That email does not look right.");
   if (!editing && !$("f-consent").checked) return err("Please check the box to continue.");
   const gradYear = +$("f-grad").value, cls = $("f-cls").value;
+  if (!cls) return err("Please choose your photography class.");
   const full = { sid, first, gradYear, cls, updatedAt: serverTimestamp() };
   const pubDoc = { first, gradYear, cls, updatedAt: serverTimestamp(),
     phoneMask: phone ? maskPhone(phone) : (editing ? pub.phoneMask || "" : ""),

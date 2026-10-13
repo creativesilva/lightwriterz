@@ -10,7 +10,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=2">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=61">
-  <link rel="stylesheet" href="css/lwz-app.css?v=5">
+  <link rel="stylesheet" href="css/lwz-app.css?v=6">
 </head>
 <body class="app-body">
   <main class="ci-wrap">
@@ -41,10 +41,11 @@
     <!-- Returning: confirm masked info -->
     <section class="ci-card" id="v-confirm" hidden>
       <h1>Welcome back, <span id="c-first"></span></h1>
-      <p class="note">Is your information still correct?</p>
+      <p class="note">Check that this is your student number and your information is correct.</p>
       <dl class="ci-info">
+        <div class="ci-sidrow"><dt>Student #</dt><dd id="c-sid"></dd></div>
         <div><dt>Class of</dt><dd id="c-grad"></dd></div>
-        <div><dt>Class</dt><dd id="c-cls"></dd></div>
+        <div><dt>Photo class on file</dt><dd id="c-cls"></dd></div>
         <div><dt>Cell</dt><dd id="c-phone"></dd></div>
         <div><dt>Email</dt><dd id="c-email"></dd></div>
       </dl>
@@ -52,17 +53,32 @@
         <button class="btn ghost ci-btn" type="button" id="c-edit">Edit</button>
         <button class="btn ci-btn" type="button" id="c-ok">OK</button>
       </div>
+      <button class="ci-notme" type="button" id="c-notme">Not my student number</button>
+    </section>
+
+    <!-- Every check-in: confirm the photography class right now (updates the member profile) -->
+    <section class="ci-card" id="v-class" hidden>
+      <h1>Your photography class</h1>
+      <p class="note">Which photography class are you enrolled in right now?</p>
+      <div class="ci-classes">
+        <button type="button" class="ci-classbtn" data-cls="Photography 1">Photography 1</button>
+        <button type="button" class="ci-classbtn" data-cls="Photography 2">Photography 2</button>
+        <button type="button" class="ci-classbtn" data-cls="Not taking photography">Not taking photography</button>
+      </div>
+      <p class="note">Any student can be in LWZ. This keeps your member profile accurate.</p>
+      <p class="ci-err" id="k-err" hidden></p>
     </section>
 
     <!-- New or edit profile -->
     <form class="ci-card" id="v-form" hidden autocomplete="off">
       <h1 id="f-title">Create your profile</h1>
       <p class="note" id="f-note">First time checking in. This builds your LWZ member profile.</p>
+      <p class="ci-sidline" id="f-sidline">Student # <strong id="f-sid"></strong> <button class="ci-notme" type="button" id="f-notme">Not my number</button></p>
       <div class="ci-grid">
         <div><label for="f-first">First name</label><input id="f-first" autocapitalize="words" autocomplete="given-name"></div>
         <div><label for="f-last">Last name</label><input id="f-last" autocapitalize="words" autocomplete="family-name"></div>
         <div><label for="f-grad">Graduation year</label><select id="f-grad"></select></div>
-        <div><label for="f-cls">Photography class</label><select id="f-cls"></select></div>
+        <div><label for="f-cls">Photography class right now</label><select id="f-cls" required></select></div>
         <div><label for="f-phone">Cell phone <span class="opt">(optional)</span></label><input id="f-phone" type="tel" inputmode="tel" autocomplete="tel"></div>
         <div><label for="f-email">Personal email <span class="opt">(optional)</span></label><input id="f-email" type="email" inputmode="email" autocapitalize="off" spellcheck="false" autocomplete="email"></div>
       </div>
@@ -90,6 +106,6 @@
       <p class="note">pics are taken. <strong>Photographs are made.</strong></p>
     </section>
   </main>
-  <script type="module" src="js/checkin.js?v=5"></script>
+  <script type="module" src="js/checkin.js?v=6"></script>
 </body>
 </html>

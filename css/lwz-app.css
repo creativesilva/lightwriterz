@@ -55,3 +55,14 @@ label[for="sid"] { text-align: center; }
 .vt-main label[for="sid"] { text-align: left; }
 .vt-main .ci-done h1, .vt-main .ci-done p { text-align: center; }
 @media (max-width: 760px) { .vt-main { padding-top: 22px; } .vt-main .ci-card { padding: 22px 18px; } .vt-main .ci-card h1 { font-size: 26px; } }
+/* Check-in: student number check and class confirmation */
+.ci-sidrow dd { font-family: var(--font-head); font-size: 22px !important; letter-spacing: 0.14em; color: var(--teal-light-accent) !important; }
+.ci-notme { background: none; border: 0; color: var(--teal-light-accent); text-decoration: underline; font: inherit; font-size: 14px; cursor: pointer; padding: 8px; justify-self: center; }
+.ci-sidline { color: #cfdada; font-size: 15px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.ci-sidline strong { font-family: var(--font-head); letter-spacing: 0.14em; font-size: 20px; color: var(--teal-light-accent); }
+.ci-sidline .ci-notme { padding: 4px; }
+.ci-classes { display: grid; gap: 10px; }
+.ci-classbtn { width: 100%; padding: 18px 14px; border-radius: 10px; border: 2px solid rgba(255,255,255,0.22); background: rgba(255,255,255,0.05); color: #fff; cursor: pointer;
+  font-family: var(--font-head); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; font-size: 20px; }
+.ci-classbtn:hover, .ci-classbtn:focus-visible { border-color: var(--teal-light-accent); background: rgba(0,116,116,0.2); outline: none; }
+.ci-classbtn:disabled { opacity: 0.6; }
