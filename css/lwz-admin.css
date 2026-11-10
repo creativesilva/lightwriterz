@@ -286,3 +286,7 @@
 .vt-toggle { justify-self: stretch !important; padding: 16px; font-size: 18px; }
 .vt-hint { margin: -4px 0 4px; font-size: 14px; }
 .vt-private { margin: 0 0 6px; font-size: 14px; }
+/* Remind class code on the QR card (shows in Full screen too) */
+.qr-remind { margin-top: 6px !important; padding: 8px 18px; border-radius: 8px; border: 2px solid #007474; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.12em; font-size: 16px; color: #007474; }
+.qr-remind strong { color: #111; font-size: 22px; letter-spacing: 0.18em; margin-left: 6px; }
+.qr-box:fullscreen .qr-remind { font-size: 24px; } .qr-box:fullscreen .qr-remind strong { font-size: 36px; }
