@@ -1,6 +1,36 @@
 {
   "posts": [
     {
+      "id": "photo-challenge-what-am-i",
+      "date": "2026-11-10",
+      "tag": "Photo Challenge",
+      "accent": "orange",
+      "image": "images/news/LWZ_Photo_Challenge_11-16-26.jpg",
+      "imageAlt": "LWZ Photo Challenge flyer: a riddle that ends with What am I? Challenge due 11-16-26",
+      "photo": true,
+      "flyer": {
+        "file": "images/news/LWZ_Photo_Challenge_11-16-26.jpg",
+        "name": "LWZ_Photo_Challenge_11-16-26.jpg",
+        "alt": "LWZ Photo Challenge flyer: I follow you wherever the light may go, I change my shape but never grow. I have no face, no voice, no sound, yet on walls and floors I can be found. I disappear when the lights grow dim, but in the sunlight, I begin. What am I? Challenge due 11-16-26."
+      },
+      "title": "Photo Challenge: What am I?",
+      "summary": "This week's challenge: solve the riddle, then make a true photograph of the answer. Submit yours by Monday, November 16.",
+      "body": [
+        "This week's LWZ Photo Challenge starts with a riddle. Read it closely, figure out what it describes, then go out and make the best photograph you can of that idea.",
+        "Don't just take a pic. Make a true photograph: think about your light, your composition, and what you want someone to feel when they see it."
+      ],
+      "list": [
+        "Solve the riddle on the flyer.",
+        "Go out and make your photograph of the answer.",
+        "Submit it to the LWZ Google Drive at lightwriterz.org/submit.html by Monday, November 16, 2026.",
+        "We will review, critique, and vote on the best photographs together."
+      ],
+      "link": {
+        "href": "submit.html",
+        "text": "Submit your photograph"
+      }
+    },
+    {
       "id": "brianna-cisneros-management-assistant",
       "date": "2026-10-13",
       "tag": "Officers",

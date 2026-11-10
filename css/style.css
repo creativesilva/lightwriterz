@@ -1173,3 +1173,9 @@ button.meet-cd:hover, button.meet-cd:focus-visible { border-color: var(--teal-li
 .news-card-photo { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 25%; border-radius: 4px; margin-bottom: 14px; }
 @media (max-width: 760px) { .news-photo { float: none; display: block; width: 100%; max-width: 280px; margin: 4px 0 14px; } }
 .viewer-bio .lwz-contact { margin-top: 8px; font-size: 14px; color: #c3cfcf; } .viewer-bio .lwz-contact a { font-size: 14px; }
+
+/* News: full flyer with a save / share button */
+.news-flyer { margin: 20px 0 6px; display: grid; justify-items: center; gap: 14px; }
+.news-flyer img { width: min(420px, 100%); height: auto; border-radius: 8px; box-shadow: var(--glow); }
+.news-flyer figcaption { display: grid; justify-items: center; gap: 6px; text-align: center; }
+.news-flyer-hint { font-size: 13px; color: var(--gray); }

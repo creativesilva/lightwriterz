@@ -184,6 +184,22 @@
     document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !jm.hidden) jmClose(); });
   }
 
+  // "Save flyer to camera roll": phones open the share sheet (Save Image, Messages, AirDrop);
+  // computers download the file.
+  document.querySelectorAll("[data-save-flyer]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var url = b.getAttribute("data-save-flyer"), name = b.getAttribute("data-name") || "LWZ_flyer.jpg";
+      var download = function () { var a = document.createElement("a"); a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove(); };
+      fetch(url).then(function (r) { return r.blob(); }).then(function (blob) {
+        var file = new File([blob], name, { type: blob.type || "image/jpeg" });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          return navigator.share({ files: [file], title: "LWZ Photo Challenge" }).catch(function (e) { if (e && e.name !== "AbortError") download(); });
+        }
+        download();
+      }).catch(download);
+    });
+  });
+
   var yr = document.getElementById("yr");
   if (yr) yr.textContent = new Date().getFullYear();
 
