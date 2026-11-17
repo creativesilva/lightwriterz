@@ -33,3 +33,6 @@
 
 ## LWZ News
 Posts live in tools/news/news.json (newest first after build). Chris sends the text; add a post, then run `node tools/news/build-news.mjs`. It rewrites news.html (shell copied from mission.html) and the home "Club News" cards between the NEWS:START / NEWS:END markers (latest 3). Accents: teal (default), gold, orange. Never invent facts in a post; ask.
+
+## Weekly critique galleries
+"build critique" (skill at ~/.claude/skills/build-critique) turns a week of Student_incoming uploads into critique/<slug>/ (images + data.json) via tools/critique/build-critique.mjs, listed in critique/index.json and shown in LWZ Admin > Critiques. critique.html is the slider (admin Google sign-in required).

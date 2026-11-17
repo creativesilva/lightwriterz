@@ -80,6 +80,7 @@ function showTab(name) {
   if (name === "notes") loadNotes();
   if (name === "qr") renderQR();
   if (name === "admins") loadAdmins();
+  if (name === "critiques") loadCritiques();
   if (name === "nominations") { loadNominations(); renderVoteQR(); renderVotes(); }
 }
 
@@ -404,6 +405,19 @@ $("vt-full").hidden = !(document.fullscreenEnabled || document.webkitFullscreenE
 $("vt-full").addEventListener("click", () => { const el = $("vt-box"); (el.requestFullscreen || el.webkitRequestFullscreen || (() => {})).call(el); });
 $("vt-csv").addEventListener("click", () => csv(`LWZ-votes-${ELECTION}.csv`, ["Time", "Voter", "Officer title", "Student #", "Voted for"],
   votes.map(v => { const m = members[v.sid]; return [v.at ? v.at.toDate().toLocaleString("en-US", { timeZone: "America/Los_Angeles" }) : "", m ? `${m.first} ${m.last}` : v.first, titles[v.sid] || "", v.sid, v.choice]; })));
+
+// ---------- Critiques (weekly galleries built from student uploads) ----------
+async function loadCritiques() {
+  let weeks = [];
+  try { weeks = (await (await fetch("critique/index.json", { cache: "no-cache" })).json()).weeks || []; } catch (e) { console.error(e); }
+  const day = d => new Date(d + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  $("cr-count-all").textContent = weeks.length + (weeks.length === 1 ? " week" : " weeks");
+  $("cr-none").hidden = weeks.length > 0;
+  $("cr-weeks").innerHTML = weeks.map((w, i) => `<a class="card cr-week${i === 0 ? " gold-top" : ""}" href="critique.html?c=${encodeURIComponent(w.slug)}" target="_blank" rel="noopener">
+    <img src="critique/${esc(w.slug)}/01.jpg" alt="" loading="lazy">
+    <p class="date">${esc(day(w.start))} to ${esc(day(w.end))}</p><h3>${esc(w.title)}</h3>
+    <p>${w.count} photographs &middot; ${w.students} ${w.students === 1 ? "student" : "students"}</p><span class="cr-open">Open slider &rarr;</span></a>`).join("");
+}
 
 // ---------- Admins (advisors only) ----------
 async function loadAdmins() {

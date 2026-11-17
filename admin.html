@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=67">
   <link rel="stylesheet" href="css/lwz-app.css?v=6">
-  <link rel="stylesheet" href="css/lwz-admin.css?v=18">
+  <link rel="stylesheet" href="css/lwz-admin.css?v=19">
 </head>
 <body class="app-body">
   <!-- Signed out -->
@@ -52,6 +52,7 @@
         <button data-tab="notes">Notes</button>
         <button data-tab="qr">Check-in QR</button>
         <button data-tab="nominations">Nominations</button>
+        <button data-tab="critiques">Critiques</button>
         <button data-tab="admins" id="tab-admins" hidden>Admins</button>
         <button class="ad-menu-only ad-menu-signout" id="signout-m" type="button">Sign out</button>
         <a class="ad-menu-only ad-menu-site" href="index.html">&larr; Back to lightwriterz.org</a>
@@ -161,6 +162,16 @@
       <p class="note ad-empty" id="nom-empty" hidden>No nominations yet.</p>
     </section>
 
+    <section class="ad-pane wrap" id="p-critiques" hidden>
+      <div class="section-head ad-head">
+        <div><p class="eyebrow">Weekly critique galleries</p><h2>Critiques</h2></div>
+        <span class="sub" id="cr-count-all"></span>
+      </div>
+      <p class="note">Each week's student uploads as a full screen slider with names, for class critique. Open one, tap Start, then Full screen for the projector. Arrow keys or swipe to move; G shows all photographs.</p>
+      <div class="cards cr-weeks" id="cr-weeks"></div>
+      <p class="note ad-empty" id="cr-none" hidden>No critique galleries yet.</p>
+    </section>
+
     <section class="ad-pane wrap" id="p-admins" hidden>
       <div class="section-head ad-head">
         <div><p class="eyebrow">Advisors only</p><h2>Admins</h2></div>
@@ -212,6 +223,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script type="module" src="js/admin.js?v=21"></script>
+  <script type="module" src="js/admin.js?v=22"></script>
 </body>
 </html>

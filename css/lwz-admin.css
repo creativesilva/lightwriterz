@@ -290,3 +290,10 @@
 .qr-remind { margin-top: 6px !important; padding: 8px 18px; border-radius: 8px; border: 2px solid #007474; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.12em; font-size: 16px; color: #007474; }
 .qr-remind strong { color: #111; font-size: 22px; letter-spacing: 0.18em; margin-left: 6px; }
 .qr-box:fullscreen .qr-remind { font-size: 24px; } .qr-box:fullscreen .qr-remind strong { font-size: 36px; }
+/* Critiques tab */
+.cr-weeks { margin-top: 18px; }
+.cr-week { display: block; text-decoration: none; color: inherit; transition: transform 0.2s ease; }
+.cr-week:hover { transform: translateY(-3px); }
+.cr-week img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 4px; margin-bottom: 12px; background: #000; }
+.cr-week h3 { font-family: var(--font-head); text-transform: uppercase; font-size: 22px; margin: 2px 0 6px; color: #fff; }
+.cr-open { display: inline-block; margin-top: 10px; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 0.1em; font-size: 13px; color: var(--teal-light-accent); }

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>LWZ Critique | Light Writerz</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" href="favicon.ico?v=2" sizes="48x48">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=78">
+  <link rel="stylesheet" href="css/critique.css?v=1">
+</head>
+<body class="cr-body">
+  <!-- Sign in (officers and advisors, same list as LWZ Admin) -->
+  <main class="cr-gate" id="cr-login" hidden>
+    <img src="logos/lw-minimal-192.png" alt="" width="72" height="72">
+    <h1>LWZ Critique</h1>
+    <p>Sign in with your LWZ Admin Google account.</p>
+    <button class="btn" id="cr-signin">Sign in with Google</button>
+    <p class="cr-err" id="cr-err" hidden></p>
+  </main>
+
+  <!-- Slider -->
+  <div class="cr-app" id="cr-app" hidden>
+    <header class="cr-top">
+      <a class="cr-brand" href="admin.html" title="Back to LWZ Admin"><img src="logos/lw-minimal-192.png" alt="" width="34" height="34"><span id="cr-week"></span></a>
+      <span class="cr-count" id="cr-count"></span>
+      <div class="cr-tools">
+        <button class="cr-btn" id="cr-grid" type="button" aria-label="All photographs">Grid</button>
+        <button class="cr-btn" id="cr-full" type="button" aria-label="Full screen">Full screen</button>
+      </div>
+    </header>
+
+    <section class="cr-stage" id="cr-stage">
+      <!-- Title card -->
+      <div class="cr-cover" id="cr-cover">
+        <p class="eyebrow">LWZ Weekly Critique</p>
+        <h1 id="cr-title"></h1>
+        <p class="cr-dates" id="cr-dates"></p>
+        <p class="cr-meta" id="cr-meta"></p>
+        <button class="btn orange" id="cr-start" type="button">Start</button>
+        <p class="cr-motto"><span class="motto-pics">pics are taken.</span> Photographs are made.</p>
+      </div>
+      <figure class="cr-fig" id="cr-fig" hidden><img id="cr-img" alt=""></figure>
+      <button class="cr-nav prev" id="cr-prev" type="button" aria-label="Previous">&#8249;</button>
+      <button class="cr-nav next" id="cr-next" type="button" aria-label="Next">&#8250;</button>
+    </section>
+
+    <footer class="cr-cap" id="cr-cap" hidden>
+      <p class="cr-student" id="cr-student"></p>
+      <p class="cr-ptitle" id="cr-ptitle"></p>
+    </footer>
+
+    <div class="cr-gridview" id="cr-gridview" hidden></div>
+  </div>
+  <script type="module" src="js/critique.js?v=1"></script>
+</body>
+</html>
