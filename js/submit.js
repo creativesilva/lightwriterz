@@ -80,7 +80,7 @@
           res(new File([b], file.name.replace(/\.[^.]+$/, "") + ".jpg", { type: "image/jpeg" }));
         }, "image/jpeg", 0.95);
       };
-      img.onerror = function () { URL.revokeObjectURL(url); rej(new Error("This photo type cannot be read here. Save it as JPG and try again.")); };
+      img.onerror = function () { URL.revokeObjectURL(url); rej(new Error("This browser cannot open that HEIC photo. Send it from your iPhone, or save it as JPG first.")); };
       img.src = url;
     });
   }
@@ -122,7 +122,7 @@
     });
     render();
     var warn = document.getElementById("sub-warn");
-    warn.textContent = skipped.length ? "Not added (photos only, up to 30 MB each): " + skipped.join(", ") : "";
+    warn.textContent = skipped.length ? "Not added (JPG, JPEG, PNG or HEIC only, up to 30 MB each): " + skipped.join(", ") : "";
     warn.hidden = !skipped.length;
   }
   drop.addEventListener("click", function () { input.click(); });
