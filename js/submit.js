@@ -1,5 +1,5 @@
-// Hidden member upload page (linked from the footer logo on the gallery page).
-// The code is checked here AND by the Apps Script, so uploads without it are refused.
+// Member upload page (Upload Your Work button on the home page).
+// Unlocked with a registered LWZ student number (checked against the member list).
 // ENDPOINT: the Apps Script web app /exec URL (same deployment as the Curriculum Catalog uploader).
 (function () {
   var ENDPOINT = "https://script.google.com/macros/s/AKfycbwKgAWHt-MerxhSJN81C-LfuGkqINYlb6VyMTBY11z6pLc7ewpw0ajSX2FE7CXq78tL/exec";
@@ -18,7 +18,8 @@
     document.getElementById("sub-name").focus();
   }
   // Members unlock with their own 6 digit student number (checked against the LWZ member list,
-  // the same list the meeting check-in uses). Advisors can still use the club code.
+  // the same list the meeting check-in uses). That is the only gate. CLUB is the internal key the
+  // Drive uploader expects; it is not typed by anyone.
   var CLUB = "2010";
   // Advisor test account for trying uploads. Lives only here, never in the member list.
   var TEST = { sid: "123456", name: "Ariella Silva" };
@@ -31,13 +32,12 @@
   }
   try {
     var saved = sessionStorage.getItem("lwz-code"), sid = sessionStorage.getItem("lwz-sid");
-    if (saved === CLUB) { if (sid) memberUnlock(sid, sessionStorage.getItem("lwz-first")); else unlock(saved); }
+    if (saved === CLUB && sid) memberUnlock(sid, sessionStorage.getItem("lwz-first"));
   } catch (e) {}
   gate.addEventListener("submit", async function (e) {
     e.preventDefault();
     var c = document.getElementById("gate-code").value.trim();
     var err = document.getElementById("gate-err");
-    if (c === CLUB) { try { sessionStorage.setItem("lwz-code", c); } catch (x) {} unlock(c); return; }
     if (c === TEST.sid) {
       try { sessionStorage.setItem("lwz-code", CLUB); sessionStorage.setItem("lwz-sid", c); sessionStorage.setItem("lwz-first", TEST.name); } catch (x) {}
       memberUnlock(c, TEST.name); document.getElementById("sub-name").value = TEST.name; return;
