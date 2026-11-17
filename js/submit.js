@@ -17,17 +17,37 @@
     if (!ENDPOINT) status("Uploads are not switched on yet. Check back soon.", "err");
     document.getElementById("sub-name").focus();
   }
-  try { var saved = sessionStorage.getItem("lwz-code"); if (saved === "2010") unlock(saved); } catch (e) {}
-  gate.addEventListener("submit", function (e) {
+  // Members unlock with their own 6 digit student number (checked against the LWZ member list,
+  // the same list the meeting check-in uses). Advisors can still use the club code.
+  var CLUB = "2010";
+  var MEMBER_URL = "https://firestore.googleapis.com/v1/projects/lightwriterz-lwz/databases/(default)/documents/members_public/";
+  function memberUnlock(sid, first) {
+    unlock(CLUB);
+    var id = document.getElementById("sub-id");
+    id.value = sid; id.readOnly = true;
+    if (first && !document.getElementById("sub-name").value) document.getElementById("sub-name").value = first + " ";
+  }
+  try {
+    var saved = sessionStorage.getItem("lwz-code"), sid = sessionStorage.getItem("lwz-sid");
+    if (saved === CLUB) { if (sid) memberUnlock(sid, sessionStorage.getItem("lwz-first")); else unlock(saved); }
+  } catch (e) {}
+  gate.addEventListener("submit", async function (e) {
     e.preventDefault();
     var c = document.getElementById("gate-code").value.trim();
-    if (c === "2010") {
-      try { sessionStorage.setItem("lwz-code", c); } catch (err) {}
-      unlock(c);
-    } else {
-      document.getElementById("gate-err").hidden = false;
-      document.getElementById("gate-code").select();
+    var err = document.getElementById("gate-err");
+    if (c === CLUB) { try { sessionStorage.setItem("lwz-code", c); } catch (x) {} unlock(c); return; }
+    if (/^\d{6}$/.test(c)) {
+      try {
+        var r = await fetch(MEMBER_URL + c);
+        if (r.ok) {
+          var d = await r.json(), first = d.fields && d.fields.first ? d.fields.first.stringValue : "";
+          try { sessionStorage.setItem("lwz-code", CLUB); sessionStorage.setItem("lwz-sid", c); sessionStorage.setItem("lwz-first", first); } catch (x) {}
+          memberUnlock(c, first); return;
+        }
+      } catch (x) { console.warn("member check", x); }
     }
+    err.hidden = false;
+    document.getElementById("gate-code").select();
   });
 
   var input = document.getElementById("sub-files");
@@ -41,13 +61,32 @@
     s.textContent = msg;
     s.className = "note" + (kind ? " " + kind : "");
   }
-  // JPG only: both the extension and the file type must say JPEG.
+  // JPG goes straight through; any other photo the browser can read (PNG, WebP, HEIC on iPhone)
+  // is converted to a full size, high quality JPG before sending.
   function isJpg(file) {
     return /\.(jpe?g)$/i.test(file.name) && (!file.type || file.type === "image/jpeg");
   }
-  // The file name (without .jpg) is the photo's title on the site.
+  function isImage(file) { return isJpg(file) || /^image\//.test(file.type) || /\.(png|webp|heic|heif|gif|tiff?|bmp)$/i.test(file.name); }
+  function toJpg(file) {
+    if (isJpg(file)) return Promise.resolve(file);
+    return new Promise(function (res, rej) {
+      var img = new Image(), url = URL.createObjectURL(file);
+      img.onload = function () {
+        var c = document.createElement("canvas"); c.width = img.naturalWidth; c.height = img.naturalHeight;
+        var g = c.getContext("2d"); g.fillStyle = "#fff"; g.fillRect(0, 0, c.width, c.height); g.drawImage(img, 0, 0);
+        URL.revokeObjectURL(url);
+        c.toBlob(function (b) {
+          if (!b) return rej(new Error("convert failed"));
+          res(new File([b], file.name.replace(/\.[^.]+$/, "") + ".jpg", { type: "image/jpeg" }));
+        }, "image/jpeg", 0.95);
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); rej(new Error("This photo type cannot be read here. Save it as JPG and try again.")); };
+      img.src = url;
+    });
+  }
+  // The file name (without the extension) is the photo's title on the site.
   function titleOf(name) {
-    return name.replace(/\.(jpe?g)$/i, "").replace(/[_-]+/g, " ").replace(/\s+/g, " ").trim();
+    return name.replace(/\.[a-z0-9]+$/i, "").replace(/[_-]+/g, " ").replace(/\s+/g, " ").trim();
   }
   function fmt(n) { return n > 1048576 ? (n / 1048576).toFixed(1) + " MB" : Math.round(n / 1024) + " KB"; }
   function render() {
@@ -78,12 +117,12 @@
   function add(fl) {
     var skipped = [];
     Array.prototype.forEach.call(fl || [], function (file) {
-      if (!isJpg(file) || file.size > MAX) { skipped.push(file.name); return; }
+      if (!isImage(file) || file.size > MAX) { skipped.push(file.name); return; }
       files.push({ file: file });
     });
     render();
     var warn = document.getElementById("sub-warn");
-    warn.textContent = skipped.length ? "Not added (JPG only, up to 30 MB each): " + skipped.join(", ") : "";
+    warn.textContent = skipped.length ? "Not added (photos only, up to 30 MB each): " + skipped.join(", ") : "";
     warn.hidden = !skipped.length;
   }
   drop.addEventListener("click", function () { input.click(); });
@@ -120,16 +159,17 @@
       f.state = "busy"; render();
       status("Sending " + (i + 1) + " of " + todo.length + "…");
       try {
-        var data = await toBase64(f.file);
+        var jpg = await toJpg(f.file);
+        var data = await toBase64(jpg);
         var res = await fetch(ENDPOINT, {
           method: "POST",
           headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify({ target: TARGET, key: code, name: f.file.name, type: f.file.type, data: data,
+          body: JSON.stringify({ target: TARGET, key: code, name: jpg.name, type: "image/jpeg", data: data,
             student: fields.student, studentId: fields.studentId, series: fields.series, title: titleOf(f.file.name), message: fields.message })
         });
         var out = await res.json();
         if (out.ok) { f.state = "done"; ok++; } else { f.state = "fail"; bad++; console.warn("Upload:", out.error); }
-      } catch (err) { f.state = "fail"; bad++; console.warn("Upload:", err); }
+      } catch (err) { f.state = "fail"; bad++; console.warn("Upload:", err); if (err && err.message) status(err.message, "err"); }
       render();
     }
     status(bad ? ok + " sent, " + bad + " failed. Tap Send to try the failed ones again."
