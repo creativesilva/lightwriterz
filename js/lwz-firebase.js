@@ -20,23 +20,20 @@ export function pacificParts(d = new Date()) {
   const p = Object.fromEntries(f.formatToParts(d).map(x => [x.type, x.value]));
   return { weekday: p.weekday, date: `${p.year}-${p.month}-${p.day}`, mins: (+p.hour % 24) * 60 + (+p.minute) };
 }
+// Tuesdays with no LWZ meeting (holidays and breaks). Add dates here as "YYYY-MM-DD".
+export const NO_MEETING = ["2026-11-24"];
 export function inMeetingWindow(d = new Date()) {
   const p = pacificParts(d);
-  return p.weekday === "Tue" && p.mins >= 12 * 60 + 25 && p.mins < 13 * 60 + 5;
+  return p.weekday === "Tue" && !NO_MEETING.includes(p.date) && p.mins >= 12 * 60 + 25 && p.mins < 13 * 60 + 5;
 }
 export function nextMeetingLabel(d = new Date()) {
-  const p = pacificParts(d);
-  const days = { Sun: 2, Mon: 1, Tue: 0, Wed: 6, Thu: 5, Fri: 4, Sat: 3 }[p.weekday];
-  let add = days;
-  if (p.weekday === "Tue" && p.mins >= 13 * 60 + 5) add = 7;
-  const n = new Date(d.getTime() + add * 86400000);
-  return n.toLocaleDateString("en-US", { timeZone: "America/Los_Angeles", weekday: "long", month: "long", day: "numeric" });
+  return nextMeetingStart(d).toLocaleDateString("en-US", { timeZone: "America/Los_Angeles", weekday: "long", month: "long", day: "numeric" });
 }
 // Start of the next meeting (Tuesday 12:25 PM Pacific) as a Date. During a meeting, that meeting's start.
 export function nextMeetingStart(d = new Date()) {
-  for (let k = 0; k <= 7; k++) {
+  for (let k = 0; k <= 60; k++) {
     const day = new Date(d.getTime() + k * 86400000), p = pacificParts(day);
-    if (p.weekday !== "Tue") continue;
+    if (p.weekday !== "Tue" || NO_MEETING.includes(p.date)) continue;
     const [y, m, dd] = p.date.split("-").map(Number);
     let t = new Date(Date.UTC(y, m - 1, dd, 19, 25));            // 12:25 PM if Pacific is UTC-7
     t = new Date(t.getTime() + ((12 * 60 + 25) - pacificParts(t).mins) * 60000); // fix for UTC-8

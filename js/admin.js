@@ -1,5 +1,5 @@
 // LWZ admin panel: Google sign-in (approved list), attendance, members, notes, check-in QR, admins.
-import { firebaseConfig, SDK, OWNERS, CHECKIN_URL, pacificParts, nextMeetingLabel, nextMeetingStart, inMeetingWindow } from "./lwz-firebase.js?v=2";
+import { firebaseConfig, SDK, OWNERS, CHECKIN_URL, pacificParts, nextMeetingLabel, nextMeetingStart, inMeetingWindow } from "./lwz-firebase.js?v=3";
 const { initializeApp } = await import(SDK + "firebase-app.js");
 const { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } = await import(SDK + "firebase-auth.js");
 const { getFirestore, collection, getDocs, doc, setDoc, deleteDoc, addDoc, serverTimestamp, query, orderBy, getDoc, onSnapshot, where } = await import(SDK + "firebase-firestore.js");
@@ -354,9 +354,10 @@ $("qr-full").addEventListener("click", () => {
 
 // ---------- Nominations (from LWZ News) ----------
 let noms = [];
+const NOM_ELECTION = "secretary-2026"; // current open nomination (LWZ News pop-up)
 async function loadNominations() {
   const s = await getDocs(collection(db, "nominations"));
-  noms = s.docs.map(d => d.data()).sort((a, b) => (b.at?.toMillis() || 0) - (a.at?.toMillis() || 0)).map(n => {
+  noms = s.docs.map(d => d.data()).filter(n => n.election === NOM_ELECTION).sort((a, b) => (b.at?.toMillis() || 0) - (a.at?.toMillis() || 0)).map(n => {
     const m = members[n.sid], by = m ? `${m.first} ${m.last}` : n.first;
     return { ...n, by, nomineeFull: n.self ? by : n.nominee,
       when: n.at ? n.at.toDate().toLocaleString("en-US", { timeZone: "America/Los_Angeles", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) : "" };

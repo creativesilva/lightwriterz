@@ -1,7 +1,7 @@
 // LWZ officer election ballot (opened from the voting QR on the officer iPad).
 // Student number (6 dots) -> ballot -> confirm -> done. The database checks that the student
 // checked in at today's meeting, that voting is open, and that each number votes only once.
-import { firebaseConfig, SDK, pacificParts } from "./lwz-firebase.js?v=2";
+import { firebaseConfig, SDK, pacificParts } from "./lwz-firebase.js?v=3";
 const { initializeApp } = await import(SDK + "firebase-app.js");
 const { getFirestore, doc, getDoc, writeBatch, serverTimestamp, onSnapshot } = await import(SDK + "firebase-firestore.js");
 const db = getFirestore(initializeApp(firebaseConfig));

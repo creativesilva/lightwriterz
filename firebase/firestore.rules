@@ -84,13 +84,13 @@ service cloud.firestore {
 
     match /notes/{id} { allow read, write: if isAdmin(); }
 
-    // Officer nominations from LWZ News: a member who has checked in (members_public exists)
+    // Officer nominations from LWZ News (current: Secretary, closes Tue Dec 1 2026 12:25 PM): a member who has checked in (members_public exists)
     // submits one name per election (id "election_sid"; resubmitting replaces it). Admins read.
     match /nominations/{id} {
       allow read, delete: if isAdmin();
       allow create, update: if validSid(request.resource.data.sid)
-        && request.resource.data.election == 'management-assistant-2026'
-        && request.time < timestamp.value(1791916613274)
+        && request.resource.data.election == 'secretary-2026'
+        && request.time < timestamp.value(1796156700000)
         && id == request.resource.data.election + '_' + request.resource.data.sid
         && exists(/databases/$(db)/documents/members_public/$(request.resource.data.sid))
         && request.resource.data.keys().hasOnly(['election', 'sid', 'first', 'self', 'nominee', 'reason', 'at'])

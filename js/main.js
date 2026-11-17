@@ -132,10 +132,11 @@
         .formatToParts(d).forEach(function (x) { p[x.type] = x.value; });
       return { wd: p.weekday, y: +p.year, m: +p.month, d: +p.day, mins: (+p.hour % 24) * 60 + (+p.minute) };
     };
+    var NO_MEETING = ["2026-11-24"]; // Tuesdays with no meeting (keep in sync with js/lwz-firebase.js)
     var nextStart = function (now) {
-      for (var k = 0; k <= 7; k++) {
+      for (var k = 0; k <= 60; k++) {
         var p = pac(new Date(now.getTime() + k * 86400000));
-        if (p.wd !== "Tue") continue;
+        if (p.wd !== "Tue" || NO_MEETING.indexOf(p.y + "-" + String(p.m).padStart(2, "0") + "-" + String(p.d).padStart(2, "0")) > -1) continue;
         var t = new Date(Date.UTC(p.y, p.m - 1, p.d, 19, 25));          // 12:25 PM when Pacific is UTC-7
         t = new Date(t.getTime() + (745 - pac(t).mins) * 60000);        // adjust for UTC-8
         if (t.getTime() + 40 * 60000 > now.getTime()) return t;         // until 1:05 PM that day

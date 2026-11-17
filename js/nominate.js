@@ -1,6 +1,6 @@
 // LWZ News: officer nominations. The post card opens the pop-up; a student number that has
 // checked in at a meeting (members_public exists) unlocks the form. One name per member.
-import { firebaseConfig, SDK } from "./lwz-firebase.js?v=2";
+import { firebaseConfig, SDK } from "./lwz-firebase.js?v=3";
 
 const modal = document.getElementById("nom-modal");
 const $ = id => document.getElementById(id);

@@ -64,7 +64,7 @@ const nomModal = !nom ? "" : `
       </section>
     </div>
   </div>
-  <script type="module" src="js/nominate.js?v=1"></script>
+  <script type="module" src="js/nominate.js?v=2"></script>
 `;
 let page = head
   .replace(/<title>[^<]*<\/title>/, "<title>LWZ News | Light Writerz</title>")
