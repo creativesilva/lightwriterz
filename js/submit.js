@@ -20,6 +20,8 @@
   // Members unlock with their own 6 digit student number (checked against the LWZ member list,
   // the same list the meeting check-in uses). Advisors can still use the club code.
   var CLUB = "2010";
+  // Advisor test account for trying uploads. Lives only here, never in the member list.
+  var TEST = { sid: "123456", name: "Ariella Silva" };
   var MEMBER_URL = "https://firestore.googleapis.com/v1/projects/lightwriterz-lwz/databases/(default)/documents/members_public/";
   function memberUnlock(sid, first) {
     unlock(CLUB);
@@ -36,6 +38,10 @@
     var c = document.getElementById("gate-code").value.trim();
     var err = document.getElementById("gate-err");
     if (c === CLUB) { try { sessionStorage.setItem("lwz-code", c); } catch (x) {} unlock(c); return; }
+    if (c === TEST.sid) {
+      try { sessionStorage.setItem("lwz-code", CLUB); sessionStorage.setItem("lwz-sid", c); sessionStorage.setItem("lwz-first", TEST.name); } catch (x) {}
+      memberUnlock(c, TEST.name); document.getElementById("sub-name").value = TEST.name; return;
+    }
     if (/^\d{6}$/.test(c)) {
       try {
         var r = await fetch(MEMBER_URL + c);
